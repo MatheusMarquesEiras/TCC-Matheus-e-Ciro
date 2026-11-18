@@ -1,0 +1,60 @@
+{
+  "model_key": "gemma3-1b",
+  "model_label": "Gemma 3 1B (base)",
+  "model_hf_id": "unsloth/gemma-3-1b-pt",
+  "dataset_key": "medpt-top10-500",
+  "dataset_label": "MedPT — top-10 com 500 exemplos por classe (piloto)",
+  "n_test": 500,
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Psicólogo, Psicanalista",
+    "Otorrino"
+  ],
+  "setups": {
+    "zeroshot": {
+      "accuracy": 0.002,
+      "f1_macro": 0.0039,
+      "precision_macro": 0.1,
+      "recall_macro": 0.002,
+      "f1_per_class": {
+        "Psicólogo": 0.0,
+        "Ginecologista": 0.0,
+        "Urologista": 0.0,
+        "Dermatologista": 0.0,
+        "Ortopedista - traumatologista": 0.0,
+        "Oftalmologista": 0.0,
+        "Psiquiatra": 0.0,
+        "Dentista": 0.0,
+        "Psicólogo, Psicanalista": 0.0,
+        "Otorrino": 0.0392
+      },
+      "n_examples": 500
+    },
+    "finetuned": {
+      "accuracy": 0.672,
+      "f1_macro": 0.6702,
+      "precision_macro": 0.7128,
+      "recall_macro": 0.672,
+      "f1_per_class": {
+        "Psicólogo": 0.3776,
+        "Ginecologista": 0.7347,
+        "Urologista": 0.7021,
+        "Dermatologista": 0.699,
+        "Ortopedista - traumatologista": 0.9515,
+        "Oftalmologista": 0.9216,
+        "Psiquiatra": 0.2903,
+        "Dentista": 0.8387,
+        "Psicólogo, Psicanalista": 0.3232,
+        "Otorrino": 0.8627
+      },
+      "n_examples": 500
+    }
+  }
+}

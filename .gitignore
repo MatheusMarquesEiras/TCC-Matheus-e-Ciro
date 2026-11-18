@@ -1,0 +1,19 @@
+.venv
+models
+.claude
+*cache*
+logs
+
+# Splits do dataset completo vão comprimidos (.json.gz): train.json passa de 100 MB
+data/top10/*.json
+!data/top10/metadata.json
+data/top10_merged/*.json
+!data/top10_merged/metadata.json
+
+# Pausa/progresso da avaliacao
+/PAUSAR
+partial_*.jsonl
+partial_grading.json
+
+# Textos do MedPT nao sao redistribuidos
+data/**/*.json.gz

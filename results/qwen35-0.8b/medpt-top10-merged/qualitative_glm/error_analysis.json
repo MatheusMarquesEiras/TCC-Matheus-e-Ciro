@@ -1,0 +1,362 @@
+[
+  {
+    "idx": 12381,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Tenho apresentado rubor a vários anos,principalmente quando fico nervosa ou em meio a muitas pessoas, o que me incomoda muito. Gostaria de saber se tem algum outro tratamento eficaz que não seja a cirurgia.",
+    "expected": "Dermatologista",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 9,
+    "pontos_max_positivos": 25,
+    "score": 0.36,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como 'Psicólogo', mas a especialidade correta é 'Dermatologista'. A queixa central é um sintoma físico (rubor facial crônico) com questionamento sobre alternativas terapêuticas à cirurgia, não um pedido de avaliação psicológica."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 3,
+        "justificativa": "Há componente defensável parcial: o rubor é desencadeado por nervosismo e situações sociais, sugerindo possível ansiedade social, o que justificaria apoio psicológico como complemento. Porém, o encaminhamento principal deveria ser para avaliação médica do sintoma físico e das opções de tratamento, tornando a escolha apenas parcialmente razoável."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 3,
+        "justificativa": "O sistema acertou ao não tratar o caso como urgência, pois se trata de queixa crônica de anos, rotineira. Contudo, caracterizou o caso como de saúde mental quando o problema principal é um sintoma dermatológico com gatilho emocional, errando a natureza do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, atendendo ao formato solicitado."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve rubor facial crônico sem qualquer sinal de emergência com risco de vida; penalidade não se aplica, permanecendo 0."
+      }
+    ]
+  },
+  {
+    "idx": 132,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Sialadenite das glandulas parotida?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 13,
+    "pontos_max_positivos": 25,
+    "score": 0.52,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "Sialadenite da parótida é condição classicamente manejada por Otorrino; o sistema indicou Dentista, especialidade incorreta, ainda que relacionada à região salivar."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Dentista avalia glândulas salivares e seus ductos que drenam na cavidade oral, sendo um encaminhamento defensável, embora Otorrino seja o especialista ideal para parotidite."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "Queixa ambulatorial rotineira, sem sinais de urgência; o encaminhamento a especialidade de rotina é compatível com a gravidade esperada do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Dentista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira sem sinais de emergência com risco de vida; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 3478,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Minha irma de 14 anos apresenta, suor frio, muita falta de ar, vomitos, pesadelos, muitas dores de cabeça. Quando a levamos p emergencia os exames dao tudo ok, oq devo fazer?Tenho q procurar um psicologo? Ela nao come, se sente fraca e sonolenta estou desesperada e esta emagrecendo muito.",
+    "expected": "Psicólogo",
+    "predicted": "Psiquiatra",
+    "correct": false,
+    "pontos_obtidos": 17,
+    "pontos_max_positivos": 25,
+    "score": 0.68,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 3,
+        "justificativa": "O sistema indicou 'Psiquiatra' quando o gabarito é 'Psicólogo'. Errou a especialidade exata, mas acertou o domínio (saúde mental), o que justifica crédito parcial e não pontuação zero."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "O quadro (falta de ar, suor frio, vômitos, pesadelos, cefaleia recorrente, exames normais na emergência, recusa alimentar e emagrecimento) é compatível com transtorno de ansiedade/pânico ou somatização, e o encaminhamento ao Psiquiatra é clinicamente defensável, ainda que o Psicólogo seja o alvo ideal."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O sistema reconheceu corretamente que se trata de um caso de saúde mental com sintomas físicos recorrentes já investigados (exames normais), encaminhando para especialista da área em vez de repetir a via somática/emergencial."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A saída contém apenas o nome da especialidade ('Psiquiatra'), sem texto adicional, conforme exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Embora haja 'muita falta de ar', trata-se de sintoma recorrente já avaliado na emergência com exames normais, enquadrando-se em quadro crônico/recorrente e não em emergência aguda com risco de vida explícito. O próprio gabarito encaminha para especialista ambulatorial, confirmando que não há subtriagem emergencial."
+      }
+    ]
+  },
+  {
+    "idx": 1102,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho muito ciumes, o que devo fazer?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 16,
+    "pontos_max_positivos": 25,
+    "score": 0.64,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 3,
+        "justificativa": "O sistema previu 'Psicólogo' e não 'Psiquiatra', errando a especialidade alvo, mas acertou o domínio de saúde mental, o que merece crédito parcial."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Queixa de ciúmes excessivo é um problema emocional/comportamental comumente conduzido por psicólogo em psicoterapia; encaminhamento clinicamente razoável, ainda que psiquiatra também seja defensável."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "O sistema reconheceu que se trata de caso de saúde mental não urgente, encaminhando a profissional de saúde mental adequado para atendimento rotineiro, sem sinalizar emergência indevidamente."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 10261,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Mordi minha bochecha na parte inferior e agora ficou um caroço do tamanho de uma semente de laranja. Esteticamente tá feio pq quando eu vou conversar ele salta p fora pq tá bem perto do lábio. Será q eu procuro o dentista oi otorrino?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 15,
+    "pontos_max_positivos": 25,
+    "score": 0.6,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "A predição 'Dentista' não corresponde ao alvo 'Otorrino'. O caso é ambíguo (o próprio paciente citou as duas opções), o que justifica crédito parcial mínimo, mas a resposta errou a especialidade correta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 5,
+        "justificativa": "Lesão em mucosa da bochecha (provável mucocele ou fibroma traumático por mordida) é plenamente avaliável por dentista/estomatologista ou cirurgião bucomaxilofacial. Escolha clinicamente razoável, embora otorrino também atenda cavidade oral."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "Queixa claramente rotineira, com preocupação principalmente estética, sem sinais de urgência ou gravidade. Encaminhamento ambulatorial de rotina está adequado."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Dentista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira sem qualquer sinal de emergência com risco de vida descrito; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 12506,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "a gonorreia pode desaparecer, curar sozinha?",
+    "expected": "Urologista",
+    "predicted": "Ginecologista",
+    "correct": false,
+    "pontos_obtidos": 13,
+    "pontos_max_positivos": 25,
+    "score": 0.52,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como 'Ginecologista', mas a especialidade correta era 'Urologista'. Classificação incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 5,
+        "justificativa": "Gonorreia é uma IST urogenital; para pacientes do sexo feminino, a ginecologia é um encaminhamento clinicamente razoável. A queixa não especifica o sexo, o que torna a escolha defensável, embora não seja a especialidade alvo."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é uma dúvida rotineira sobre evolução natural da gonorreia, sem sinais de urgência ou emergência. O encaminhamento ambulatorial é consistente com a baixa gravidade do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Ginecologista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira, sem nenhum sinal de emergência com risco de vida descrito. Penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 1798,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho extremo desprezo pelas pessoas, sou introvertido, tenho poucos amigos e não sinto nenhuma necessidade de os ter ou de socializar. Me sinto superior aos outros, prefiro me dedicar ao trabalho do que as relações íntimas e tenho baixa empatia. Esse comportamento pode indicar algum transtorno?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "A especialidade correta é Psiquiatra, pois a queixa levanta a hipótese de transtorno de personalidade (traças esquizoides/narcísicas), que exige avaliação médica para diagnóstico. O sistema indicou Psicólogo, errando a classificação."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Psicólogo é parcialmente defensável: trata-se de questão de saúde mental e o psicólogo pode avaliar traços de personalidade. Porém, a pergunta explícita sobre possível 'transtorno' e a necessidade de diagnóstico diferencial favorecem o Psiquiatra, reduzindo a pontuação."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O caso é claramente rotineiro, de saúde mental ambulatorial, sem sinais de urgência ou risco de vida. O encaminhamento a um profissional de saúde mental ambulatorial mostra reconhecimento adequado da natureza não urgente da queixa."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, atendendo ao formato exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve traços de personalidade e questionamento sobre transtorno, sem nenhum sinal de emergência com risco de vida. Penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 16252,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Quanto tempo depois da retirada do lipomo eu posso voltar ao trabalho?",
+    "expected": "Dermatologista",
+    "predicted": "Oftalmologista",
+    "correct": false,
+    "pontos_obtidos": 8,
+    "pontos_max_positivos": 25,
+    "score": 0.32,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como Oftalmologista, mas a resposta correta é Dermatologista. Lipoma é uma lesão de pele/tecido subcutâneo, sem qualquer relação com oftalmologia."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 0,
+        "justificativa": "Não há justificativa clínica plausível para encaminhar dúvida sobre remoção de lipoma e retorno ao trabalho a um oftalmologista. Especialidades defensáveis seriam Dermatologia ou Cirurgia Geral."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é claramente rotineira (dúvida pós-operatória sobre retorno ao trabalho) e o sistema a encaminhou para especialidade ambulatorial de rotina, sem escalá-la indevidamente como urgência ou saúde mental."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Oftalmologista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 6619,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "É normal aparecer manchas brancas na glande após o tratamento da candidíase?",
+    "expected": "Urologista",
+    "predicted": "Ginecologista",
+    "correct": false,
+    "pontos_obtidos": 8,
+    "pontos_max_positivos": 25,
+    "score": 0.32,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "A especialidade correta é Urologista, mas o sistema classificou como Ginecologista. A glande é anatomia masculina, tornando a classificação completamente incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 0,
+        "justificativa": "Ginecologista não é defensável: trata exclusivamente de saúde feminina. Embora candidíase seja associada à ginecologia, a queixa envolve a glande (órgão masculino), exigindo urologista."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é rotineira (dúvida sobre manchas pós-tratamento, sem sinais de urgência). O encaminhamento ambulatorial indica correta identificação de caso não urgente."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Ginecologista'), sem texto adicional, seguindo o formato exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida. Penalidade obrigatoriamente 0 conforme critério."
+      }
+    ]
+  }
+]

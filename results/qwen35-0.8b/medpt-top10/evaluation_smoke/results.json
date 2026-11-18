@@ -1,0 +1,98 @@
+{
+  "model_key": "qwen35-0.8b",
+  "model_label": "Qwen3.5-0.8B",
+  "model_hf_id": "Qwen/Qwen3.5-0.8B",
+  "dataset_key": "medpt-top10",
+  "dataset_label": "MedPT — 10 especialidades mais frequentes",
+  "n_test": 200,
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Psicólogo, Psicanalista",
+    "Otorrino"
+  ],
+  "setups": {
+    "zeroshot": {
+      "accuracy": 0.2,
+      "f1_macro": 0.163,
+      "precision_macro": 0.344,
+      "recall_macro": 0.2359,
+      "f1_per_class": {
+        "Psicólogo": 0.0345,
+        "Ginecologista": 0.1935,
+        "Urologista": 0.0,
+        "Dermatologista": 0.3125,
+        "Ortopedista - traumatologista": 0.0,
+        "Oftalmologista": 0.0,
+        "Psiquiatra": 0.1569,
+        "Dentista": 0.5,
+        "Psicólogo, Psicanalista": 0.2326,
+        "Otorrino": 0.2
+      },
+      "n_examples": 200
+    },
+    "threeshot": {
+      "accuracy": 0.14,
+      "f1_macro": 0.1941,
+      "precision_macro": 0.3239,
+      "recall_macro": 0.1568,
+      "f1_per_class": {
+        "Psicólogo": 0.1143,
+        "Ginecologista": 0.2286,
+        "Urologista": 0.1818,
+        "Dermatologista": 0.24,
+        "Ortopedista - traumatologista": 0.1818,
+        "Oftalmologista": 0.0,
+        "Psiquiatra": 0.12,
+        "Dentista": 0.4286,
+        "Psicólogo, Psicanalista": 0.1379,
+        "Otorrino": 0.3077
+      },
+      "n_examples": 200
+    },
+    "fiveshot": {
+      "accuracy": 0.095,
+      "f1_macro": 0.1452,
+      "precision_macro": 0.263,
+      "recall_macro": 0.1049,
+      "f1_per_class": {
+        "Psicólogo": 0.0779,
+        "Ginecologista": 0.1622,
+        "Urologista": 0.1739,
+        "Dermatologista": 0.087,
+        "Ortopedista - traumatologista": 0.1905,
+        "Oftalmologista": 0.0,
+        "Psiquiatra": 0.0426,
+        "Dentista": 0.3846,
+        "Psicólogo, Psicanalista": 0.0,
+        "Otorrino": 0.3333
+      },
+      "n_examples": 200
+    },
+    "finetuned": {
+      "accuracy": 0.84,
+      "f1_macro": 0.7865,
+      "precision_macro": 0.7921,
+      "recall_macro": 0.7889,
+      "f1_per_class": {
+        "Psicólogo": 0.8271,
+        "Ginecologista": 0.9388,
+        "Urologista": 0.8889,
+        "Dermatologista": 0.8947,
+        "Ortopedista - traumatologista": 0.9286,
+        "Oftalmologista": 1.0,
+        "Psiquiatra": 0.5833,
+        "Dentista": 0.9143,
+        "Psicólogo, Psicanalista": 0.0,
+        "Otorrino": 0.8889
+      },
+      "n_examples": 200
+    }
+  }
+}

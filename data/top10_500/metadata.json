@@ -1,0 +1,106 @@
+{
+  "dataset_key": "medpt-top10-500",
+  "dataset_label": "MedPT — top-10 com 500 exemplos por classe (piloto)",
+  "source": "huggingface",
+  "source_path": "AKCIT/MedPT",
+  "citation": "FÄRBER, F. B. et al. MedPT: a massive medical question answering dataset for Brazilian-Portuguese speakers. arXiv:2511.11878, 2026.",
+  "language": "pt-BR",
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Psicólogo, Psicanalista",
+    "Otorrino"
+  ],
+  "specialties": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Psicólogo, Psicanalista",
+    "Otorrino"
+  ],
+  "top_n": 10,
+  "max_per_class": 500,
+  "min_per_class": 0,
+  "label_aliases": {},
+  "drop_labels": [],
+  "seed": 42,
+  "system_prompt": "Você é um sistema de triagem médica. Dada a queixa do paciente, classifique a especialidade médica mais apropriada entre: Dentista, Dermatologista, Ginecologista, Oftalmologista, Ortopedista - traumatologista, Otorrino, Psicólogo, Psicólogo, Psicanalista, Psiquiatra, Urologista. Responda APENAS com o nome da especialidade, sem explicações adicionais.",
+  "label2id": {
+    "Dentista": 0,
+    "Dermatologista": 1,
+    "Ginecologista": 2,
+    "Oftalmologista": 3,
+    "Ortopedista - traumatologista": 4,
+    "Otorrino": 5,
+    "Psicólogo": 6,
+    "Psicólogo, Psicanalista": 7,
+    "Psiquiatra": 8,
+    "Urologista": 9
+  },
+  "id2label": {
+    "0": "Dentista",
+    "1": "Dermatologista",
+    "2": "Ginecologista",
+    "3": "Oftalmologista",
+    "4": "Ortopedista - traumatologista",
+    "5": "Otorrino",
+    "6": "Psicólogo",
+    "7": "Psicólogo, Psicanalista",
+    "8": "Psiquiatra",
+    "9": "Urologista"
+  },
+  "split_sizes": {
+    "train": 4000,
+    "validation": 500,
+    "test": 500
+  },
+  "class_distribution": {
+    "train": {
+      "Psicólogo, Psicanalista": 400,
+      "Otorrino": 400,
+      "Oftalmologista": 400,
+      "Ortopedista - traumatologista": 400,
+      "Psiquiatra": 400,
+      "Ginecologista": 400,
+      "Psicólogo": 400,
+      "Dentista": 400,
+      "Dermatologista": 400,
+      "Urologista": 400
+    },
+    "validation": {
+      "Psiquiatra": 50,
+      "Psicólogo, Psicanalista": 50,
+      "Dentista": 50,
+      "Oftalmologista": 50,
+      "Urologista": 50,
+      "Otorrino": 50,
+      "Psicólogo": 50,
+      "Dermatologista": 50,
+      "Ginecologista": 50,
+      "Ortopedista - traumatologista": 50
+    },
+    "test": {
+      "Psiquiatra": 50,
+      "Psicólogo": 50,
+      "Ginecologista": 50,
+      "Dermatologista": 50,
+      "Psicólogo, Psicanalista": 50,
+      "Urologista": 50,
+      "Ortopedista - traumatologista": 50,
+      "Dentista": 50,
+      "Oftalmologista": 50,
+      "Otorrino": 50
+    }
+  }
+}

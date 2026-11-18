@@ -1,0 +1,18 @@
+Modelo: Qwen3.5-0.8B (Qwen/Qwen3.5-0.8B)
+Setup: finetuned
+
+                               precision    recall  f1-score   support
+
+                    Psicólogo       0.93      0.90      0.91      6686
+                Ginecologista       0.89      0.92      0.90      2662
+                   Urologista       0.89      0.82      0.86      1618
+               Dermatologista       0.89      0.93      0.91      1505
+Ortopedista - traumatologista       0.97      0.97      0.97      1482
+               Oftalmologista       0.97      0.97      0.97      1211
+                   Psiquiatra       0.52      0.63      0.57      1115
+                     Dentista       0.91      0.95      0.93      1114
+                     Otorrino       0.94      0.86      0.90       773
+
+                     accuracy                           0.89     18166
+                    macro avg       0.88      0.88      0.88     18166
+                 weighted avg       0.90      0.89      0.89     18166

@@ -1,0 +1,18 @@
+Setup: fiveshot
+
+                               precision    recall  f1-score   support
+
+                    Psicólogo       0.18      0.26      0.21        50
+                Ginecologista       0.54      0.14      0.22        50
+                   Urologista       0.29      0.08      0.12        50
+               Dermatologista       0.27      0.12      0.17        50
+Ortopedista - traumatologista       0.28      0.20      0.23        50
+               Oftalmologista       0.00      0.00      0.00        50
+                   Psiquiatra       0.27      0.16      0.20        50
+                     Dentista       0.35      0.36      0.35        50
+      Psicólogo, Psicanalista       0.13      0.08      0.10        50
+                     Otorrino       0.44      0.08      0.14        50
+
+                    micro avg       0.26      0.15      0.19       500
+                    macro avg       0.27      0.15      0.17       500
+                 weighted avg       0.27      0.15      0.17       500

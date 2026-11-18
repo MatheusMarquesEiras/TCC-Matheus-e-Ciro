@@ -1,0 +1,60 @@
+{
+  "model_key": "qwen35-2b",
+  "model_label": "Qwen3.5-2B",
+  "model_hf_id": "Qwen/Qwen3.5-2B",
+  "dataset_key": "medpt-top10-500",
+  "dataset_label": "MedPT — top-10 com 500 exemplos por classe (piloto)",
+  "n_test": 500,
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Psicólogo, Psicanalista",
+    "Otorrino"
+  ],
+  "setups": {
+    "zeroshot": {
+      "accuracy": 0.498,
+      "f1_macro": 0.4842,
+      "precision_macro": 0.5684,
+      "recall_macro": 0.498,
+      "f1_per_class": {
+        "Psicólogo": 0.25,
+        "Ginecologista": 0.6667,
+        "Urologista": 0.5,
+        "Dermatologista": 0.4862,
+        "Ortopedista - traumatologista": 0.7789,
+        "Oftalmologista": 0.6111,
+        "Psiquiatra": 0.503,
+        "Dentista": 0.6737,
+        "Psicólogo, Psicanalista": 0.0,
+        "Otorrino": 0.3721
+      },
+      "n_examples": 500
+    },
+    "finetuned": {
+      "accuracy": 0.762,
+      "f1_macro": 0.7542,
+      "precision_macro": 0.7571,
+      "recall_macro": 0.762,
+      "f1_per_class": {
+        "Psicólogo": 0.1842,
+        "Ginecologista": 0.8762,
+        "Urologista": 0.8125,
+        "Dermatologista": 0.8889,
+        "Ortopedista - traumatologista": 1.0,
+        "Oftalmologista": 0.9697,
+        "Psiquiatra": 0.5957,
+        "Dentista": 0.8571,
+        "Psicólogo, Psicanalista": 0.5,
+        "Otorrino": 0.8571
+      },
+      "n_examples": 500
+    }
+  }
+}

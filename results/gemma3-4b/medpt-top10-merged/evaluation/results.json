@@ -1,0 +1,39 @@
+{
+  "model_key": "gemma3-4b",
+  "model_label": "Gemma 3 4B (base)",
+  "model_hf_id": "unsloth/gemma-3-4b-pt",
+  "dataset_key": "medpt-top10-merged",
+  "dataset_label": "MedPT — top-10 com Psicólogo e Psicanalista fundidos (9 classes)",
+  "n_test": 18166,
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Otorrino"
+  ],
+  "setups": {
+    "finetuned": {
+      "accuracy": 0.9135,
+      "f1_macro": 0.901,
+      "precision_macro": 0.9014,
+      "recall_macro": 0.9008,
+      "f1_per_class": {
+        "Psicólogo": 0.9338,
+        "Ginecologista": 0.9126,
+        "Urologista": 0.8769,
+        "Dermatologista": 0.9325,
+        "Ortopedista - traumatologista": 0.9785,
+        "Oftalmologista": 0.9745,
+        "Psiquiatra": 0.6335,
+        "Dentista": 0.942,
+        "Otorrino": 0.9244
+      },
+      "n_examples": 18166
+    }
+  }
+}

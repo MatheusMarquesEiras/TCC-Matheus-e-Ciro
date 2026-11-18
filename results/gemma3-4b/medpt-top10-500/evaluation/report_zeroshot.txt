@@ -1,0 +1,19 @@
+Modelo: Gemma 3 4B (base) (unsloth/gemma-3-4b-pt)
+Setup: zeroshot
+
+                               precision    recall  f1-score   support
+
+                    Psicólogo       0.00      0.00      0.00        50
+                Ginecologista       0.00      0.00      0.00        50
+                   Urologista       0.00      0.00      0.00        50
+               Dermatologista       0.00      0.00      0.00        50
+Ortopedista - traumatologista       0.00      0.00      0.00        50
+               Oftalmologista       0.00      0.00      0.00        50
+                   Psiquiatra       0.00      0.00      0.00        50
+                     Dentista       1.00      0.06      0.11        50
+      Psicólogo, Psicanalista       0.00      0.00      0.00        50
+                     Otorrino       0.00      0.00      0.00        50
+
+                    micro avg       0.75      0.01      0.01       500
+                    macro avg       0.10      0.01      0.01       500
+                 weighted avg       0.10      0.01      0.01       500

@@ -1,0 +1,19 @@
+Modelo: Qwen3.5-0.8B (Qwen/Qwen3.5-0.8B)
+Setup: fiveshot
+
+                               precision    recall  f1-score   support
+
+                    Psicólogo       0.15      0.05      0.08        57
+                Ginecologista       0.27      0.12      0.16        26
+                   Urologista       0.40      0.11      0.17        18
+               Dermatologista       0.20      0.06      0.09        18
+Ortopedista - traumatologista       0.29      0.14      0.19        14
+               Oftalmologista       0.00      0.00      0.00        13
+                   Psiquiatra       0.03      0.07      0.04        14
+                     Dentista       0.62      0.28      0.38        18
+      Psicólogo, Psicanalista       0.00      0.00      0.00        13
+                     Otorrino       0.67      0.22      0.33         9
+
+                    micro avg       0.17      0.10      0.12       200
+                    macro avg       0.26      0.10      0.15       200
+                 weighted avg       0.24      0.10      0.13       200

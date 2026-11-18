@@ -1,0 +1,25 @@
+{
+  "model": "qwen35-2b",
+  "gguf": "triagem-qwen35-2b-nf4-q8_0.gguf",
+  "n": 200,
+  "concordancia": 0.99,
+  "acc_gguf": 0.905,
+  "acc_python": 0.895,
+  "segundos": 23.9,
+  "diferencas": [
+    {
+      "i": 13,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 162,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psicólogo"
+    }
+  ]
+}

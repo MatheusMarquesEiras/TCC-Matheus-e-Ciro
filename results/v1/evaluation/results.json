@@ -1,0 +1,74 @@
+{
+  "zeroshot": {
+    "f1_macro": 0.1897,
+    "precision_macro": 0.4632,
+    "recall_macro": 0.224,
+    "accuracy": 0.224,
+    "f1_per_class": {
+      "Psicólogo": 0.4771,
+      "Ginecologista": 0.2456,
+      "Urologista": 0.0392,
+      "Dermatologista": 0.2857,
+      "Ortopedista - traumatologista": 0.0377,
+      "Oftalmologista": 0.0,
+      "Psiquiatra": 0.3188,
+      "Dentista": 0.3237,
+      "Psicólogo, Psicanalista": 0.1311,
+      "Otorrino": 0.0385
+    }
+  },
+  "threeshot": {
+    "f1_macro": 0.1855,
+    "precision_macro": 0.3108,
+    "recall_macro": 0.15,
+    "accuracy": 0.15,
+    "f1_per_class": {
+      "Psicólogo": 0.2182,
+      "Ginecologista": 0.2333,
+      "Urologista": 0.0714,
+      "Dermatologista": 0.16,
+      "Ortopedista - traumatologista": 0.3095,
+      "Oftalmologista": 0.0,
+      "Psiquiatra": 0.3158,
+      "Dentista": 0.2917,
+      "Psicólogo, Psicanalista": 0.1282,
+      "Otorrino": 0.127
+    }
+  },
+  "fiveshot": {
+    "f1_macro": 0.1749,
+    "precision_macro": 0.2744,
+    "recall_macro": 0.148,
+    "accuracy": 0.148,
+    "f1_per_class": {
+      "Psicólogo": 0.2149,
+      "Ginecologista": 0.2222,
+      "Urologista": 0.125,
+      "Dermatologista": 0.1667,
+      "Ortopedista - traumatologista": 0.2326,
+      "Oftalmologista": 0.0,
+      "Psiquiatra": 0.2,
+      "Dentista": 0.3529,
+      "Psicólogo, Psicanalista": 0.0988,
+      "Otorrino": 0.1356
+    }
+  },
+  "finetuned": {
+    "f1_macro": 0.6296,
+    "precision_macro": 0.7056,
+    "recall_macro": 0.668,
+    "accuracy": 0.668,
+    "f1_per_class": {
+      "Psicólogo": 0.0,
+      "Ginecologista": 0.7742,
+      "Urologista": 0.7629,
+      "Dermatologista": 0.7158,
+      "Ortopedista - traumatologista": 0.9592,
+      "Oftalmologista": 0.9375,
+      "Psiquiatra": 0.1481,
+      "Dentista": 0.7244,
+      "Psicólogo, Psicanalista": 0.4737,
+      "Otorrino": 0.8
+    }
+  }
+}

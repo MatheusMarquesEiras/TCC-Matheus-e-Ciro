@@ -1,0 +1,18 @@
+Setup: finetuned
+
+                               precision    recall  f1-score   support
+
+                    Psicólogo       0.74      1.00      0.85        57
+                Ginecologista       1.00      0.88      0.94        26
+                   Urologista       0.78      0.78      0.78        18
+               Dermatologista       0.94      0.94      0.94        18
+Ortopedista - traumatologista       0.93      0.93      0.93        14
+               Oftalmologista       1.00      1.00      1.00        13
+                   Psiquiatra       0.78      0.50      0.61        14
+                     Dentista       0.95      1.00      0.97        18
+      Psicólogo, Psicanalista       0.00      0.00      0.00        13
+                     Otorrino       0.89      0.89      0.89         9
+
+                     accuracy                           0.85       200
+                    macro avg       0.80      0.79      0.79       200
+                 weighted avg       0.81      0.85      0.82       200

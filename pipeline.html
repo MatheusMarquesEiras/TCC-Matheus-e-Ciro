@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipeline TCC — Fine-Tuning para Triagem Médica</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    /* ── Header ────────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    header .badge {
+      display: inline-block;
+      background: #1f6feb33;
+      border: 1px solid #1f6feb;
+      color: #58a6ff;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #f0f6fc;
+      line-height: 1.3;
+    }
+    header p {
+      margin-top: 0.6rem;
+      color: #8b949e;
+      font-size: 0.95rem;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────── */
+    .pipeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ── Step card ───────────────────────────────────────────────── */
+    .step {
+      width: 100%;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .step:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 4px 24px #0008;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+    .step-icon {
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 8px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .step-meta { flex: 1; }
+    .step-number {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .step-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f0f6fc;
+      margin-top: 0.1rem;
+    }
+    .step-file {
+      font-size: 0.72rem;
+      color: #8b949e;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      margin-top: 0.15rem;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      color: #8b949e;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    /* Tags */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      border: 1px solid;
+    }
+    .tag-blue  { background: #1f6feb22; border-color: #1f6feb; color: #79c0ff; }
+    .tag-green { background: #238636aa; border-color: #2ea043; color: #7ee787; }
+    .tag-purple{ background: #8957e522; border-color: #8957e5; color: #d2a8ff; }
+    .tag-teal  { background: #1bc0a022; border-color: #1bc0a0; color: #56d364; }
+    .tag-orange{ background: #d2942022; border-color: #d29420; color: #f0b430; }
+
+    /* Output block */
+    .output-block {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+    }
+    .output-block .out-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #6e7681;
+      margin-bottom: 0.4rem;
+    }
+    .output-block ul { list-style: none; }
+    .output-block li {
+      color: #8b949e;
+      padding: 0.18rem 0;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.78rem;
+    }
+    .output-block li::before { content: "→ "; color: var(--accent); }
+
+    /* Metrics inline */
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+    .metric {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 0.5rem 0.9rem;
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+    }
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    .metric-label {
+      font-size: 0.68rem;
+      color: #6e7681;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.1rem;
+    }
+
+    /* Connector arrow */
+    .arrow {
+      width: 2px;
+      height: 2.2rem;
+      background: linear-gradient(to bottom, #30363d, #30363d);
+      position: relative;
+      margin: 0 auto;
+    }
+    .arrow::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid #30363d;
+    }
+
+    /* Result banner */
+    .result-banner {
+      width: 100%;
+      max-width: 760px;
+      margin: 2.5rem auto 0;
+      background: linear-gradient(135deg, #0d2a1a, #0a1f2e);
+      border: 1px solid #2ea043;
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    .result-banner h2 {
+      font-size: 1rem;
+      color: #7ee787;
+      flex: 1 1 100%;
+      margin-bottom: 0.2rem;
+    }
+    .result-banner .big-metric {
+      flex: 1;
+      min-width: 130px;
+      text-align: center;
+    }
+    .big-metric .val {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7ee787;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      line-height: 1;
+    }
+    .big-metric .lbl {
+      font-size: 0.72rem;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 0.35rem;
+    }
+    .result-banner .divider {
+      width: 1px;
+      height: 3rem;
+      background: #2ea04355;
+      align-self: center;
+    }
+
+    /* Color themes per step */
+    .s1 { --accent: #79c0ff; --accent-dim: #1f6feb22; }
+    .s2 { --accent: #d2a8ff; --accent-dim: #8957e522; }
+    .s3 { --accent: #f0b430; --accent-dim: #d2942022; }
+    .s4 { --accent: #56d364; --accent-dim: #23863622; }
+    .s5 { --accent: #ffa657; --accent-dim: #fb8f4422; }
+
+    /* ── Rubric table ────────────────────────────────────────────── */
+    .rubric {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.9rem;
+      font-size: 0.78rem;
+    }
+    .rubric thead tr {
+      background: #0d1117;
+    }
+    .rubric th {
+      text-align: left;
+      padding: 0.4rem 0.7rem;
+      color: #6e7681;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-bottom: 1px solid #30363d;
+    }
+    .rubric td {
+      padding: 0.45rem 0.7rem;
+      border-bottom: 1px solid #21262d;
+      color: #8b949e;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .rubric td:first-child { color: #e6edf3; }
+    .rubric td.pts {
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      white-space: nowrap;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .rubric tr:last-child td { border-bottom: none; }
+    .rubric tr.penalty td.pts { color: #f85149; }
+    .rubric tr.penalty td:first-child { color: #f85149; }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #6e7681;
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">TCC — IFPR Pinhais · 2026</div>
+  <h1>Fine-Tuning de LLM Compacto<br>para Triagem Médica em Português</h1>
+  <p>Matheus Marques Eiras &amp; Ciro Guilherme Nass</p>
+</header>
+
+<div class="pipeline">
+
+  <!-- ── Etapa 1 ───────────────────────────────────── -->
+  <div class="step s1">
+    <div class="step-header">
+      <div class="step-icon">📦</div>
+      <div class="step-meta">
+        <div class="step-number">Etapa 1</div>
+        <div class="step-title">Preparação dos dados</div>
+        <div class="step-file">scripts/01_prepare_data.py</div>
+      </div>
+    </div>
+    <p class="step-desc">
+      O dataset <strong>AKCIT/MedPT</strong> é carregado do Hugging Face Hub — 384 mil pares
+      de pergunta e especialidade médica em português brasileiro, cobrindo 104 especialidades.
+      As 10 mais frequentes são selecionadas, os dados são convertidos para o formato ChatML
+      com system prompt de triagem e divididos em treino, validação e teste.
+    </p>
+    <div class="tags">
+      <span class="tag tag-blue">AKCIT/MedPT</span>
+      <span class="tag tag-blue">384k exemplos</span>
+      <span class="tag tag-blue">104 especialidades → top 10</span>
+      <span class="tag tag-blue">ChatML</span>
+    </div>
+    <div class="output-block">
+      <div class="out-label">Saída</div>
+      <ul>
+        <li>data/top10/train.json &nbsp;— 145.321 exemplos</li>
+        <li>data/top10/val.json &nbsp;&nbsp;&nbsp;— 18.165 exemplos</li>
+        <li>data/top10/test.json &nbsp;&nbsp;— 18.166 exemplos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- ── Etapa 2 ───────────────────────────────────── -->
+  <div class="step s2">
+    <div class="step-header">
+      <div class="step-icon">🏋️</div>
+      <div class="step-meta">
+        <div class="step-number">Etapa 2</div>
+        <div class="step-title">Treinamento com QLoRA</div>
+        <div class="step-file">scripts/02_train.py</div>
+      </div>
+    </div>
+    <p class="step-desc">
+      O modelo base <strong>Qwen3.5-0.8B</strong> é carregado quantizado em 4 bits via Unsloth.
+      Adaptadores LoRA são treinados sobre as camadas de atenção e MLP — apenas
+      6,4 milhões de parâmetros treináveis (0,84% do total). O treinamento usa o
+      <strong>SFTTrainer</strong> da biblioteca TRL por 3 épocas na GPU RTX 4070.
+    </p>
+    <div class="tags">
+      <span class="tag tag-purple">Qwen3.5-0.8B</span>
+      <span class="tag tag-purple">QLoRA 4-bit NF4</span>
+      <span class="tag tag-purple">LoRA r=16 α=32</span>
+      <span class="tag tag-purple">Unsloth + TRL</span>
+      <span class="tag tag-purple">RTX 4070 12 GB</span>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-value">~7h</div>
+        <div class="metric-label">Duração</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">3</div>
+        <div class="metric-label">Épocas</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">0,44</div>
+        <div class="metric-label">Loss final</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">6,4M</div>
+        <div class="metric-label">Parâm. treináveis</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- ── Etapa 3 ───────────────────────────────────── -->
+  <div class="step s3">
+    <div class="step-header">
+      <div class="step-icon">📊</div>
+      <div class="step-meta">
+        <div class="step-number">Etapa 3</div>
+        <div class="step-title">Avaliação quantitativa</div>
+        <div class="step-file">scripts/03_evaluate.py</div>
+      </div>
+    </div>
+    <p class="step-desc">
+      O modelo fine-tuned é avaliado num conjunto de teste estratificado com 200 exemplos.
+      São calculadas acurácia, F1-macro, precisão e recall por especialidade.
+      A matriz de confusão é gerada para análise de erros. O resultado também é comparado
+      com o desempenho zero-shot e few-shot do modelo base.
+    </p>
+    <div class="tags">
+      <span class="tag tag-orange">200 exemplos de teste</span>
+      <span class="tag tag-orange">Acurácia · F1-macro</span>
+      <span class="tag tag-orange">Matriz de confusão</span>
+      <span class="tag tag-orange">Zero-shot vs Fine-tuned</span>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-value">85%</div>
+        <div class="metric-label">Acurácia</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">0,791</div>
+        <div class="metric-label">F1-macro</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">+18pp</div>
+        <div class="metric-label">vs base zero-shot</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- ── Etapa 4 ───────────────────────────────────── -->
+  <div class="step s4">
+    <div class="step-header">
+      <div class="step-icon">🩺</div>
+      <div class="step-meta">
+        <div class="step-number">Etapa 4</div>
+        <div class="step-title">Avaliação qualitativa (HealthBench-style)</div>
+        <div class="step-file">scripts/04_qualitative_eval.py</div>
+      </div>
+    </div>
+    <p class="step-desc">
+      Um segundo modelo LLM atua como juiz avaliando cada resposta por 5 critérios clínicos:
+      acurácia da especialidade, relevância clínica, identificação de gravidade,
+      instruction-following e penalidade por subtriagem de emergência. São avaliados
+      100 exemplos estratificados por tema: casos rotineiros, saúde mental e casos urgentes.
+    </p>
+    <div class="tags">
+      <span class="tag tag-green">LLM-as-judge</span>
+      <span class="tag tag-green">llama3.1:8b · Ollama</span>
+      <span class="tag tag-green">Rubrica 5 critérios</span>
+      <span class="tag tag-green">100 exemplos</span>
+      <span class="tag tag-green">Inspirado no HealthBench</span>
+    </div>
+    <table class="rubric">
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th>O que avalia</th>
+          <th>Pontos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Acurácia</td>
+          <td>O modelo acertou exatamente a especialidade correta?</td>
+          <td class="pts">0 – 10</td>
+        </tr>
+        <tr>
+          <td>Relevância clínica</td>
+          <td>Mesmo errando, a resposta é clinicamente razoável para os sintomas?</td>
+          <td class="pts">0 – 7</td>
+        </tr>
+        <tr>
+          <td>Awareness de gravidade</td>
+          <td>Identificou corretamente se o caso é urgente, rotineiro ou saúde mental?</td>
+          <td class="pts">0 – 5</td>
+        </tr>
+        <tr>
+          <td>Instruction following</td>
+          <td>A resposta contém apenas o nome da especialidade, sem texto extra?</td>
+          <td class="pts">0 – 3</td>
+        </tr>
+        <tr class="penalty">
+          <td>Penalidade de emergência</td>
+          <td>Caso com risco de vida encaminhado para especialidade ambulatorial de rotina?</td>
+          <td class="pts">−8 ou 0</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="metrics" style="margin-top:0.9rem">
+      <div class="metric">
+        <div class="metric-value">0,951</div>
+        <div class="metric-label">Score geral</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">0,966</div>
+        <div class="metric-label">Rotineiros (n=72)</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">0,911</div>
+        <div class="metric-label">Saúde mental (n=27)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arrow"></div>
+
+  <!-- ── Etapa 5 ───────────────────────────────────── -->
+  <div class="step s5">
+    <div class="step-header">
+      <div class="step-icon">🖥️</div>
+      <div class="step-meta">
+        <div class="step-number">Etapa 5</div>
+        <div class="step-title">Demo interativa</div>
+        <div class="step-file">scripts/05_demo.py</div>
+      </div>
+    </div>
+    <p class="step-desc">
+      O modelo treinado é carregado e testado com 5 casos clínicos predefinidos,
+      exibindo a especialidade esperada e a predita para cada queixa.
+      No modo interativo o usuário pode digitar qualquer queixa em português e
+      recebe a especialidade recomendada em tempo real.
+    </p>
+    <div class="tags">
+      <span class="tag tag-orange">Mini-teste automático</span>
+      <span class="tag tag-orange">Modo interativo</span>
+      <span class="tag tag-orange">Inferência local</span>
+    </div>
+    <div class="output-block" style="margin-top:0.6rem">
+      <div class="out-label">Exemplo de saída</div>
+      <ul>
+        <li>[1] OK · "Tristeza há meses…" → Psicólogo ✓</li>
+        <li>[2] OK · "Joelho inchado…" → Ortopedista ✓</li>
+        <li>[3] OK · "Manchas na pele…" → Dermatologista ✓</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Result banner ─────────────────────────────── -->
+<div class="result-banner">
+  <h2>Resultados finais do experimento</h2>
+  <div class="big-metric">
+    <div class="val">85%</div>
+    <div class="lbl">Acurácia (200 exemplos)</div>
+  </div>
+  <div class="divider"></div>
+  <div class="big-metric">
+    <div class="val">0,791</div>
+    <div class="lbl">F1-macro</div>
+  </div>
+  <div class="divider"></div>
+  <div class="big-metric">
+    <div class="val">0,951</div>
+    <div class="lbl">Score qualitativo</div>
+  </div>
+  <div class="divider"></div>
+  <div class="big-metric">
+    <div class="val">0,8B</div>
+    <div class="lbl">Parâmetros do modelo</div>
+  </div>
+  <div class="divider"></div>
+  <div class="big-metric">
+    <div class="val">~7h</div>
+    <div class="lbl">Tempo de treino (RTX 4070)</div>
+  </div>
+</div>
+
+<footer>
+  Qwen3.5-0.8B · QLoRA (LoRA r=16, 4-bit NF4) · AKCIT/MedPT · Unsloth + TRL · IFPR Pinhais 2026
+</footer>
+
+</body>
+</html>

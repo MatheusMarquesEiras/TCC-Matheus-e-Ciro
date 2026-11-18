@@ -1,0 +1,1289 @@
+[
+  {
+    "idx": 369,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Bom dia! Tomo escitalopram e depakote Era demoro p dormir e sinto mto cansaço é normal.??? Obrigada Célia",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Psicólogo, Psicanalista' em vez de 'Psiquiatra'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação como 'Psicólogo, Psicanalista' é clinicamente razoável para os sintomas descritos"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não há indicação de urgência ou gravidade no caso apresentado"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou incorretamente a especialidade"
+      }
+    ]
+  },
+  {
+    "idx": 58,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho uma filha de 11 anos, ela desde os 4 mais ou menos começou a não falar com pessoas fora de casa, ai quando começou no 1 ano começou a minha angustia, ela demorou pra ser alfabetizada e até hoje no 6 ano não fala na escola e nem com pessoas fora de casa, acha que tem mutismo seletivo ?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como Psicólogo, Psicanalista, que não é a especialidade correta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação de Psicólogo, Psicanalista é clinicamente razoável para os sintomas descritos."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente a gravidade do caso, que parece ser um problema de saúde mental crônico."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser urgente (red flag) e o sistema classificou como especialidade rotineira."
+      }
+    ]
+  },
+  {
+    "idx": 5,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "A ansiedade demasiada pode causar queda de pressão?Minha pressão caiu, foi pra 7 por 4. Trato depressão e ansiedade.",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 7,
+    "pontos_max_positivos": 25,
+    "score": 0.28,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Psicólogo, Psicanalista' em vez de 'Psiquiatra'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, pois a ansiedade e depressão podem ser tratadas por um psicólogo ou psicanalista"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O sistema não identificou explicitamente a gravidade do caso, mas a queda de pressão pode ser considerada uma situação urgente"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (queda de pressão) e o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 169,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Meu esposo foi diagnosticado com esquizofrenia aos 39 anos. Fez tratamento compulsivo durante 2 anos deixou de fazer pois não se dava com a injeção. Quais são as consequências? Obrigada",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "Especialidade predita pelo sistema não é a correta"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "Psicólogo pode ser uma especialidade razoável para casos de esquizofrenia, embora não seja a mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não há indicação de urgência ou emergência no caso descrito"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas a especialidade predita pelo sistema foi rotineira e não a correta"
+      }
+    ]
+  },
+  {
+    "idx": 147,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Sofro de ansiedade e panico, comecei fazer o uso do Exodus (10mg) e Frontal (0,5) ha 2 meses. Me ajudou muito, mas as vezes tenho crises fortes tanto do panico como de ansiedade, mesmo fazendo terapia. Gostaria de saber se na hora da crise posso tomar dois comprimidos de Frontal (o que daria 1mg)?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como Psicólogo, Psicanalista em vez de Psiquiatra."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja a especialidade exata."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente ou rotineiro, pois a questão não sugere uma situação crítica."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou como especialidade rotineira em vez da correta."
+      }
+    ]
+  },
+  {
+    "idx": 144,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Bom, sou estudante de medicina e ando esquecendo, principalmente, conteúdos que eu trabalhava com maior facilidade.Fui diagnosticado com ansiedade (mas sempre tive facilidade em aprender) e gostaria de saber se conforme a ansiedade passe, minhas memórias vão voltando.",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Psicólogo, Psicanalista' em vez de 'Psiquiatra'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja exatamente a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente, rotineiro ou de saúde mental; a questão parece ser rotineira"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser rotineiro e o sistema classificou como especialidade rotineira; aplicar penalidade de -8"
+      }
+    ]
+  },
+  {
+    "idx": 70,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Olá, doutores e doutoras.Tive alguns episódios de Hipocondria e Pânico nos últimos meses.Melhorei desde que passei a tomar uma cápsula de Clonazepam 2mg antes de dormir.Acontece que gosto de tomar uma cervejinha,sempre com moderação e sem exageros,sempre longe do momento da medicação. Há problemas?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Psicólogo, Psicanalista' em vez de 'Psiquiatra'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação como 'Psicólogo, Psicanalista' é clinicamente razoável para os sintomas descritos de Hipocondria e Pânico"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente a gravidade do caso, que parece ser rotineiro mas com uso de medicamentos"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser rotineiro, mas com uso de medicamentos; o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 33,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Faço tratamento para pânico, tag e depressão. Os medicamentos que utilizo são : Dual de 120mg e ansitec de 10mg. Mesmo com esses medicamentos, ainda tenho crises as vezes e necessito tomar rivotril gotas como SOS de uma a duas vezes por semana. Meu médico disse que seria melhor eu tomar uma mesma dosagem do rivotril todos os dias do que tomar de 1 a 2 vezes por semana pois seria prejudicial a longo prazo. Isso faz sentido? Achei estranha essa colocação dele.",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 7,
+    "pontos_max_positivos": 25,
+    "score": 0.28,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "Especialidade predita pelo sistema não é a correta"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "Psicólogo pode ser uma especialidade defensável para casos de depressão e pânico, mas não é a mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O caso parece ser rotineiro, sem sinais de urgência imediata"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade predita pelo sistema"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser rotineiro, mas a especialidade predita pelo sistema não é a correta"
+      }
+    ]
+  },
+  {
+    "idx": 306,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "A partir de que dose a quetiapina tem efeito na bipolaridade?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "Especialidade predita pelo sistema não é a correta"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "Psicólogo pode ser considerado clinicamente razoável para sintomas de bipolaridade, mas não é a especialidade mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não há indicação de que o caso seja urgente ou rotineiro"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas a especialidade predita pelo sistema foi rotineira e não a correta"
+      }
+    ]
+  },
+  {
+    "idx": 21,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Estou tomando Alprazolam. Há cerca de 3 semanas sinto cabeça pesada, tontura e falta de equilíbrio. Pode ser efeito colateral do Alprazolam? Na bula há todos esses efeitos colaterais",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Psicólogo, Psicanalista' em vez de 'Psiquiatra'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não há indicação de urgência ou gravidade nos sintomas descritos"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou incorretamente a especialidade"
+      }
+    ]
+  },
+  {
+    "idx": 407,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Qual é o tratamento para o transtorno do déficit de atenção?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja exatamente a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente, rotineiro ou de saúde mental"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 329,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Estou tendo síndrome de ansiedade,apos pesquisar descobri que por ser Despersonalização ou desrealização.Com qual profissional devo me consultar? Tem tratamento?No auge das minhas crise fui a psiquiatra, do qual não me adiantou muita coisa.",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 17,
+    "pontos_max_positivos": 25,
+    "score": 0.68,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo', que é a especialidade correta para o caso descrito."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação de Psicanalista também é clinicamente razoável, pois ambos os profissionais podem tratar ansiedade e despersonalização."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O sistema não identificou a gravidade do caso, mas o paciente mencionou que foi ao psiquiatra durante uma crise, sugerindo que o caso pode ser urgente."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso pode ser considerado urgente, pois o paciente mencionou que foi ao psiquiatra durante uma crise e o sistema classificou como especialidade rotineira."
+      }
+    ]
+  },
+  {
+    "idx": 7,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Estou tendo falta de ar a quase a uma semana e tenho problema de ansiedade acha q isso tem algo a ver?Estou muito preocupada",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação de Psicanalista é clinicamente razoável para os sintomas descritos"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou a gravidade do caso como urgente, rotineiro ou de saúde mental"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (falta de ar) e o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 3,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Quais os alimentos indicados para quem tem eczema disidrótico (disidrose)?",
+    "expected": "Psicólogo",
+    "predicted": "Dermatologista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "A especialidade predita pelo sistema foi Dermatologista, não Psicólogo."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "Embora a dermatologia seja uma especialidade mais adequada para eczema disidrótico, a psicologia pode ter um papel secundário na abordagem do paciente."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não há indicação de que o caso seja urgente ou de saúde mental."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas a especialidade predita foi rotineira, aplicando penalidade."
+      }
+    ]
+  },
+  {
+    "idx": 42,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Eu sou Homem, do sexo masculino, gosto de mulher, mas sinto o desejo de ter um corpo mais Feminino. Mas não sei, como posso lidar com isso? O que Eu poderia fazer, em relação a isso?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja exatamente a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente, rotineiro ou de saúde mental; a queixa parece ser mais uma questão de saúde mental do que um problema imediato"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser mais uma questão de saúde mental do que um problema imediato; o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 188,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Olá! Uma pessoa com transtorno do espectro autista pode ter também ansiedade social?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação de Psicanalista é clinicamente razoável para os sintomas descritos"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não foi possível determinar a gravidade do caso com base na queixa do paciente"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas a especialidade predita foi rotineira e o sistema classificou como Psicólogo"
+      }
+    ]
+  },
+  {
+    "idx": 208,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Eu tenho 21 anos e sinto necessidade de dormir pelo menos 10 horas por dia para me sentir disposto para o dia seguinte. Porém, trabalho 9h30 todos os dias e pego mais 3h de transporte público, então não tenho tempo para dormir tudo isso. Qual profissional eu devo consultar pra me ajudar com isso?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O caso não apresenta sinais de urgência, mas a subtriagem de emergência não foi aplicada pois o sistema classificou corretamente"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente e o sistema classificou corretamente, então a penalidade não foi aplicada"
+      }
+    ]
+  },
+  {
+    "idx": 377,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Quando era criança tinha a mania de mastigar a lingua me dava uma sensação boa, mas naturalmente parou. Um dia desses um parente me lembrou que eu tinha esse hábito. É incrível mas instantaneamente a mania voltou! Desde então mastigo a lingua sem parar e agora piorou, eu peguei a mania de ficar passando a unha na linha, arranhando e está causando pequenas lesões e dor qdo eu como. Horrível, mas definitamente não consigo parar está incontrolável! Como posso tratar?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou a gravidade do caso, mas o paciente descreveu sintomas crônicos e não urgentes"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou como rotineira; aplicação da penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 417,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "É possível ter transtorno de personalidade antissocial e borderline, ao mesmo tempo?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação de Psicanalista é clinicamente razoável para os sintomas descritos"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não foi possível determinar a urgência do caso com base na queixa do paciente"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou como rotineira; penalidade aplicada"
+      }
+    ]
+  },
+  {
+    "idx": 482,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho ansiedade social mas nunca procurei ajuda profissional, e é ai que está o problema. Como posso buscar ajuda se o meu problema é justamente sair da zona de conforto, situações sociais e medo de ser julgado?",
+    "expected": "Psicólogo",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": 12,
+    "pontos_max_positivos": 25,
+    "score": 0.48,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 10,
+        "justificativa": "O sistema classificou corretamente como 'Psicólogo'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja exatamente a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente, rotineiro ou de saúde mental; a queixa parece ser mais rotineira"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser rotineiro e o sistema classificou como especialidade rotineira; aplicar penalidade por subtriagem de emergência"
+      }
+    ]
+  },
+  {
+    "idx": 301,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Minha sobrinha está grávida de 5 meses. Levamos ela para o hospital quinta feira, pois os pés dela estava muito inchado e as pernas doendo. A pressão tava 1610 .esse quadro pode ser do Metildopa? Pois ela tomava 250mg de 1212 e agora a médica mandou ela toma 500mg de88 ? Isso pode prejudicar o bebe?",
+    "expected": "Ginecologista",
+    "predicted": "Otorrino",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Otorrino' em vez de 'Ginecologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja exatamente a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente, rotineiro ou de saúde mental; a pressão alta e os sintomas podem indicar uma situação urgente"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira; aplicar penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 211,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "o que é candidíase? e pq se passa a ter?",
+    "expected": "Ginecologista",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dentista' em vez de 'Ginecologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não foi possível determinar se o caso é urgente ou rotineiro com base na classificação do sistema"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 358,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Estou com um corrimento pastoso tipo uma coalhada a muito tempo o que fazer? As vezes tem um leve cheiro de ovo",
+    "expected": "Ginecologista",
+    "predicted": "Urologista",
+    "correct": false,
+    "pontos_obtidos": 0,
+    "pontos_max_positivos": 25,
+    "score": 0.0,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Urologista' em vez de 'Ginecologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 5,
+        "justificativa": "A classificação como 'Urologista' é clinicamente razoável para os sintomas descritos, embora não seja a especialidade mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não foi possível determinar se o caso é urgente ou rotineiro com base nos sintomas descritos"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso pode ser considerado urgente (red flag) e o sistema classificou como especialidade rotineira, aplicando a penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 285,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Meu pai furou o pe em um prego e está infeccionado o que devo fazer? Em qual medico devo levar?",
+    "expected": "Dermatologista",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": -1,
+    "pontos_max_positivos": 25,
+    "score": 0.0,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dentista' em vez de 'Dermatologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, mas não é a especialidade mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente ou rotineiro"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 494,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Fiz um furo na orelha com pistola, porém como estava usando o brinco sem a tarraxa, saiu enquanto eu estava dormindo. Quando coloquei no outro dia já tinha tapado o perfuro, eis que tentei colocar novamente e furou perto do outro que tinha tampado. Percebi porque atrás ficou uma marcação de furo no decorrer que foi sarando. Após um mês fiz outro perfuro do lado eis que o que tinha tampado é que tá inflamado e olhe que é só perto. Nem o que eu furei tá assim. É como se tivesse os dois furos, inclusive até com brinco e no meio o furo q havia tampado da primeira vez e ele que tá inflamando. Até sangrou hj, porque?",
+    "expected": "Dermatologista",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 7,
+    "pontos_max_positivos": 25,
+    "score": 0.28,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dentista' em vez de 'Dermatologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A inflamação e o sangramento podem ser sintomas relevantes para uma dermatologista, mesmo que não seja a especialidade mais óbvia"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O caso pode ser considerado rotineiro, mas o sangramento pode indicar uma situação mais grave que requer atenção"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 476,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Tomei 3 caixas de antiviral, mais 2 de vitaminas HsO e 7 tubos Aciclovir. Porém comecei com coceira e estou com impressão que vai sair herpes do outro lado do tronco. Isso é possivel? Ela pode infectar bebês recem nascidos?",
+    "expected": "Dermatologista",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 7,
+    "pontos_max_positivos": 25,
+    "score": 0.28,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dentista' em vez de 'Dermatologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O sistema identificou corretamente que o caso pode ser urgente (red flag) devido ao risco de infecção do bebê"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira, aplicando penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 195,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Boa noite!Minha filha tem 17 anos .Ela faz uns barulhos contínuos,tipo rum,rum...não sei que especialista levar.Ela diz que se eu chamar atenção aí que não consegue parar e diz ainda que às vezes nempercebe que está fazendo.",
+    "expected": "Psicólogo, Psicanalista",
+    "predicted": "Otorrino",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Otorrino' em vez de 'Psicólogo, Psicanalista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos de barulhos contínuos e comportamento incomum"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou a gravidade do caso, que parece ser mais relacionado à saúde mental do que uma emergência médica"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso parece ser mais relacionado à saúde mental do que uma emergência médica e o sistema classificou como especialidade rotineira"
+      }
+    ]
+  },
+  {
+    "idx": 412,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Olá estou com balanite mais não sinto nenhum sintoma apenas vermelhidao , que sumiu após eu passar pomada por uns 6 dias , quantos dias pra curar exatamente?",
+    "expected": "Urologista",
+    "predicted": "Ginecologista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Ginecologista' em vez de 'Urologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação como Ginecologista é clinicamente razoável para os sintomas descritos, embora não seja a especialidade mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente, rotineiro ou de saúde mental; a balanite geralmente não é considerada uma emergência"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou incorretamente; aplicar penalidade de -8"
+      }
+    ]
+  },
+  {
+    "idx": 35,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Boa Noite!Estou com a inflamação na Faceite plantar.Isso tem cura?Estou ficando sem esperança.Se eu fazer uma infiltração mais fortalecimento da fascite ela pôde estabilizar?",
+    "expected": "Ortopedista - traumatologista",
+    "predicted": "Dermatologista",
+    "correct": false,
+    "pontos_obtidos": -1,
+    "pontos_max_positivos": 25,
+    "score": 0.0,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dermatologista' em vez de 'Ortopedista - traumatologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, mas não é a especialidade mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não há indicação de urgência ou emergência nos sintomas descritos"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente, mas o sistema classificou como especialidade rotineira em vez da correta"
+      }
+    ]
+  },
+  {
+    "idx": 416,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Fui diagnosticada com amigdalite e estou com os olhos inchados, sem nenhum outro sintoma, há duas semanas. Existe relação entre ambos? Pf me ajuda, estou desesperada!!!",
+    "expected": "Oftalmologista",
+    "predicted": "Otorrino",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Otorrino' em vez de 'Oftalmologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente ou rotineiro, pois a amigdalite pode ser uma condição aguda que requer atenção médica"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira, portanto aplique penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 361,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Gostaria de entender melhor sobre a Cid H33.3 ? E a recuperação após a Fotocoagulação ?",
+    "expected": "Oftalmologista",
+    "predicted": "Dermatologista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dermatologista' em vez de 'Oftalmologista'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, embora não seja exatamente a especialidade alvo"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não foi possível determinar se o caso é urgente ou rotineiro com base na queixa do paciente"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso não é urgente (red flag), mas o sistema classificou como especialidade rotineira, aplicando a penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 398,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Íngua é algo pra se preocupar? Quantos dias ela desaparece?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 2,
+    "pontos_max_positivos": 25,
+    "score": 0.08,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Dentista' em vez de 'Otorrino'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "A classificação como 'Dentista' é clinicamente razoável para os sintomas descritos, pois a íngua pode estar relacionada à saúde bucal"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "Não foi possível determinar se o caso é urgente ou rotineiro com base nos sintomas descritos"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é rotineiro e o sistema classificou como especialidade rotineira, aplicando a penalidade"
+      }
+    ]
+  },
+  {
+    "idx": 456,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Boa noite! Estou ha uma semana com dor em toda a cabeça e as vezes é so uma pressao. Meu nariz esta escorrendo secreçao igual agua. Tenho dor no abdomen e mal estar. Tenho muito sono. Fui no ps mas o medico falou que pode ser uma enxaqueca. Eu nao sei qual especialidade procurar?",
+    "expected": "Otorrino",
+    "predicted": "Psicólogo, Psicanalista",
+    "correct": false,
+    "pontos_obtidos": -1,
+    "pontos_max_positivos": 25,
+    "score": 0.0,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou incorretamente como 'Psicólogo, Psicanalista' em vez de 'Otorrino'"
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "A classificação é clinicamente razoável para os sintomas descritos, mas não é a especialidade mais adequada"
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 0,
+        "justificativa": "O sistema não identificou corretamente se o caso é urgente ou rotineiro, pois a dor e os sintomas podem indicar uma condição mais grave"
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional"
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": -8,
+        "justificativa": "O caso é urgente (red flag) e o sistema classificou como especialidade rotineira, aplicando a penalidade"
+      }
+    ]
+  }
+]

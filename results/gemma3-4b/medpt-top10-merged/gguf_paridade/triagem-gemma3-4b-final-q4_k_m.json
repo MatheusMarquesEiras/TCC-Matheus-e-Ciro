@@ -1,0 +1,88 @@
+{
+  "model": "gemma3-4b",
+  "gguf": "triagem-gemma3-4b-final-q4_k_m.gguf",
+  "n": 200,
+  "concordancia": 0.945,
+  "acc_gguf": 0.88,
+  "acc_python": 0.91,
+  "segundos": 30.1,
+  "diferencas": [
+    {
+      "i": 2,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 50,
+      "raw": "Ortopedista - traumatologista",
+      "gguf": "Ortopedista - traumatologista",
+      "python": "Dermatologista",
+      "gold": "Dermatologista"
+    },
+    {
+      "i": 66,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Psicólogo",
+      "gold": "Urologista"
+    },
+    {
+      "i": 81,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Otorrino",
+      "gold": "Otorrino"
+    },
+    {
+      "i": 90,
+      "raw": "Oftalmologista",
+      "gguf": "Oftalmologista",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 103,
+      "raw": "Ginecologista",
+      "gguf": "Ginecologista",
+      "python": "Otorrino",
+      "gold": "Ortopedista - traumatologista"
+    },
+    {
+      "i": 125,
+      "raw": "Dentista",
+      "gguf": "Dentista",
+      "python": "Dermatologista",
+      "gold": "Ginecologista"
+    },
+    {
+      "i": 151,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Ginecologista",
+      "gold": "Dentista"
+    },
+    {
+      "i": 153,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 162,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 163,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psiquiatra"
+    }
+  ]
+}

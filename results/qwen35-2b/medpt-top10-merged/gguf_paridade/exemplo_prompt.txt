@@ -1,0 +1,9 @@
+<|im_start|>system
+Você é um sistema de triagem médica. Dada a queixa do paciente, classifique a especialidade médica mais apropriada entre: Dentista, Dermatologista, Ginecologista, Oftalmologista, Ortopedista - traumatologista, Otorrino, Psicólogo, Psiquiatra, Urologista. Responda APENAS com o nome da especialidade, sem explicações adicionais.<|im_end|>
+<|im_start|>user
+Quando se está com depressão, grave ou moderada, é normal sentir-se relativamente bem por uns dias e de repente se sentir horrível, como se fosse uma crise e vontade de chorar muito? Mesmo estando tratando ha 2 meses com antidepressivo?<|im_end|>
+<|im_start|>assistant
+<think>
+
+</think>
+

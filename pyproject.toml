@@ -1,0 +1,41 @@
+[project]
+name = "unsloth-projeto"
+version = "0.2.0"
+description = "Triagem médica em PT-BR: fine-tuning QLoRA multi-modelo (Qwen3.5, Gemma 3) para roteamento de especialidade"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "torch>=2.11.0",
+    "torchaudio>=2.11.0",
+    "torchvision>=0.26.0",
+    "unsloth>=2026.3.11",
+    "unsloth-zoo>=2026.5.4",
+    "datasets>=3.0",
+    "scikit-learn>=1.6",
+    "matplotlib>=3.10",
+    "seaborn>=0.13",
+    "anthropic>=0.49",
+    "flash-linear-attention>=0.5.0",
+    "causal-conv1d>=1.7.0",
+]
+
+[tool.uv]
+# Projeto virtual: o pacote em src/ é alcançado pelo scripts/_bootstrap.py, sem
+# instalação. Evita que um `uv sync` reconstrua o ambiente e derrube os ajustes
+# manuais do Windows (causal-conv1d compilado e o patch de encoding do TRL).
+package = false
+# O setup.py do causal-conv1d importa torch em tempo de build para descobrir a
+# versão do CUDA. No ambiente isolado do uv entra um torch CPU-only, o nvcc não
+# é detectado e o build morre em `NameError: bare_metal_version`. Sem isolamento
+# ele compila contra o torch cu128 já instalado no .venv.
+no-build-isolation-package = ["causal-conv1d"]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
+torchvision = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
+torchaudio = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]

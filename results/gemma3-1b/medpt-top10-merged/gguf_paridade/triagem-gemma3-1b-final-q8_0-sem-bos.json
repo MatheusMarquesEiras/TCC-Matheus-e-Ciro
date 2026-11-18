@@ -1,0 +1,137 @@
+{
+  "model": "gemma3-1b",
+  "gguf": "triagem-gemma3-1b-final-q8_0.gguf",
+  "n": 200,
+  "concordancia": 0.91,
+  "acc_gguf": 0.81,
+  "acc_python": 0.86,
+  "segundos": 17.5,
+  "diferencas": [
+    {
+      "i": 8,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 17,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 18,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 40,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Dentista",
+      "gold": "Urologista"
+    },
+    {
+      "i": 44,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 47,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 53,
+      "raw": "Oftalmologista",
+      "gguf": "Oftalmologista",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 57,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 72,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 86,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 88,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 112,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 120,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 132,
+      "raw": "Dentista",
+      "gguf": "Dentista",
+      "python": "Otorrino",
+      "gold": "Otorrino"
+    },
+    {
+      "i": 153,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 169,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 172,
+      "raw": "Otorrino",
+      "gguf": "Otorrino",
+      "python": "Dentista",
+      "gold": "Dentista"
+    },
+    {
+      "i": 195,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    }
+  ]
+}

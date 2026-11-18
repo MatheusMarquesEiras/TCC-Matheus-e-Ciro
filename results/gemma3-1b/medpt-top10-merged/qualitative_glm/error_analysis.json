@@ -1,0 +1,402 @@
+[
+  {
+    "idx": 10901,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Parece que piorei com o antidepressivo venlafaxina , tipo fiquei pior da depressao será que posso ter transtorno bipolar ou pode ser um efeito parodoxal ?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 10,
+    "pontos_max_positivos": 25,
+    "score": 0.4,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema indicou Psicólogo, mas a correta seria Psiquiatra. A queixa envolve piora clínica com venlafaxina, possível efeito paradógico e investigação de transtorno bipolar — questões de diagnóstico diferencial e manejo medicamentoso, competência exclusiva do médico psiquiatra."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 3,
+        "justificativa": "Psicólogo é um profissional de saúde mental e o encaminhamento não é totalmente desarrazoado para um quadro depressivo em acompanhamento. Contudo, a dúvida central do paciente é farmacológica (efeito do antidepressivo) e diagnóstica (bipolaridade), o que exige avaliação médica; psicólogo não pode ajustar medicação nem fechar esse diagnóstico."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "O caso é de saúde mental e rotineiro, sem sinais de urgência ou risco imediato (não há ideação suicida explícita, sintomas psicóticos ou descompensação aguda). O encaminhamento a um profissional de saúde mental sugere reconhecimento do contexto correto, embora sem captar a necessidade de avaliação médica psiquiátrica."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta do sistema contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, atendendo ao formato solicitado."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve apenas piora subjetiva de sintomas depressivos durante uso de antidepressivo, sem qualquer sinal de emergência com risco de vida. Penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 12839,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Olá.Alguns meses atrás comecei a sentir taquicardia e isso dura alguns dias. Fiz exames de sangue, holter, eletrocardiograma e ecocardiograma e não acusou nada. Fico muito preocupada e isso piora o seu batimentos. Quando estou de pé sinto ele mais acelerado. O que poderia ser?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 15,
+    "pontos_max_positivos": 25,
+    "score": 0.6,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 3,
+        "justificativa": "O sistema não classificou como 'Psiquiatra' (especialidade correta), predizendo 'Psicólogo'. Há acerto parcial apenas por se tratar de saúde mental, mas psicólogo não é médico e não pode avaliar nem prescrever, enquanto o caso pede avaliação psiquiátrica."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Encaminhamento parcialmente defensável: exames cardiológicos normais e queixa clara de preocupação/ansiedade agravando os batimentos sugerem componente ansioso. Porém, piora em ortostatismo pode indicar causa orgânica não investigada (ex.: intolerância ortostática), e psicólogo não cobre avaliação clínica/farmacológica."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O caso é de rotineiro/saúde mental, e o sistema encaminhou para especialidade ambulatorial não emergencial, indicando reconhecimento correto de que não há urgência."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa não descreve sinal de emergência com risco de vida explícito (taquicardia crônica recorrente com exames normais é quadro rotineiro); penalidade padrão aplicada."
+      }
+    ]
+  },
+  {
+    "idx": 10664,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Meu namorado tem esquizofrenia e de vez em outra quando estamos conversando ele fica repetindo as palavras queria entender se isso faz parte do quadro? Pq ficar repetindo algumas palavras que eu menciono não acho que è normal e isso acontece sempre.",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 13,
+    "pontos_max_positivos": 25,
+    "score": 0.52,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "Sistema previu 'Psicólogo' em vez de 'Psiquiatra'. A dúvida envolve manifestação clínica (repetição de palavras/ecolalia) em paciente com esquizofrenia já diagnosticada, questão tipicamente psiquiátrica. Erro parcialmente mitigado por estar na área de saúde mental."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Psicólogo é defensável para questões de saúde mental e acompanhamento de esquizofrenia, mas a pergunta sobre se o sintoma faz parte do quadro clínico e sua avaliação medicamentosa/evolução é mais adequada ao psiquiatra, que conduz o tratamento do transtorno."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "Trata-se de caso rotineiro de saúde mental, sem sinais de urgência ou risco iminente. O encaminhamento ambulatorial para profissional de saúde mental é coerente com a baixa gravidade descrita."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve sintoma crônico e rotineiro (repetição de palavras), sem nenhum sinal de emergência com risco de vida. Penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 14967,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Falta de ar pode ser o primeiro sintoma dias antes de uma crise de ansiedade?E pode ser constante?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 13,
+    "pontos_max_positivos": 25,
+    "score": 0.52,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "O sistema não classificou como 'Psiquiatra', retornou 'Psicólogo'. Há crédito parcial mínimo por ter identificado corretamente o domínio de saúde mental, mas a especialidade está errada: Psicólogo não é médico e não pode avaliar nem tratar clinicamente sintomas somáticos."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Encaminhar uma dúvida sobre crise de ansiedade a um Psicólogo é defensável dentro do campo da saúde mental. Porém, o sintoma central é falta de ar (queixa somática), o que exige avaliação médica para descartar causas orgânicas — papel do Psiquiatra (ou clínico), não do Psicólogo."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "O sistema identificou corretamente o caso como rotineiro e de saúde mental, sem encaminhamento de emergência, o que é adequado à natureza da pergunta. Perde pontos por não ter sinalizado que a falta de ar constante merece investigação médica complementar."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, atendendo plenamente ao formato exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é uma pergunta educacional sobre sintomas de ansiedade, sem descrição de sinal de emergência com risco de vida explícito (não há falta de ar intensa aguda, dor no peito ou outros sinais de gravidade). Penalidade não se aplica: valor obrigatório 0."
+      }
+    ]
+  },
+  {
+    "idx": 1869,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho ansiedade e as vezes o coração da um solavanco como se tivesse errado a batida, fico com a sensação de elevador no peito. A ansiedade faz isso?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 3,
+        "justificativa": "O sistema previu 'Psicólogo', mas a especialidade correta é 'Psiquiatra'. Errou o alvo; pontuação parcial apenas pela proximidade temática na área de saúde mental."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Psicólogo é defensável para queixa de ansiedade, mas o paciente relata palpitações (sensação de batida 'pulada'/elevador no peito) que pedem avaliação médica para investigar arritmia/extrassístoles e, se preciso, medicação — algo fora do escopo do psicólogo."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "O sistema reconheceu corretamente que o caso é de saúde mental e não urgente, encaminhando para profissão de saúde mental. Perde um ponto por negligenciar o componente físico (palpitações) que mereceria avaliação clínica/cardiológica de rotina."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve palpitações ocasionais associadas a ansiedade, sem dor no peito, falta de ar intensa ou outro sinal de emergência explícito com risco de vida. Caso rotineiro; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 1102,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho muito ciumes, o que devo fazer?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 15,
+    "pontos_max_positivos": 25,
+    "score": 0.6,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como 'Psicólogo', mas a especialidade correta era 'Psiquiatra'. Classificação incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 7,
+        "justificativa": "Ciúmes excessivo é uma queixa emocional/comportamental que é comumente abordada por psicoterapia; encaminhar a um Psicólogo é clinicamente razoável e defensável."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é de saúde mental, rotineira, sem risco de vida. O encaminhamento para Psicólogo reflete corretamente a natureza não urgente do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa não descreve nenhum sinal de emergência com risco de vida; penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 10261,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Mordi minha bochecha na parte inferior e agora ficou um caroço do tamanho de uma semente de laranja. Esteticamente tá feio pq quando eu vou conversar ele salta p fora pq tá bem perto do lábio. Será q eu procuro o dentista oi otorrino?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema prediz 'Dentista', mas a especialidade correta é 'Otorrino'. A classificação não corresponde ao gabarito."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Lesão de mucosa bucal por mordida (provável mucocele/fibroma traumático perto do lábio) é comumente avaliada por dentistas, especialmente bucomaxilo. Escolha clinicamente razoável, embora o gabarito seja Otorrino."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "Queixa rotineira e estética, sem sinais de urgência. O encaminhamento ambulatorial reflete corretamente a baixa gravidade do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Dentista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Não há sinal de emergência com risco de vida na queixa; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 12506,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "a gonorreia pode desaparecer, curar sozinha?",
+    "expected": "Urologista",
+    "predicted": "Ginecologista",
+    "correct": false,
+    "pontos_obtidos": 13,
+    "pontos_max_positivos": 25,
+    "score": 0.52,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como Ginecologista, mas a especialidade correta era Urologista. Sem indicação de que o paciente é mulher, o gabarito aponta urologia (uretrite gonocócica é classicamente atendida por urologia). Predição incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 5,
+        "justificativa": "A gonorreia é uma IST que também é manejada por ginecologistas no contexto feminino e por infectologistas. Embora não seja a especialidade alvo, o encaminhamento a Ginecologista não é absurdo clinicamente, ainda que o ideal sem gênero informado fosse urologia."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é uma dúvida rotineira sobre evolução/cura da gonorreia, sem sinais de urgência ou emergência. Encaminhamento ambulatorial de rotina é adequado à gravidade do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta do sistema contém apenas o nome da especialidade ('Ginecologista'), sem texto adicional, conforme exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida (não há dor intensa, sangramento grave, febre alta com sinais alarmantes etc.). Penalidade não aplicável, permanece 0."
+      }
+    ]
+  },
+  {
+    "idx": 5587,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "O esporão osseo nasal pode deformar o nariz e o rosto da pessoa ?",
+    "expected": "Otorrino",
+    "predicted": "Ortopedista - traumatologista",
+    "correct": false,
+    "pontos_obtidos": 9,
+    "pontos_max_positivos": 25,
+    "score": 0.36,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como 'Ortopedista - traumatologista', mas a especialidade correta é Otorrino. Esporão ósseo nasal é structure do nariz/septo, território típico de otorrinolaringologia."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 1,
+        "justificativa": "A menção à palavra 'ósseo' provavelmente induziu o erro para ortopedia, mas o contexto é inequivocamente nasal/facial. Esporão ósseo nasal não é tratado por ortopedista; o encaminhamento não é clinicamente defensável, apenas compreensível heurísticamente."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é uma dúvida rotineira sobre deformidade estética/estrutural nasal, sem sinais de urgência. O encaminhamento ambulatorial de rotina é consistente com a gravidade correta do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Ortopedista - traumatologista'), sem texto adicional, seguindo o formato esperado."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida. Penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 1798,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho extremo desprezo pelas pessoas, sou introvertido, tenho poucos amigos e não sinto nenhuma necessidade de os ter ou de socializar. Me sinto superior aos outros, prefiro me dedicar ao trabalho do que as relações íntimas e tenho baixa empatia. Esse comportamento pode indicar algum transtorno?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como 'Psicólogo', mas a especialidade correta é 'Psiquiatra'. A queixa levanta a questão de possível transtorno de personalidade (traços esquizoides/narcisistas), cujo diagnóstico médico requer avaliação psiquiátrica. A previsão está incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Embora não seja a especialidade alvo, 'Psicólogo' é clinicamente defensável: trata-se de preocupação com padrões de personalidade, empatia e funcionamento social, que estão dentro do escopo de avaliação e condução psicológica em saúde mental, sendo encaminhamento razoável em nível ambulatorial."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O caso é claramente não urgente e pertenente à área de saúde mental; o sistema não indicou urgência/emergência e direcionou a um profissional de saúde mental, compatível com a gravidade real (rotineiro/saúde mental)."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, atendendo ao formato exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve padrão de comportamento e questionamento sobre possível transtorno, sem qualquer sinal de emergência com risco de vida. Penalidade obrigatoriamente 0."
+      }
+    ]
+  }
+]

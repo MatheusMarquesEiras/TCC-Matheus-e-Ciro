@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pipeline TCC — Slides</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --muted: #8b949e;
+      --dim: #6e7681;
+      --text: #f0f6fc;
+      --blue: #79c0ff;
+      --purple: #d2a8ff;
+      --yellow: #f0b430;
+      --green: #56d364;
+      --orange: #ffa657;
+      --red: #f85149;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── Deck container ─────────────────────────────── */
+    #deck {
+      width: 100%; height: 100%;
+      position: relative;
+    }
+
+    /* ── Slide base ─────────────────────────────────── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 5vw;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Animated children */
+    .slide .anim {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .slide.active .anim { opacity: 1; transform: translateY(0); }
+    .slide.active .anim:nth-child(1) { transition-delay: 0.05s; }
+    .slide.active .anim:nth-child(2) { transition-delay: 0.15s; }
+    .slide.active .anim:nth-child(3) { transition-delay: 0.25s; }
+    .slide.active .anim:nth-child(4) { transition-delay: 0.35s; }
+    .slide.active .anim:nth-child(5) { transition-delay: 0.45s; }
+    .slide.active .anim:nth-child(6) { transition-delay: 0.55s; }
+    .slide.active .anim:nth-child(7) { transition-delay: 0.65s; }
+
+    /* ── Typography ─────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      background: #1f6feb33;
+      border: 1px solid #1f6feb;
+      color: var(--blue);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      color: var(--text);
+    }
+    h2 {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    .step-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Cards ──────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem 1.8rem;
+      width: 100%;
+      max-width: 820px;
+    }
+
+    /* ── Tag pills ──────────────────────────────────── */
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem; }
+    .tag {
+      font-size: 0.68rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    .tag-blue   { background:#1f6feb22; border-color:#1f6feb; color:var(--blue);   }
+    .tag-purple { background:#8957e522; border-color:#8957e5; color:var(--purple); }
+    .tag-yellow { background:#d2942022; border-color:#d29420; color:var(--yellow); }
+    .tag-green  { background:#23863622; border-color:#2ea043; color:var(--green);  }
+    .tag-orange { background:#fb8f4422; border-color:#fb8f44; color:var(--orange); }
+
+    /* ── Metrics row ────────────────────────────────── */
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.1rem;
+      justify-content: center;
+    }
+    .metric {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7rem 1.2rem;
+      text-align: center;
+      min-width: 110px;
+      flex: 1;
+    }
+    .metric .val {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+    .metric .lbl {
+      font-size: 0.68rem;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Rubric table ───────────────────────────────── */
+    .rubric {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 1rem;
+    }
+    .rubric th {
+      text-align: left;
+      padding: 0.4rem 0.7rem;
+      color: var(--dim);
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-bottom: 1px solid var(--border);
+    }
+    .rubric td {
+      padding: 0.5rem 0.7rem;
+      border-bottom: 1px solid #21262d;
+      color: var(--muted);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+    .rubric td:first-child { color: var(--text); font-weight: 500; }
+    .rubric td.pts {
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .rubric tr:last-child td { border-bottom: none; }
+
+    /* ── Output block ───────────────────────────────── */
+    .output {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+    .output .out-lbl {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--dim);
+      margin-bottom: 0.4rem;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+    .output li { list-style: none; color: var(--muted); padding: 0.15rem 0; }
+    .output li::before { content: "→ "; }
+
+    /* ── Pipeline overview (slide 2) ────────────────── */
+    .pipeline-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: nowrap;
+      width: 100%;
+      max-width: 900px;
+    }
+    .pip-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .pip-circle {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      border: 2px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: var(--surface);
+    }
+    .pip-label {
+      font-size: 0.7rem;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.4;
+      max-width: 90px;
+    }
+    .pip-arrow {
+      color: var(--border);
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── Navigation ─────────────────────────────────── */
+    #nav {
+      position: fixed;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #161b22cc;
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      z-index: 100;
+    }
+    #nav button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+      line-height: 1;
+    }
+    #nav button:hover { color: var(--text); background: #30363d; }
+    #nav button:disabled { opacity: 0.25; cursor: default; }
+    #counter {
+      font-size: 0.8rem;
+      color: var(--dim);
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+      min-width: 3ch;
+      text-align: center;
+    }
+
+    /* ── Dots ───────────────────────────────────────── */
+    #dots {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .dot.active { background: var(--blue); transform: scale(1.4); }
+
+    /* ── Slide number top-right ─────────────────────── */
+    #slide-num {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.6rem;
+      font-size: 0.72rem;
+      color: var(--dim);
+      font-family: 'Cascadia Code', 'Fira Code', monospace;
+    }
+
+    /* ── Keyboard hint ──────────────────────────────── */
+    #hint {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.6rem;
+      font-size: 0.68rem;
+      color: #30363d;
+    }
+
+    /* ── Gradient accent line top ───────────────────── */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 2px;
+      border-radius: 999px;
+      opacity: 0.5;
+    }
+    #s0::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+    #s1::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+    #s2::before { background: var(--blue); }
+    #s3::before { background: var(--purple); }
+    #s4::before { background: var(--yellow); }
+    #s5::before { background: var(--green); }
+    #s6::before { background: var(--orange); }
+    #s7::before { background: linear-gradient(90deg, var(--green), var(--blue)); }
+  </style>
+</head>
+<body>
+
+<div id="deck">
+
+  <!-- ── SLIDE 0 · Capa ──────────────────────────────── -->
+  <div class="slide active" id="s0">
+    <div class="anim badge">TCC · IFPR Pinhais · 2026</div>
+    <h1 class="anim">Fine-Tuning de LLM Compacto<br>para Triagem Médica</h1>
+    <p class="subtitle anim">Matheus Marques Eiras &amp; Ciro Guilherme Nass</p>
+    <div class="metrics anim" style="margin-top:2.5rem; max-width:600px">
+      <div class="metric"><div class="val" style="color:var(--blue)">0,8B</div><div class="lbl">Parâmetros</div></div>
+      <div class="metric"><div class="val" style="color:var(--green)">85%</div><div class="lbl">Acurácia</div></div>
+      <div class="metric"><div class="val" style="color:var(--purple)">0,791</div><div class="lbl">F1-macro</div></div>
+      <div class="metric"><div class="val" style="color:var(--yellow)">0,951</div><div class="lbl">Score qualitativo</div></div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 1 · Trabalhos relacionados ───────────── -->
+  <div class="slide" id="s_art" style="justify-content:flex-start; padding-top:2rem; overflow-y:auto;">
+    <div class="anim badge">Revisão de literatura</div>
+    <h2 class="anim" style="text-align:center; margin-bottom:1.2rem">Trabalhos relacionados</h2>
+    <div class="anim" style="width:100%; max-width:900px; display:flex; flex-direction:column; gap:0.55rem">
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--blue);padding-top:0.1rem;line-height:1.4">PAIOLA<br>et al.<br>2024</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">Adapting LLMs for the Medical Domain in Portuguese</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Fine-tuning do ChatBode-7B com QLoRA em dois datasets médicos traduzidos do inglês. Conclui que modelos treinados em dados do domínio têm melhor precisão clínica, mas sofrem de catastrophic forgetting. Primeiro benchmark de LLMs médicos em português.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--purple);padding-top:0.1rem;line-height:1.4">WANG<br>et al.<br>2023</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">Disease-Prediction Protocol with BERT-Based Transfer Learning for Intelligent Triage</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Sistema de triagem inteligente usando BERT para classificar queixa livre em departamento hospitalar. Usa o método Triage Priority (TP) para converter o problema multilabel em single-label. Atinge 87,47% de acurácia em registros médicos neurológicos em chinês.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--yellow);padding-top:0.1rem;line-height:1.4">VALM.<br>et al.<br>2021</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">SmartTriage — Personalized Patient Data Capture and Decision Support</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Sistema da Kaiser Permanente que usa ML para identificar a queixa principal a partir de texto livre e fazer perguntas de acompanhamento personalizadas com base no histórico do paciente no EMR. Prediz códigos ICD-10-CM e recomendações de cuidados.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--green);padding-top:0.1rem;line-height:1.4">STEW.<br>et al.<br>2023</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">Applications of NLP at Emergency Department Triage — Narrative Review</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Revisão narrativa mapeando o uso de PLN na triagem de pronto-socorro: classificação de gravidade, previsão de admissão, detecção de sepse e geração de documentação clínica. Conclui que modelos de linguagem têm grande potencial, mas faltam dados e validação prospectiva.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--orange);padding-top:0.1rem;line-height:1.4">ELVAS<br>et al.<br>2025</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">Fine-Tuning de LMs para Estruturação de Laudos Médicos em Português</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Fine-tuning do MediAlbertina para português europeu na tarefa de reconhecimento de entidades em laudos de cardiologia. Atinge 96,13% de acurácia na identificação de condições como estenose aórtica em textos não estruturados. Próximo ao nosso problema de estruturação de texto médico em PT.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--blue);padding-top:0.1rem;line-height:1.4">COLLA<br>et al.<br>2025</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">Fine-Tuning + RAG for Healthcare AI — Scoping Review (Mayo Clinic)</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Revisão sistemática comparando abordagens de fine-tuning, RAG e FT+RAG em sistemas de saúde. Sete estudos elegíveis mostram que a combinação FT+RAG supera ambas as abordagens isoladas em QA, sumarização e suporte a decisão clínica. LoRA foi o método de FT mais usado.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--purple);padding-top:0.1rem;line-height:1.4">FÄRBER<br>et al.<br>2024</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">MedPT — Dataset de QA Médica em Português Brasileiro (AKCIT/UFG)</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">Apresenta o dataset usado neste TCC: 384 mil pares reais de paciente-médico em português brasileiro, cobrindo mais de 3.200 condições. Fine-tuning de um modelo de 1,7B parâmetros alcança 94% de F1 em 20 especialidades. Base direta para o nosso experimento com 10 especialidades.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1rem;display:flex;gap:0.9rem;align-items:flex-start">
+        <div style="flex-shrink:0;width:3rem;text-align:center;font-size:0.65rem;font-family:monospace;color:var(--green);padding-top:0.1rem;line-height:1.4">LAGO<br>et al.<br>2024</div>
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:0.2rem">Software de Pré-Diagnóstico Médico para Classificação de Risco (TCC FEI)</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.5">TCC brasileiro usando Random Forest com o Protocolo de Manchester para classificar risco de atendimento em pronto-socorro. Abordagem clássica de ML sem LLMs. Serve de referência para comparar com abordagens baseadas em linguagem natural como a deste trabalho.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SLIDE 1 · Visão geral da pipeline ───────────── -->
+  <div class="slide" id="s1">
+    <div class="anim badge">Visão geral</div>
+    <h2 class="anim" style="text-align:center; margin-bottom:2rem">Pipeline em 5 etapas</h2>
+    <div class="pipeline-row anim">
+      <div class="pip-step">
+        <div class="pip-circle" style="border-color:var(--blue)">📦</div>
+        <div class="pip-label" style="color:var(--blue)">01<br>Preparar dados</div>
+      </div>
+      <div class="pip-arrow">›</div>
+      <div class="pip-step">
+        <div class="pip-circle" style="border-color:var(--purple)">🏋️</div>
+        <div class="pip-label" style="color:var(--purple)">02<br>Treinar modelo</div>
+      </div>
+      <div class="pip-arrow">›</div>
+      <div class="pip-step">
+        <div class="pip-circle" style="border-color:var(--yellow)">📊</div>
+        <div class="pip-label" style="color:var(--yellow)">03<br>Avaliação quantitativa</div>
+      </div>
+      <div class="pip-arrow">›</div>
+      <div class="pip-step">
+        <div class="pip-circle" style="border-color:var(--green)">🩺</div>
+        <div class="pip-label" style="color:var(--green)">04<br>Avaliação qualitativa</div>
+      </div>
+      <div class="pip-arrow">›</div>
+      <div class="pip-step">
+        <div class="pip-circle" style="border-color:var(--orange)">🖥️</div>
+        <div class="pip-label" style="color:var(--orange)">05<br>Demo interativa</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2 · Etapa 1 ────────────────────────────── -->
+  <div class="slide" id="s2">
+    <div class="anim step-label" style="color:var(--blue)">Etapa 1 · 01_prepare_data.py</div>
+    <div class="anim" style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.2rem">
+      <span style="font-size:1.8rem">📦</span>
+      <h2>Preparação dos dados</h2>
+    </div>
+    <div class="card anim" style="border-color:var(--blue)44; max-width:820px">
+      <p style="color:var(--muted);font-size:0.9rem;line-height:1.7">
+        O dataset <strong style="color:var(--text)">AKCIT/MedPT</strong> é carregado do Hugging Face Hub —
+        384 mil pares de queixa e especialidade em português brasileiro, com 104 especialidades.
+        As 10 mais frequentes são selecionadas, convertidas para <strong style="color:var(--text)">formato ChatML</strong>
+        com system prompt de triagem e divididas em treino, validação e teste.
+      </p>
+      <div class="tags anim">
+        <span class="tag tag-blue">AKCIT/MedPT</span>
+        <span class="tag tag-blue">384k exemplos</span>
+        <span class="tag tag-blue">104 especialidades → top 10</span>
+        <span class="tag tag-blue">ChatML</span>
+      </div>
+      <div class="output anim">
+        <div class="out-lbl">Saída</div>
+        <ul>
+          <li>data/top10/train.json — 145.321 exemplos</li>
+          <li>data/top10/val.json &nbsp;&nbsp;— 18.165 exemplos</li>
+          <li>data/top10/test.json — 18.166 exemplos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 3 · Etapa 2 ────────────────────────────── -->
+  <div class="slide" id="s3">
+    <div class="anim step-label" style="color:var(--purple)">Etapa 2 · 02_train.py</div>
+    <div class="anim" style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.2rem">
+      <span style="font-size:1.8rem">🏋️</span>
+      <h2>Treinamento com QLoRA</h2>
+    </div>
+    <div class="card anim" style="border-color:var(--purple)44; max-width:820px">
+      <p style="color:var(--muted);font-size:0.9rem;line-height:1.7">
+        O modelo base <strong style="color:var(--text)">Qwen3.5-0.8B</strong> é carregado quantizado em
+        <strong style="color:var(--text)">4 bits (NF4)</strong> via Unsloth. Adaptadores LoRA são treinados
+        sobre as camadas de atenção e MLP — apenas <strong style="color:var(--text)">6,4 M parâmetros treináveis</strong>
+        (0,84% do total), pelo SFTTrainer da TRL em 3 épocas na RTX 4070.
+      </p>
+      <div class="tags anim">
+        <span class="tag tag-purple">Qwen3.5-0.8B</span>
+        <span class="tag tag-purple">QLoRA 4-bit NF4</span>
+        <span class="tag tag-purple">LoRA r=16 α=32</span>
+        <span class="tag tag-purple">Unsloth + TRL</span>
+        <span class="tag tag-purple">RTX 4070 12 GB</span>
+      </div>
+      <div class="metrics anim">
+        <div class="metric"><div class="val" style="color:var(--purple)">~7h</div><div class="lbl">Duração</div></div>
+        <div class="metric"><div class="val" style="color:var(--purple)">3</div><div class="lbl">Épocas</div></div>
+        <div class="metric"><div class="val" style="color:var(--purple)">0,44</div><div class="lbl">Loss final</div></div>
+        <div class="metric"><div class="val" style="color:var(--purple)">6,4M</div><div class="lbl">Parâm. treináveis</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4 · Etapa 3 ────────────────────────────── -->
+  <div class="slide" id="s4">
+    <div class="anim step-label" style="color:var(--yellow)">Etapa 3 · 03_evaluate.py</div>
+    <div class="anim" style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.2rem">
+      <span style="font-size:1.8rem">📊</span>
+      <h2>Avaliação quantitativa</h2>
+    </div>
+    <div class="card anim" style="border-color:var(--yellow)44; max-width:820px">
+      <p style="color:var(--muted);font-size:0.9rem;line-height:1.7">
+        O modelo fine-tuned é avaliado num conjunto de teste estratificado com
+        <strong style="color:var(--text)">200 exemplos</strong>. São calculadas acurácia,
+        F1-macro, precisão e recall por especialidade. O resultado é comparado com o
+        desempenho <strong style="color:var(--text)">zero-shot</strong> do modelo base.
+      </p>
+      <div class="tags anim">
+        <span class="tag tag-yellow">200 exemplos de teste</span>
+        <span class="tag tag-yellow">Acurácia · F1-macro</span>
+        <span class="tag tag-yellow">Matriz de confusão</span>
+        <span class="tag tag-yellow">Zero-shot vs Fine-tuned</span>
+      </div>
+      <div class="metrics anim">
+        <div class="metric"><div class="val" style="color:var(--yellow)">85%</div><div class="lbl">Acurácia</div></div>
+        <div class="metric"><div class="val" style="color:var(--yellow)">0,791</div><div class="lbl">F1-macro</div></div>
+        <div class="metric"><div class="val" style="color:var(--yellow)">+18pp</div><div class="lbl">vs base zero-shot</div></div>
+        <div class="metric"><div class="val" style="color:var(--yellow)">1,0</div><div class="lbl">F1 Oftalmologia</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5 · Etapa 4 ────────────────────────────── -->
+  <div class="slide" id="s5">
+    <div class="anim step-label" style="color:var(--green)">Etapa 4 · 04_qualitative_eval.py</div>
+    <div class="anim" style="display:flex;align-items:center;gap:0.7rem;margin-bottom:0.9rem">
+      <span style="font-size:1.8rem">🩺</span>
+      <h2>Avaliação qualitativa (HealthBench-style)</h2>
+    </div>
+    <div class="card anim" style="border-color:var(--green)44; max-width:820px">
+      <p style="color:var(--muted);font-size:0.85rem;line-height:1.6;margin-bottom:0.5rem">
+        Um segundo LLM (<strong style="color:var(--text)">llama3.1:8b via Ollama</strong>) atua como juiz,
+        avaliando cada resposta por 5 critérios clínicos em 100 exemplos estratificados.
+      </p>
+      <table class="rubric anim">
+        <thead>
+          <tr>
+            <th>Critério</th>
+            <th>O que avalia</th>
+            <th>Pontos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Acurácia</td>
+            <td>Acertou exatamente a especialidade correta?</td>
+            <td class="pts" style="color:var(--green)">0 – 10</td>
+          </tr>
+          <tr>
+            <td>Relevância clínica</td>
+            <td>Mesmo errando, é clinicamente razoável para os sintomas?</td>
+            <td class="pts" style="color:var(--green)">0 – 7</td>
+          </tr>
+          <tr>
+            <td>Awareness de gravidade</td>
+            <td>Identificou se o caso é urgente, rotineiro ou saúde mental?</td>
+            <td class="pts" style="color:var(--green)">0 – 5</td>
+          </tr>
+          <tr>
+            <td>Instruction following</td>
+            <td>Resposta contém só o nome da especialidade, sem texto extra?</td>
+            <td class="pts" style="color:var(--green)">0 – 3</td>
+          </tr>
+          <tr>
+            <td style="color:var(--red)">Penalidade emergência</td>
+            <td>Caso com risco de vida encaminhado para especialidade errada?</td>
+            <td class="pts" style="color:var(--red)">−8 ou 0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6 · Resultados qualitativos ───────────── -->
+  <div class="slide" id="s6">
+    <div class="anim step-label" style="color:var(--green)">Etapa 4 · Resultados</div>
+    <div class="anim" style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.4rem">
+      <span style="font-size:1.8rem">📈</span>
+      <h2>Score qualitativo por categoria</h2>
+    </div>
+    <div class="metrics anim" style="max-width:820px; width:100%">
+      <div class="metric" style="border-color:var(--green)44">
+        <div class="val" style="color:var(--green)">0,951</div>
+        <div class="lbl">Geral (n=100)</div>
+      </div>
+      <div class="metric" style="border-color:var(--blue)44">
+        <div class="val" style="color:var(--blue)">0,966</div>
+        <div class="lbl">Rotineiros (n=72)</div>
+      </div>
+      <div class="metric" style="border-color:var(--purple)44">
+        <div class="val" style="color:var(--purple)">0,911</div>
+        <div class="lbl">Saúde mental (n=27)</div>
+      </div>
+      <div class="metric" style="border-color:var(--yellow)44">
+        <div class="val" style="color:var(--yellow)">1,000</div>
+        <div class="lbl">Urgentes (n=1)*</div>
+      </div>
+    </div>
+    <div class="card anim" style="max-width:820px; margin-top:1rem; background:#0d1117; border-color:var(--border)">
+      <p style="color:var(--muted);font-size:0.85rem;line-height:1.7">
+        O score inicial era <strong style="color:var(--red)">0,344</strong> — o critério de penalidade de emergência
+        disparava em casos rotineiros. Após recalibração do prompt do juiz para só penalizar
+        red flags explícitos (dor no peito, convulsão, AVC…), o score subiu para
+        <strong style="color:var(--green)">0,951</strong>.
+      </p>
+    </div>
+    <p class="anim" style="color:var(--dim); font-size:0.72rem; margin-top:0.7rem">* amostra insuficiente — ampliar em TCC2</p>
+  </div>
+
+  <!-- ── SLIDE 7 · Demo + Resultados finais ──────────── -->
+  <div class="slide" id="s7">
+    <div class="anim badge">Conclusão</div>
+    <h2 class="anim" style="text-align:center; margin-bottom:1.5rem">Resultados do experimento</h2>
+    <div class="metrics anim" style="max-width:860px; width:100%">
+      <div class="metric" style="border-color:var(--green)44">
+        <div class="val" style="color:var(--green)">85%</div>
+        <div class="lbl">Acurácia</div>
+      </div>
+      <div class="metric" style="border-color:var(--blue)44">
+        <div class="val" style="color:var(--blue)">0,791</div>
+        <div class="lbl">F1-macro</div>
+      </div>
+      <div class="metric" style="border-color:var(--purple)44">
+        <div class="val" style="color:var(--purple)">0,951</div>
+        <div class="lbl">Score qualitativo</div>
+      </div>
+      <div class="metric" style="border-color:var(--yellow)44">
+        <div class="val" style="color:var(--yellow)">0,8B</div>
+        <div class="lbl">Parâmetros</div>
+      </div>
+      <div class="metric" style="border-color:var(--orange)44">
+        <div class="val" style="color:var(--orange)">~7h</div>
+        <div class="lbl">Tempo de treino</div>
+      </div>
+    </div>
+    <div class="card anim" style="max-width:820px; margin-top:1.2rem; border-color:var(--green)44; background:#0d2a1a">
+      <p style="color:#7ee787; font-size:0.9rem; line-height:1.7; text-align:center">
+        Um modelo compacto de 0,8 B parâmetros, treinado em ~7 horas numa GPU de consumidor,
+        alcança 85% de acurácia na tarefa de triagem médica em português —
+        com score qualitativo de 0,951 no estilo do HealthBench.
+      </p>
+    </div>
+    <p class="anim" style="color:var(--dim); font-size:0.78rem; margin-top:1rem">
+      Qwen3.5-0.8B · QLoRA (LoRA r=16, 4-bit NF4) · AKCIT/MedPT · Unsloth + TRL · IFPR Pinhais 2026
+    </p>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- ── Navigation ─────────────────────────────────────── -->
+<div id="nav">
+  <button id="btn-prev" onclick="go(-1)" disabled>‹</button>
+  <span id="counter">1 / 9</span>
+  <button id="btn-next" onclick="go(1)">›</button>
+</div>
+
+<div id="dots"></div>
+<div id="slide-num">1 / 9</div>
+<div id="hint">← → para navegar</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let cur = 0;
+
+  const dotsEl = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const slideNum = document.getElementById('slide-num');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = Math.max(0, Math.min(total - 1, n));
+    slides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    counter.textContent = `${cur + 1} / ${total}`;
+    slideNum.textContent = `${cur + 1} / ${total}`;
+    btnPrev.disabled = cur === 0;
+    btnNext.disabled = cur === total - 1;
+  }
+
+  function go(dir) { goTo(cur + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                     go(-1);
+  });
+</script>
+</body>
+</html>

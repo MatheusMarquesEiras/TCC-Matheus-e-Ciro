@@ -1,0 +1,39 @@
+{
+  "model_key": "qwen35-2b",
+  "model_label": "Qwen3.5-2B",
+  "model_hf_id": "Qwen/Qwen3.5-2B",
+  "dataset_key": "medpt-top10-merged",
+  "dataset_label": "MedPT — top-10 com Psicólogo e Psicanalista fundidos (9 classes)",
+  "n_test": 18166,
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Otorrino"
+  ],
+  "setups": {
+    "finetuned": {
+      "accuracy": 0.9114,
+      "f1_macro": 0.8979,
+      "precision_macro": 0.8988,
+      "recall_macro": 0.8973,
+      "f1_per_class": {
+        "Psicólogo": 0.933,
+        "Ginecologista": 0.9108,
+        "Urologista": 0.8721,
+        "Dermatologista": 0.9256,
+        "Ortopedista - traumatologista": 0.9743,
+        "Oftalmologista": 0.9732,
+        "Psiquiatra": 0.6305,
+        "Dentista": 0.9441,
+        "Otorrino": 0.9175
+      },
+      "n_examples": 18166
+    }
+  }
+}

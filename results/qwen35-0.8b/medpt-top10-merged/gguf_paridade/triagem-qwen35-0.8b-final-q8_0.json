@@ -1,0 +1,88 @@
+{
+  "model": "qwen35-0.8b",
+  "gguf": "triagem-qwen35-0.8b-final-q8_0.gguf",
+  "n": 200,
+  "concordancia": 0.945,
+  "acc_gguf": 0.855,
+  "acc_python": 0.87,
+  "segundos": 18.0,
+  "diferencas": [
+    {
+      "i": 2,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 13,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 28,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 54,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 75,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 98,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Ginecologista",
+      "gold": "Urologista"
+    },
+    {
+      "i": 120,
+      "raw": "Dentista",
+      "gguf": "Dentista",
+      "python": "Psiquiatra",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 125,
+      "raw": "Dermatologista",
+      "gguf": "Dermatologista",
+      "python": "Dentista",
+      "gold": "Ginecologista"
+    },
+    {
+      "i": 129,
+      "raw": "Dentista",
+      "gguf": "Dentista",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 162,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 166,
+      "raw": "Dermatologista",
+      "gguf": "Dermatologista",
+      "python": "Oftalmologista",
+      "gold": "Oftalmologista"
+    }
+  ]
+}

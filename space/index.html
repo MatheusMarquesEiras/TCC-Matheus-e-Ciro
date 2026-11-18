@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triagem Médica PT-BR</title>
+<meta name="description" content="Demo do TCC: um modelo de linguagem pequeno, rodando no seu navegador, sugere a especialidade médica a partir da queixa do paciente.">
+<style>
+  :root {
+    --bg: #f6f8f9;
+    --surface: #ffffff;
+    --surface-2: #eef3f4;
+    --text: #14212b;
+    --muted: #5b6b76;
+    --border: #d7e0e4;
+    --accent: #0f766e;
+    --accent-strong: #0b5f58;
+    --accent-soft: #d8f0ec;
+    --warn-bg: #fff6e0;
+    --warn-border: #f0d48a;
+    --warn-text: #6b4e00;
+    --ok: #15803d;
+    --err: #b42318;
+    --radius: 12px;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1518;
+      --surface: #172026;
+      --surface-2: #1e2a31;
+      --text: #e5edf0;
+      --muted: #9aabb4;
+      --border: #2b3a42;
+      --accent: #2dd4bf;
+      --accent-strong: #5eead4;
+      --accent-soft: #123a37;
+      --warn-bg: #2d2513;
+      --warn-border: #5c4a1c;
+      --warn-text: #f5d58a;
+      --ok: #4ade80;
+      --err: #f87171;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+  h2 { font-size: 1rem; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  p { margin: 0 0 12px; }
+  a { color: var(--accent); }
+  .lead { color: var(--muted); max-width: 70ch; }
+  .credits { font-size: 0.9rem; color: var(--muted); }
+  .warn {
+    background: var(--warn-bg); border: 1px solid var(--warn-border); color: var(--warn-text);
+    border-radius: var(--radius); padding: 12px 14px; font-size: 0.92rem; margin: 16px 0 24px;
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; margin-bottom: 16px;
+  }
+  label.field { display: block; font-weight: 600; margin-bottom: 6px; }
+  textarea {
+    width: 100%; min-height: 110px; resize: vertical; padding: 12px; border-radius: 10px;
+    border: 1.5px solid var(--border); background: var(--surface); color: var(--text); font: inherit;
+  }
+  textarea:focus { outline: none; border-color: var(--accent); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+  button {
+    font: inherit; font-weight: 600; border-radius: 10px; padding: 10px 18px; cursor: pointer;
+    border: 1.5px solid var(--accent); background: var(--accent); color: var(--surface);
+  }
+  button:hover:not(:disabled) { background: var(--accent-strong); border-color: var(--accent-strong); }
+  button:disabled { opacity: 0.55; cursor: progress; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip {
+    font-size: 0.85rem; font-weight: 500; padding: 5px 11px; border-radius: 999px;
+    background: var(--surface-2); color: var(--text); border: 1px solid var(--border);
+  }
+  .chip:hover:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); }
+  .status { font-size: 0.9rem; color: var(--muted); min-height: 1.5em; }
+  #load-status { margin-top: 14px; }
+  .status.error { color: var(--err); }
+  progress { width: 100%; height: 8px; accent-color: var(--accent); margin-top: 8px; }
+  .result { display: grid; gap: 4px; }
+  .result .label { font-size: 0.85rem; color: var(--muted); }
+  .result .value { font-size: 1.6rem; font-weight: 700; color: var(--accent); line-height: 1.25; }
+  .result .raw { font-size: 0.88rem; color: var(--muted); }
+  code { background: var(--surface-2); padding: 1px 5px; border-radius: 5px; font-size: 0.88em; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .table-wrap { overflow-x: auto; }
+  .hidden { display: none !important; }
+  .models { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
+  .model {
+    text-align: left; font-weight: 400; color: var(--text); background: var(--surface);
+    border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; display: grid; gap: 2px;
+  }
+  .model:hover:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); }
+  .model[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+  .model .nome { font-weight: 700; }
+  .model .tag { font-size: 0.78rem; font-weight: 600; color: var(--accent); min-height: 1.1em; }
+  .model .meta { font-size: 0.82rem; color: var(--muted); }
+  footer { font-size: 0.85rem; color: var(--muted); margin-top: 24px; }
+  footer ul { padding-left: 18px; margin: 6px 0 12px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>🩺 Triagem médica automatizada em português</h1>
+    <p class="lead">
+      Descreva a queixa de um paciente e o modelo indica a qual <strong>especialidade médica</strong>
+      encaminhá-lo, entre 9 opções. São os quatro modelos finais do TCC (Qwen3.5 e Gemma 3, de 0,8 a
+      4,3 bilhões de parâmetros), ajustados com QLoRA sobre 145 mil queixas do corpus
+      <a href="https://huggingface.co/datasets/AKCIT/MedPT">MedPT</a>. Eles rodam <strong>inteiros no seu
+      navegador</strong>: a queixa digitada não é enviada a nenhum servidor.
+    </p>
+    <p class="credits">
+      TCC de <strong>Matheus Marques Eiras</strong> e <strong>Ciro Guilherme Nass</strong> ·
+      Instituto Federal do Paraná, Câmpus Pinhais · orientação de <strong>João Paulo Orlando</strong>
+    </p>
+  </header>
+
+  <div class="warn" role="note">
+    <strong>Demonstração acadêmica, não é um dispositivo médico.</strong> O modelo sugere um
+    encaminhamento a partir do texto; não diagnostica nem avalia gravidade. Em caso de emergência,
+    procure atendimento imediatamente.
+  </div>
+
+  <section class="card" aria-labelledby="h-modelo">
+    <h2 id="h-modelo">1. Modelo</h2>
+    <div class="models" id="modelos" role="group" aria-label="Escolha do modelo"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-queixa">
+    <h2 id="h-queixa">2. Queixa do paciente</h2>
+    <label class="field" for="queixa">Descreva os sintomas em texto livre — ou só clique em Classificar</label>
+    <textarea id="queixa" maxlength="2000"
+      placeholder="Ex.: estou com dor de dente e sensibilidade ao frio há uma semana.">Meu dente do fundo dói muito quando tomo algo gelado e a gengiva está sangrando.</textarea>
+    <div class="actions">
+      <button id="classificar" type="button">Classificar</button>
+      <span class="status" id="run-status" aria-live="polite"></span>
+    </div>
+    <div class="chips" id="exemplos" aria-label="Outros exemplos de queixa"></div>
+    <p class="status" id="load-status" aria-live="polite"></p>
+    <progress id="load-progress" class="hidden" max="100" value="0"></progress>
+    <p class="status hidden" id="fullscreen-hint">
+      Dentro da página do Hugging Face o navegador não libera a placa de vídeo (WebGPU), então o
+      modelo roda só no processador. <a id="fullscreen-link" target="_blank" rel="noopener">Abra a demo
+      em tela cheia</a> para classificar bem mais rápido.
+    </p>
+  </section>
+
+  <section class="card hidden" id="resultado" aria-live="polite">
+    <h2>3. Resultado</h2>
+    <div class="result">
+      <span class="label">Especialidade recomendada</span>
+      <span class="value" id="res-especialidade"></span>
+      <span class="raw" id="res-detalhes"></span>
+    </div>
+  </section>
+
+  <section class="card hidden" id="historico">
+    <h2>Histórico desta sessão</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Queixa</th><th>Modelo</th><th>Especialidade</th><th>Tempo</th></tr></thead>
+        <tbody id="hist-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Especialidades:</strong> <span id="lista-especialidades"></span>
+    <ul>
+      <li>Acurácia e F1-macro medidos nas 18.166 queixas do conjunto de teste. Adaptadores LoRA e avaliações:
+        <span id="links-modelos"></span>. Versões GGUF usadas aqui:
+        <a href="https://huggingface.co/matheus-ciro-tcc/triagem-medica-gguf-final">matheus-ciro-tcc/triagem-medica-gguf-final</a>
+        (o LoRA foi somado ao modelo base como ele foi treinado, em 4 bits; nas 200 primeiras queixas do teste, as
+        respostas daqui coincidem com as da avaliação do TCC em 97,5% a 100% dos casos).</li>
+      <li>Inferência local com <a href="https://github.com/ngxson/wllama">wllama</a> (llama.cpp em WebAssembly).
+        <span id="runtime-info"></span></li>
+    </ul>
+  </footer>
+</main>
+
+<script type="module">
+import { Wllama, LoggerWithoutDebug } from './wllama/index.js';
+
+const params = new URLSearchParams(location.search);
+const MODEL_ROOT = params.get('models')
+  ?? 'https://huggingface.co/matheus-ciro-tcc/triagem-medica-gguf-final/resolve/main/';
+const FORCE_CPU = params.has('cpu');
+
+// Os 9 rótulos do dataset final (Psicólogo e "Psicólogo, Psicanalista" fundidos),
+// em ordem alfabética, como no prompt de treino.
+const LABELS = [
+  'Dentista', 'Dermatologista', 'Ginecologista', 'Oftalmologista',
+  'Ortopedista - traumatologista', 'Otorrino', 'Psicólogo', 'Psiquiatra', 'Urologista',
+];
+
+// Idêntico ao prompt de treino e avaliação (tcc_triagem.prompting): mudar uma
+// vírgula aqui torna a demo incomparável com os resultados do TCC.
+const SYSTEM_PROMPT =
+  'Você é um sistema de triagem médica. Dada a queixa do paciente, ' +
+  `classifique a especialidade médica mais apropriada entre: ${LABELS.join(', ')}. ` +
+  'Responda APENAS com o nome da especialidade, sem explicações adicionais.';
+
+// Chat templates exatamente como tokenizer.apply_chat_template os produz no
+// treino. Qwen3.5: non-thinking mode (enable_thinking=False). Gemma 3: o papel
+// system vira um parágrafo antes da mensagem do usuário; o <bos> do texto se
+// soma ao que o tokenizador acrescenta, como na avaliação em Python.
+const TEMPLATES = {
+  qwen: (q) =>
+    `<|im_start|>system\n${SYSTEM_PROMPT}<|im_end|>\n` +
+    `<|im_start|>user\n${q}<|im_end|>\n` +
+    '<|im_start|>assistant\n<think>\n\n</think>\n\n',
+  gemma: (q) =>
+    `<bos><start_of_turn>user\n${SYSTEM_PROMPT}\n\n${q}<end_of_turn>\n<start_of_turn>model\n`,
+};
+const STOPS = ['<|im_end|>', '<|im_start|>', '<end_of_turn>', '<start_of_turn>'];
+
+const MODELS = [
+  { id: 'qwen35-2b', nome: 'Qwen3.5-2B', tag: 'Recomendado', template: 'qwen', mb: 1980,
+    arquivo: 'qwen35-2b-final-q8_0-00001-of-00003.gguf', quant: 'Q8_0', acc: '91,1%', f1: '0,898',
+    repo: 'matheus-ciro-tcc/qwen35-2b-triagem-medica-final' },
+  { id: 'gemma3-4b', nome: 'Gemma 3 4B', tag: 'Mais preciso, mais pesado', template: 'gemma', mb: 2375,
+    arquivo: 'gemma3-4b-final-q4_k_m-00001-of-00006.gguf', quant: 'Q4_K_M', acc: '91,4%', f1: '0,901',
+    repo: 'matheus-ciro-tcc/gemma3-4b-triagem-medica-final' },
+  { id: 'qwen35-0.8b', nome: 'Qwen3.5-0.8B', tag: 'Mais leve', template: 'qwen', mb: 795,
+    arquivo: 'qwen35-0.8b-final-q8_0-00001-of-00002.gguf', quant: 'Q8_0', acc: '89,2%', f1: '0,881',
+    repo: 'matheus-ciro-tcc/qwen35-0.8b-triagem-medica-final' },
+  { id: 'gemma3-1b', nome: 'Gemma 3 1B', tag: '', template: 'gemma', mb: 1020,
+    arquivo: 'gemma3-1b-final-q8_0-00001-of-00003.gguf', quant: 'Q8_0', acc: '89,1%', f1: '0,863',
+    repo: 'matheus-ciro-tcc/gemma3-1b-triagem-medica-final' },
+];
+let current = MODELS.find((m) => m.id === params.get('modelo')) ?? MODELS[0];
+const buildPrompt = (queixa, model = current) => TEMPLATES[model.template](queixa);
+
+const MAX_NEW_TOKENS = 20;
+
+const EXEMPLOS = [
+  ['Tristeza', 'Tenho sentido muita tristeza há meses, não consigo dormir e perdi o interesse em tudo que gostava.'],
+  ['Joelho', 'Meu joelho direito está inchado e doendo muito depois que caí da escada há três dias.'],
+  ['Manchas na pele', 'Aparecem manchas vermelhas com coceira na minha pele toda vez que como frutos do mar.'],
+  ['Visão', 'Estou com dificuldade para enxergar de longe e minha visão ficou embaçada nas últimas semanas.'],
+  ['Urina', 'Sinto dor ao urinar há quatro dias e a urina está com cor estranha.'],
+  ['Dente', 'Meu dente do fundo dói muito quando tomo algo gelado e a gengiva está sangrando.'],
+  ['Ouvido', 'Estou com o ouvido tampado e zumbindo desde a última gripe.'],
+  ['Menstruação', 'Minha menstruação está atrasada e sinto cólicas fortes fora do período.'],
+];
+
+// Mesmo casamento de rótulo da avaliação (tcc_triagem.prompting.match_label).
+function normalizeLabel(text) {
+  return text.trim().toLowerCase().normalize('NFKD').replace(/\p{M}/gu, '').split(/\s+/).filter(Boolean).join(' ');
+}
+function matchLabel(generated, labels) {
+  const gen = normalizeLabel(generated);
+  if (!gen) return generated.trim();
+  const norm = labels.map((l) => [l, normalizeLabel(l)]);
+  for (const [label, n] of norm) if (n === gen) return label;
+  // Rótulos mais longos primeiro: "Psicólogo, Psicanalista" antes de "Psicólogo".
+  for (const [label, n] of [...norm].sort((a, b) => b[1].length - a[1].length)) {
+    if (gen.includes(n) || n.includes(gen)) return label;
+  }
+  return generated.trim();
+}
+
+// ---------------------------------------------------------------- runtime --
+
+let wllama = null;
+let loadedId = null;
+let busy = false;
+
+const $ = (id) => document.getElementById(id);
+const fmtMB = (bytes) => `${Math.round(bytes / 1024 ** 2)} MB`;
+
+async function loadModel(onProgress = () => {}) {
+  if (wllama && loadedId === current.id) return;
+  if (wllama) { await wllama.exit(); wllama = null; loadedId = null; }
+  const url = MODEL_ROOT + current.arquivo;
+  const attempt = async (gpu) => {
+    const instance = new Wllama({ default: './wllama/wllama.wasm' }, { logger: LoggerWithoutDebug });
+    await instance.loadModelFromUrl(url, {
+      n_ctx: 1024,
+      ...(gpu ? {} : { n_gpu_layers: 0 }),
+      useCache: true,
+      progressCallback: onProgress,
+    });
+    return instance;
+  };
+  try {
+    wllama = await attempt(!FORCE_CPU);
+  } catch (err) {
+    if (FORCE_CPU) throw err;
+    console.warn('Falha ao carregar com WebGPU, tentando só CPU:', err);
+    wllama = await attempt(false);
+  }
+  loadedId = current.id;
+}
+
+async function classify(queixa) {
+  const started = performance.now();
+  const res = await wllama.createCompletion({
+    prompt: buildPrompt(queixa),
+    max_tokens: MAX_NEW_TOKENS,
+    temperature: 0, // decodificação gulosa, como no do_sample=False da avaliação
+    stop: STOPS,
+  });
+  const raw = (res.choices[0]?.text ?? '').trim();
+  return { label: matchLabel(raw, LABELS), raw, seconds: (performance.now() - started) / 1000 };
+}
+
+function runtimeDescription() {
+  if (!wllama) return '';
+  const threads = wllama.getNumThreads?.() ?? 1;
+  return `Rodando com ${threads} thread${threads > 1 ? 's' : ''}` +
+    (wllama.isSupportWebGPU?.() && !FORCE_CPU ? ' (WebGPU disponível).' : ' em CPU.');
+}
+
+// --------------------------------------------------------------------- UI --
+
+function setBusy(value) {
+  busy = value;
+  $('classificar').disabled = value;
+  document.querySelectorAll('#exemplos button, #modelos button').forEach((b) => (b.disabled = value));
+}
+
+const fmtGB = (mb) => (mb / 1000).toFixed(1).replace('.', ',');
+
+function describeModel() {
+  $('load-status').classList.remove('error');
+  $('load-status').textContent = wllama && loadedId === current.id
+    ? `✓ ${current.nome} carregado.`
+    : `Na primeira vez o ${current.nome} é baixado (~${fmtGB(current.mb)} GB) e fica guardado no cache do navegador.` +
+      (current.mb > 1500 && (FORCE_CPU || !navigator.gpu)
+        ? ' Sem placa de vídeo (WebGPU), este modelo pode levar mais de um minuto por queixa: prefira o Qwen3.5-0.8B.'
+        : '');
+}
+
+async function ensureModel() {
+  if (wllama && loadedId === current.id) return;
+  const status = $('load-status');
+  const bar = $('load-progress');
+  status.classList.remove('error');
+  status.textContent = 'Carregando o modelo...';
+  bar.classList.remove('hidden');
+  bar.removeAttribute('value');
+  await loadModel(({ loaded, total }) => {
+    if (!total) return;
+    bar.max = total;
+    bar.value = loaded;
+    status.textContent = `Baixando o ${current.nome}: ${fmtMB(loaded)} de ${fmtMB(total)}`;
+  });
+  bar.classList.add('hidden');
+  status.textContent = `✓ ${current.nome} carregado.`;
+  $('runtime-info').textContent = runtimeDescription();
+}
+
+async function onClassify() {
+  const queixa = $('queixa').value.trim();
+  if (!queixa) {
+    $('run-status').textContent = 'Digite a queixa do paciente.';
+    $('queixa').focus();
+    return;
+  }
+  setBusy(true);
+  try {
+    await ensureModel();
+    $('run-status').textContent = 'Classificando...';
+    const { label, raw, seconds } = await classify(queixa);
+    const inside = LABELS.includes(label);
+    $('res-especialidade').textContent = label || '(resposta vazia)';
+    $('res-detalhes').innerHTML = '';
+    $('res-detalhes').append(
+      'Texto gerado: ', Object.assign(document.createElement('code'), { textContent: raw || '(vazio)' }),
+      inside ? '' : ' — fora das 9 especialidades',
+      ` · ${current.nome}`,
+      ` · ${seconds.toFixed(1)} s`,
+    );
+    $('resultado').classList.remove('hidden');
+    addHistory(queixa, current.nome, label, seconds);
+    $('run-status').textContent = '';
+  } catch (err) {
+    console.error(err);
+    $('load-progress').classList.add('hidden');
+    $('load-status').classList.add('error');
+    $('load-status').textContent = `Erro: ${err?.message ?? err}`;
+    $('run-status').textContent = '';
+  } finally {
+    setBusy(false);
+  }
+}
+
+function addHistory(queixa, modelo, especialidade, seconds) {
+  const tr = document.createElement('tr');
+  const short = queixa.length > 90 ? `${queixa.slice(0, 90)}…` : queixa;
+  for (const [text, cls] of [[short], [modelo], [especialidade], [`${seconds.toFixed(1)} s`, 'num']]) {
+    const td = document.createElement('td');
+    td.textContent = text;
+    if (cls) td.className = cls;
+    tr.append(td);
+  }
+  $('hist-body').prepend(tr);
+  $('historico').classList.remove('hidden');
+}
+
+function selectModel(model) {
+  current = model;
+  document.querySelectorAll('#modelos button').forEach((b) =>
+    b.setAttribute('aria-pressed', String(b.dataset.id === model.id)));
+  const url = new URL(location.href);
+  url.searchParams.set('modelo', model.id);
+  history.replaceState(null, '', url);
+  describeModel();
+}
+
+function render() {
+  for (const m of MODELS) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'model';
+    b.dataset.id = m.id;
+    for (const [cls, text] of [['nome', m.nome], ['tag', m.tag],
+      ['meta', `Acurácia ${m.acc} · F1 ${m.f1} · ${fmtGB(m.mb)} GB`]]) {
+      b.append(Object.assign(document.createElement('span'), { className: cls, textContent: text }));
+    }
+    b.addEventListener('click', () => selectModel(m));
+    $('modelos').append(b);
+    const a = Object.assign(document.createElement('a'), { href: `https://huggingface.co/${m.repo}`, textContent: m.nome });
+    $('links-modelos').append(...($('links-modelos').childNodes.length ? [' · ', a] : [a]));
+  }
+  selectModel(current);
+  for (const [titulo, texto] of EXEMPLOS) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.textContent = titulo;
+    b.title = texto;
+    b.addEventListener('click', () => { $('queixa').value = texto; onClassify(); });
+    $('exemplos').append(b);
+  }
+  $('classificar').addEventListener('click', onClassify);
+  $('queixa').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey) && !busy) onClassify();
+  });
+  $('lista-especialidades').textContent = LABELS.join(' · ');
+  if (window.self !== window.top) {
+    $('fullscreen-link').href = location.href;
+    $('fullscreen-hint').classList.remove('hidden');
+  }
+}
+
+render();
+
+// Ganchos para testes automatizados (paridade com a avaliação em Python).
+window.triagem = {
+  loadModel, classify, buildPrompt, matchLabel, LABELS, MODELS,
+  selectModel: (id) => selectModel(MODELS.find((m) => m.id === id)),
+};
+</script>
+</body>
+</html>

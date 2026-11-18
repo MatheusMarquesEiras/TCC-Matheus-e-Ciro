@@ -1,0 +1,101 @@
+{
+  "dataset_key": "medpt-top10-merged",
+  "dataset_label": "MedPT — top-10 com Psicólogo e Psicanalista fundidos (9 classes)",
+  "source": "huggingface",
+  "source_path": "AKCIT/MedPT",
+  "citation": "FÄRBER, F. B. et al. MedPT: a massive medical question answering dataset for Brazilian-Portuguese speakers. arXiv:2511.11878, 2026.",
+  "language": "pt-BR",
+  "labels": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Otorrino"
+  ],
+  "specialties": [
+    "Psicólogo",
+    "Ginecologista",
+    "Urologista",
+    "Dermatologista",
+    "Ortopedista - traumatologista",
+    "Oftalmologista",
+    "Psiquiatra",
+    "Dentista",
+    "Otorrino"
+  ],
+  "top_n": 9,
+  "max_per_class": null,
+  "min_per_class": 0,
+  "label_aliases": {
+    "Psicólogo, Psicanalista": "Psicólogo"
+  },
+  "drop_labels": [],
+  "seed": 42,
+  "system_prompt": "Você é um sistema de triagem médica. Dada a queixa do paciente, classifique a especialidade médica mais apropriada entre: Dentista, Dermatologista, Ginecologista, Oftalmologista, Ortopedista - traumatologista, Otorrino, Psicólogo, Psiquiatra, Urologista. Responda APENAS com o nome da especialidade, sem explicações adicionais.",
+  "label2id": {
+    "Dentista": 0,
+    "Dermatologista": 1,
+    "Ginecologista": 2,
+    "Oftalmologista": 3,
+    "Ortopedista - traumatologista": 4,
+    "Otorrino": 5,
+    "Psicólogo": 6,
+    "Psiquiatra": 7,
+    "Urologista": 8
+  },
+  "id2label": {
+    "0": "Dentista",
+    "1": "Dermatologista",
+    "2": "Ginecologista",
+    "3": "Oftalmologista",
+    "4": "Ortopedista - traumatologista",
+    "5": "Otorrino",
+    "6": "Psicólogo",
+    "7": "Psiquiatra",
+    "8": "Urologista"
+  },
+  "split_sizes": {
+    "train": 145321,
+    "validation": 18165,
+    "test": 18166
+  },
+  "class_distribution": {
+    "train": {
+      "Urologista": 12938,
+      "Dermatologista": 12041,
+      "Oftalmologista": 9688,
+      "Psicólogo": 53484,
+      "Dentista": 8915,
+      "Ginecologista": 21294,
+      "Ortopedista - traumatologista": 11854,
+      "Otorrino": 6187,
+      "Psiquiatra": 8920
+    },
+    "validation": {
+      "Ginecologista": 2662,
+      "Psiquiatra": 1115,
+      "Psicólogo": 6685,
+      "Ortopedista - traumatologista": 1482,
+      "Dermatologista": 1505,
+      "Oftalmologista": 1211,
+      "Urologista": 1617,
+      "Otorrino": 774,
+      "Dentista": 1114
+    },
+    "test": {
+      "Psicólogo": 6686,
+      "Dentista": 1114,
+      "Otorrino": 773,
+      "Ginecologista": 2662,
+      "Urologista": 1618,
+      "Ortopedista - traumatologista": 1482,
+      "Oftalmologista": 1211,
+      "Psiquiatra": 1115,
+      "Dermatologista": 1505
+    }
+  }
+}

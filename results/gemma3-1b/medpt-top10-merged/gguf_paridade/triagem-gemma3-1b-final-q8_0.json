@@ -1,0 +1,116 @@
+{
+  "model": "gemma3-1b",
+  "gguf": "triagem-gemma3-1b-final-q8_0.gguf",
+  "n": 200,
+  "concordancia": 0.925,
+  "acc_gguf": 0.83,
+  "acc_python": 0.86,
+  "segundos": 16.4,
+  "diferencas": [
+    {
+      "i": 17,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 18,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 44,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 47,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 72,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 86,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 88,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psiquiatra"
+    },
+    {
+      "i": 112,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 120,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 125,
+      "raw": "Dentista",
+      "gguf": "Dentista",
+      "python": "Dermatologista",
+      "gold": "Ginecologista"
+    },
+    {
+      "i": 153,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 169,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 172,
+      "raw": "Oftalmologista",
+      "gguf": "Oftalmologista",
+      "python": "Dentista",
+      "gold": "Dentista"
+    },
+    {
+      "i": 192,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Ginecologista",
+      "gold": "Urologista"
+    },
+    {
+      "i": 195,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    }
+  ]
+}

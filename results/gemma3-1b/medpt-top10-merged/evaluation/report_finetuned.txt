@@ -1,0 +1,18 @@
+Modelo: Gemma 3 1B (base) (unsloth/gemma-3-1b-pt)
+Setup: finetuned
+
+                               precision    recall  f1-score   support
+
+                    Psicólogo       0.88      0.95      0.92      6686
+                Ginecologista       0.88      0.91      0.90      2662
+                   Urologista       0.90      0.82      0.85      1618
+               Dermatologista       0.89      0.91      0.90      1505
+Ortopedista - traumatologista       0.97      0.97      0.97      1482
+               Oftalmologista       0.97      0.97      0.97      1211
+                   Psiquiatra       0.61      0.34      0.44      1115
+                     Dentista       0.93      0.93      0.93      1114
+                     Otorrino       0.92      0.88      0.90       773
+
+                     accuracy                           0.89     18166
+                    macro avg       0.88      0.85      0.86     18166
+                 weighted avg       0.88      0.89      0.88     18166

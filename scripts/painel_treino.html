@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel do treino</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --ink: #1c2330; --mut: #667085; --line: #e3e6eb;
+    --ok: #1a7f4b; --warn: #b26a00; --bad: #c0392b; --acc: #2457d6; --acc2: #8a5cf6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f1218; --card: #171b24; --ink: #e8ebf1; --mut: #98a2b3; --line: #262c38;
+      --ok: #4ade80; --warn: #fbbf24; --bad: #f87171; --acc: #6ea0ff; --acc2: #b69cff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, "Segoe UI", sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; }
+  h1 { font-size: 20px; margin: 0; }
+  .sub { color: var(--mut); font-size: 13px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    border: 1px solid currentColor; }
+  .ok { color: var(--ok); } .warn { color: var(--warn); } .bad { color: var(--bad); }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-top: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--mut); margin: 0 0 6px; font-weight: 600; }
+  .big { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .small { color: var(--mut); font-size: 13px; }
+  .bar { height: 10px; border-radius: 999px; background: var(--line); overflow: hidden; margin-top: 8px; }
+  .bar > i { display: block; height: 100%; background: var(--acc); border-radius: 999px; transition: width .6s; }
+  .wide { grid-column: 1 / -1; }
+  .card { min-width: 0; }
+  .cv { position: relative; height: 220px; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #aviso { margin-top: 14px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--bad); color: var(--bad); display: none; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+  td, th { text-align: left; padding: 3px 8px 3px 0; border-bottom: 1px solid var(--line); }
+  th { color: var(--mut); font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div><h1 id="titulo">Treino</h1><div class="sub" id="sub">carregando…</div></div>
+    <div><span class="pill" id="estado">…</span></div>
+  </header>
+
+  <div id="aviso"></div>
+
+  <div class="grid">
+    <div class="card wide">
+      <h2>Progresso</h2>
+      <div class="big" id="prog">–</div>
+      <div class="bar"><i id="progbar" style="width:0%"></i></div>
+      <div class="small" id="progsub"></div>
+    </div>
+    <div class="card"><h2>Ritmo</h2><div class="big" id="ritmo">–</div><div class="small" id="ritmosub"></div></div>
+    <div class="card"><h2>Tempo restante</h2><div class="big" id="eta">–</div><div class="small" id="etasub"></div></div>
+    <div class="card"><h2>Perda de treino</h2><div class="big" id="loss">–</div><div class="small" id="losssub"></div></div>
+    <div class="card"><h2>GPU</h2><div class="big" id="gpu">–</div><div class="small" id="gpusub"></div></div>
+    <div class="card wide" id="valcard" style="display:none">
+      <h2>Validação em curso</h2>
+      <div class="big" id="valtxt">–</div>
+      <div class="bar"><i id="valbar" style="width:0%;background:var(--acc2)"></i></div>
+      <div class="small" id="valsub"></div>
+    </div>
+    <div class="card wide"><h2>Perda de treino por passo (e validação por época)</h2><div class="cv"><canvas id="cLoss"></canvas></div></div>
+    <div class="card wide"><h2>Memória e potência da GPU (últimos 15 min)</h2><div class="cv"><canvas id="cGpu"></canvas></div></div>
+    <div class="card wide"><h2>Checkpoints recentes</h2><div id="cks" class="small">–</div></div>
+  </div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmtH = h => {
+  if (h == null || !isFinite(h)) return "–";
+  const m = Math.round(h * 60); return m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60 ? String(m % 60).padStart(2, "0") + " min" : "");
+};
+const cor = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+function chart(cv, series, opt = {}) {
+  const dpr = devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  const c = cv.getContext("2d"); c.scale(dpr, dpr); c.clearRect(0, 0, W, H);
+  const pad = { l: 46, r: 46, t: 8, b: 20 };
+  const xs = series.flatMap(s => s.pts.map(p => p[0]));
+  if (!xs.length) { c.fillStyle = cor("--mut"); c.fillText("sem dados ainda", pad.l, H / 2); return; }
+  const x0 = Math.min(...xs), x1 = Math.max(...xs) || x0 + 1;
+  const X = x => pad.l + (x - x0) / ((x1 - x0) || 1) * (W - pad.l - pad.r);
+  const axes = {};
+  for (const s of series) {
+    const ys = s.pts.map(p => p[1]).filter(v => v != null);
+    if (!ys.length) continue;
+    const a = axes[s.axis] ||= { lo: Infinity, hi: -Infinity };
+    a.lo = Math.min(a.lo, Math.min(...ys)); a.hi = Math.max(a.hi, Math.max(...ys));
+  }
+  if (opt.ymax != null && axes.l) axes.l.hi = Math.min(axes.l.hi, opt.ymax);
+  for (const k in axes) { const a = axes[k]; if (a.lo === a.hi) { a.lo -= 1; a.hi += 1; } const m = (a.hi - a.lo) * .08; a.lo -= m; a.hi += m; }
+  c.strokeStyle = cor("--line"); c.fillStyle = cor("--mut"); c.font = "11px system-ui"; c.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + i * (H - pad.t - pad.b) / 4; c.beginPath(); c.moveTo(pad.l, y); c.lineTo(W - pad.r, y); c.stroke();
+    for (const [k, a] of Object.entries(axes)) {
+      const v = a.hi - i * (a.hi - a.lo) / 4, left = k === "l";
+      c.textAlign = left ? "right" : "left";
+      c.fillText((opt.fmt?.[k] || (x => x.toFixed(2)))(v), left ? pad.l - 6 : W - pad.r + 6, y + 4);
+    }
+  }
+  c.textAlign = "center";
+  for (let i = 0; i <= 4; i++) { const x = x0 + i * (x1 - x0) / 4; c.fillText((opt.xfmt || (v => Math.round(v)))(x), X(x), H - 4); }
+  for (const s of series) {
+    const a = axes[s.axis]; if (!a) continue;
+    const Y = y => pad.t + (1 - (y - a.lo) / (a.hi - a.lo)) * (H - pad.t - pad.b);
+    c.strokeStyle = cor(s.cor); c.fillStyle = cor(s.cor); c.lineWidth = s.dots ? 0 : 1.8; c.beginPath();
+    let on = false;
+    for (const [x, y] of s.pts) {
+      if (y == null) { on = false; continue; }
+      if (s.dots) { c.beginPath(); c.arc(X(x), Y(y), 4, 0, 7); c.fill(); continue; }
+      const yy = Math.min(Math.max(y, a.lo), a.hi);
+      on ? c.lineTo(X(x), Y(yy)) : c.moveTo(X(x), Y(yy)); on = true;
+    }
+    if (!s.dots) c.stroke();
+  }
+  let lx = pad.l; c.textAlign = "left";
+  for (const s of series) { c.fillStyle = cor(s.cor); c.fillRect(lx, 2, 10, 3); c.fillText(s.nome, lx + 14, 10); lx += 22 + c.measureText(s.nome).width; }
+}
+
+function suavizar(pts, n = 12) {
+  return pts.map((p, i) => { const j = pts.slice(Math.max(0, i - n + 1), i + 1); return [p[0], j.reduce((s, q) => s + q[1], 0) / j.length]; });
+}
+
+async function atualizar() {
+  let d;
+  try { d = await (await fetch("/api/status", { cache: "no-store" })).json(); }
+  catch (e) { $("estado").className = "pill bad"; $("estado").textContent = "painel sem conexão"; return; }
+  const i = d.info || {}, g = d.gpu || {};
+  $("titulo").textContent = "Treino " + d.modelo;
+  $("sub").textContent = "atualizado às " + new Date(d.agora * 1000).toLocaleTimeString("pt-BR");
+  const velho = i.mtime && (d.agora - i.mtime) > 300;
+  let est = ["pill ok", "treinando"];
+  if (i.final) est = ["pill ok", "concluído"];
+  else if (!i.rodando) est = ["pill bad", "parado"];
+  else if (i.fase === "validacao") est = ["pill warn", "validando"];
+  else if (d.s_por_passo > 20) est = ["pill bad", "lento"];
+  $("estado").className = est[0]; $("estado").textContent = est[1];
+
+  const passo = i.passo || 0, tot = i.total || 1, pct = passo / tot * 100;
+  $("prog").textContent = passo.toLocaleString("pt-BR") + " / " + tot.toLocaleString("pt-BR") + " passos (" + pct.toFixed(1).replace(".", ",") + "%)";
+  $("progbar").style.width = pct + "%";
+  $("progsub").textContent = i.epoca != null ? "época " + i.epoca.toFixed(2).replace(".", ",") + " de 3" : "";
+
+  if (d.s_por_passo) {
+    $("ritmo").textContent = d.s_por_passo.toFixed(1).replace(".", ",") + " s/passo";
+    $("ritmosub").textContent = d.s_por_passo > 20 ? "muito lento — veja o aviso" : "média dos últimos 10 min (só treino)";
+  } else { $("ritmo").textContent = "–"; $("ritmosub").textContent = i.fase === "validacao" ? "validação em andamento" : "sem amostras recentes"; }
+  $("eta").textContent = fmtH(d.eta_h);
+  $("etasub").textContent = d.eta_h != null ? "inclui as validações que faltam (~3 h cada)" : "";
+  if (d.eta_h != null) { const f = new Date(Date.now() + d.eta_h * 3.6e6); $("etasub").textContent += " · fim ~" + f.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); }
+
+  $("loss").textContent = i.loss != null ? i.loss.toFixed(3).replace(".", ",") : "–";
+  const ev = (d.historico?.eval || []).map(e => "época " + Math.round(e[0] / (tot / 3)) + ": " + e[1].toFixed(3).replace(".", ","));
+  $("losssub").textContent = ev.length ? "validação — " + ev.join(" · ") : "validação: ainda nenhuma";
+
+  if (g.mem_total_mb) {
+    $("gpu").textContent = (g.mem_usada_mb / 1024).toFixed(1).replace(".", ",") + " / " + (g.mem_total_mb / 1024).toFixed(0) + " GB";
+    $("gpusub").textContent = g.util + "% de uso · " + Math.round(g.watts) + " W · " + g.temp + " °C";
+  }
+
+  const vc = $("valcard");
+  if (i.fase === "validacao" && i.val_total) {
+    vc.style.display = ""; const p = i.val_atual / i.val_total * 100;
+    $("valtxt").textContent = i.val_atual.toLocaleString("pt-BR") + " / " + i.val_total.toLocaleString("pt-BR") + " lotes (" + p.toFixed(0) + "%)";
+    $("valbar").style.width = p + "%"; $("valsub").textContent = i.val_info || "";
+  } else vc.style.display = "none";
+
+  const av = [];
+  if (i.erro) av.push("Há um erro no final do log do treino (Traceback ou falta de memória).");
+  if (!i.rodando && !i.final) av.push("Nenhum processo de treino ou avaliação em execução.");
+  if (i.rodando && velho) av.push("O log não muda há mais de 5 min.");
+  if (d.s_por_passo > 20) av.push("Ritmo acima de 20 s/passo. Costuma ser a memória da GPU transbordando para a RAM: confira se há outros programas usando a placa (editores de vídeo, 3D, jogos).");
+  if (i.rodando && g.mem_usada_mb > 11300 && g.watts < 80 && i.fase !== "validacao") av.push("GPU quase cheia (>11 GB) com pouca potência: possível transbordo de memória.");
+  $("aviso").style.display = av.length ? "" : "none"; $("aviso").innerHTML = av.map(t => "• " + t).join("<br>");
+
+  const h = d.historico || {};
+  chart($("cLoss"), [
+    { nome: "treino (média móvel)", pts: suavizar(h.loss || []), axis: "l", cor: "--acc" },
+    { nome: "validação", pts: h.eval || [], axis: "l", cor: "--acc2", dots: true },
+  ], { fmt: { l: v => v.toFixed(2) }, xfmt: v => Math.round(v), ymax: 1.4 });
+  const t0 = (d.gpu_serie[0] || [0])[0], T = x => (x - t0) / 60;
+  chart($("cGpu"), [
+    { nome: "memória (GB)", pts: d.gpu_serie.map(s => [T(s[0]), s[1] != null ? s[1] / 1024 : null]), axis: "l", cor: "--acc" },
+    { nome: "potência (W)", pts: d.gpu_serie.map(s => [T(s[0]), s[2]]), axis: "r", cor: "--ok" },
+  ], { fmt: { l: v => v.toFixed(1), r: v => Math.round(v) }, xfmt: v => v.toFixed(v < 10 ? 1 : 0) + " min" });
+
+  $("cks").innerHTML = (h.cks || []).length
+    ? "<table><tr><th>checkpoint</th><th>época</th></tr>" + h.cks.slice().reverse().map(c => "<tr><td>" + c + "</td><td>" + (c / (tot / 3)).toFixed(2).replace(".", ",") + "</td></tr>").join("") + "</table>"
+    : "nenhum ainda";
+}
+atualizar(); setInterval(atualizar, 5000);
+</script>
+</body>
+</html>

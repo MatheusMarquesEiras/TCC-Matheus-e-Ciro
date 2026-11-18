@@ -1,0 +1,39 @@
+{
+  "model": "gemma3-4b",
+  "gguf": "triagem-gemma3-4b-nf4-q4_k_m.gguf",
+  "n": 200,
+  "concordancia": 0.98,
+  "acc_gguf": 0.9,
+  "acc_python": 0.91,
+  "segundos": 29.2,
+  "diferencas": [
+    {
+      "i": 2,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 53,
+      "raw": "Oftalmologista",
+      "gguf": "Oftalmologista",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 103,
+      "raw": "Ginecologista",
+      "gguf": "Ginecologista",
+      "python": "Otorrino",
+      "gold": "Ortopedista - traumatologista"
+    },
+    {
+      "i": 151,
+      "raw": "Dermatologista",
+      "gguf": "Dermatologista",
+      "python": "Ginecologista",
+      "gold": "Dentista"
+    }
+  ]
+}

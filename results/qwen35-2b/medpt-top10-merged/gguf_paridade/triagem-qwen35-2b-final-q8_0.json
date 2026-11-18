@@ -1,0 +1,60 @@
+{
+  "model": "qwen35-2b",
+  "gguf": "triagem-qwen35-2b-final-q8_0.gguf",
+  "n": 200,
+  "concordancia": 0.965,
+  "acc_gguf": 0.91,
+  "acc_python": 0.895,
+  "segundos": 25.7,
+  "diferencas": [
+    {
+      "i": 68,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Ginecologista",
+      "gold": "Ginecologista"
+    },
+    {
+      "i": 91,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Ginecologista",
+      "gold": "Urologista"
+    },
+    {
+      "i": 98,
+      "raw": "Urologista",
+      "gguf": "Urologista",
+      "python": "Ginecologista",
+      "gold": "Urologista"
+    },
+    {
+      "i": 103,
+      "raw": "Ortopedista - traumatologista",
+      "gguf": "Ortopedista - traumatologista",
+      "python": "Ginecologista",
+      "gold": "Ortopedista - traumatologista"
+    },
+    {
+      "i": 105,
+      "raw": "Psiquiatra",
+      "gguf": "Psiquiatra",
+      "python": "Psicólogo",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 162,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psicólogo"
+    },
+    {
+      "i": 195,
+      "raw": "Psicólogo",
+      "gguf": "Psicólogo",
+      "python": "Psiquiatra",
+      "gold": "Psicólogo"
+    }
+  ]
+}

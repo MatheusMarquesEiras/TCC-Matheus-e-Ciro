@@ -1,0 +1,10 @@
+{
+  "model": "gemma3-1b",
+  "gguf": "triagem-gemma3-1b-nf4-q8_0.gguf",
+  "n": 200,
+  "concordancia": 1.0,
+  "acc_gguf": 0.86,
+  "acc_python": 0.86,
+  "segundos": 16.4,
+  "diferencas": []
+}

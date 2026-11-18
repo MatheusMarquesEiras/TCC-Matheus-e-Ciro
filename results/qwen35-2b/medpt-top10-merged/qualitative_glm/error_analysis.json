@@ -1,0 +1,242 @@
+[
+  {
+    "idx": 132,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Sialadenite das glandulas parotida?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "O sistema classificou como 'Dentista', mas a resposta correta é 'Otorrino'. Sialadenite de parótida é classicamente de competência da otorrinolaringologia; houve apenas proximidade anatômica parcial, não acerto."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Embora não seja a especialidade ideal, encaminhar doença de glândula salivar (parótida) a um dentista/estomatologista é parcialmente defensável, pois essas glândulas estão no escopo da estomatologia; ainda assim, o manejo típico é otorrino."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é rotineira (investigação de sialadenite, sem sinais de emergência). O sistema encaminhou para especialidade ambulatorial, tratando o caso como não urgente, o que está adequado."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Dentista'), sem texto adicional, seguindo o formato solicitado."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa não descreve sinal de emergência com risco de vida; caso rotineiro, penalidade não se aplica."
+      }
+    ]
+  },
+  {
+    "idx": 1102,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho muito ciumes, o que devo fazer?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 16,
+    "pontos_max_positivos": 25,
+    "score": 0.64,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 3,
+        "justificativa": "O sistema predisse 'Psicólogo' em vez de 'Psiquiatra'. Errou a especialidade alvo, mas permaneceu dentro do domínio de saúde mental, o que ameniza parcialmente o erro."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Ciúmes excessivo é uma queixa emocional/comportamental comumente abordada em psicoterapia; o encaminhamento a psicólogo é clinicamente razoável e defensável para essa queixa."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "O caso é claramente rotineiro e de saúde mental, sem urgência. O sistema o tratou como questão não emergencial, o que está correto, embora não tenha distinguido entre avaliação psiquiátrica e psicológica."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida; penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 10261,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Mordi minha bochecha na parte inferior e agora ficou um caroço do tamanho de uma semente de laranja. Esteticamente tá feio pq quando eu vou conversar ele salta p fora pq tá bem perto do lábio. Será q eu procuro o dentista oi otorrino?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 13,
+    "pontos_max_positivos": 25,
+    "score": 0.52,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema indicou 'Dentista', mas a especialidade correta é 'Otorrino'. Erro de classificação, apesar de o dentista ser uma das opções levantadas pelo próprio paciente."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 5,
+        "justificativa": "Lesão de mucosa bucal pós-mordida (provável mucocele ou fibroma traumático) é comumente avaliada por dentista/estomatologista, tornando a escolha clinicamente defensável, ainda que otorrino seja o alvo."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "Queixa claramente rotineira e estética, sem sinais de urgência; o encaminhamento ambulatorial de rotina é compatível com a gravidade do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Dentista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira, sem nenhum sinal de emergência com risco de vida descrito; penalidade não se aplica."
+      }
+    ]
+  },
+  {
+    "idx": 12506,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "a gonorreia pode desaparecer, curar sozinha?",
+    "expected": "Urologista",
+    "predicted": "Ginecologista",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema previu 'Ginecologista', mas a especialidade correta é 'Urologista'; classificação incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Gonorreia é uma IST também manejada por ginecologistas em pacientes do sexo feminino; como o sexo não foi informado, a escolha é clinicamente razoável, embora não seja a especialidade alvo."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "Queixa rotineira (dúvida sobre cura espontânea de gonorreia), sem urgência; o encaminhamento ambulatorial é compatível com a gravidade correta do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira, sem sinais de emergência com risco de vida; penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 1798,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho extremo desprezo pelas pessoas, sou introvertido, tenho poucos amigos e não sinto nenhuma necessidade de os ter ou de socializar. Me sinto superior aos outros, prefiro me dedicar ao trabalho do que as relações íntimas e tenho baixa empatia. Esse comportamento pode indicar algum transtorno?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "A especialidade correta era Psiquiatra, mas o sistema indicou Psicólogo. Erro de classificação, com crédito parcial apenas por permanecer na área de saúde mental."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 4,
+        "justificativa": "Psicólogo é razoável para avaliação de traços de personalidade (possíveis traços esquizoides/narcisistas) e terapia, mas a pergunta sobre diagnóstico de transtorno e a baixa empatia acentuada favorecem Psiquiatra para avaliação clínica completa."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O caso é claramente rotineiro e de saúde mental, sem urgência. O sistema encaminhou para um profissional de saúde mental, identificando corretamente a natureza não emergencial da queixa."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve traços de personalidade e questionamento sobre possível transtorno, sem nenhum sinal de emergência com risco de vida. Penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 16252,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Quanto tempo depois da retirada do lipomo eu posso voltar ao trabalho?",
+    "expected": "Dermatologista",
+    "predicted": "Ortopedista - traumatologista",
+    "correct": false,
+    "pontos_obtidos": 8,
+    "pontos_max_positivos": 25,
+    "score": 0.32,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema classificou como Ortopedista-Traumatologista, mas a especialidade correta é Dermatologista; lipoma é uma lesão dermatológica subcutânea."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 0,
+        "justificativa": "Lipoma é tumor benigno de tecido adiposo subcutâneo, não uma condição musculoesquelética; ortopedia não é encaminhamento clinicamente defensável para dúvida pós-operatória de lipoma."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é claramente rotineira (dúvida sobre retorno ao trabalho após procedimento); o encaminhamento ambulatorial é coerente com a não urgência do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira, sem sinais de emergência com risco de vida; penalidade não se aplica."
+      }
+    ]
+  }
+]

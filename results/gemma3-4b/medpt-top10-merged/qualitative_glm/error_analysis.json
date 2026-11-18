@@ -1,0 +1,202 @@
+[
+  {
+    "idx": 132,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Sialadenite das glandulas parotida?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 11,
+    "pontos_max_positivos": 25,
+    "score": 0.44,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema predisse 'Dentista', mas a especialidade correta para sialadenite das parótidas é Otorrino, responsável pelas glândulas salivares maiores."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 3,
+        "justificativa": "Dentista/estomatologista avalia condições da cavidade oral e ductos salivares, então o encaminhamento não é absurdo, mas o manejo da parótida é predominantemente otorrinológico; relevância parcial."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "Sialadenite é condição rotineira/ambulatorial, e o encaminhamento para especialidade não emergencial é coerente com a gravidade esperada do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade, sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa descreve condição rotineira, sem sinal de emergência com risco de vida; penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 1102,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho muito ciumes, o que devo fazer?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 16,
+    "pontos_max_positivos": 25,
+    "score": 0.64,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade central",
+        "pontos": 3,
+        "justificativa": "O sistema previu 'Psicólogo' enquanto a especialidade correta era 'Psiquiatra'. Classificação incorreta, mas com sobreposição parcial: ambos pertencem ao campo da saúde mental, apenas gerando crédito parcial."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Ciúmes excessivos são uma queixa emocional/comportamental comum, frequentemente conduzida inicialmente por psicólogo em psicoterapia. O encaminhamento é clinicamente razoável, embora a avaliação psiquiátrica possa ser preferível se houver suspeita de quadro patológico (ex.: ciúme patológico/delirante)."
+      },
+      {
+        "criterio": "Consciência contextual — identificação de gravidade",
+        "pontos": 4,
+        "justificativa": "O sistema identificou corretamente que se trata de caso de saúde mental não urgente, encaminhando a um profissional de saúde mental sem sinalizar urgência ou emergência. Não há indicação de que tenha reconhecido possível necessidade de avaliação psiquiátrica para gravidade, o que impede pontuação máxima."
+      },
+      {
+        "criterio": "Aderência às instruções — formato correto",
+        "pontos": 3,
+        "justificativa": "A saída contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, conforme exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa (ciúmes) não descreve nenhum sinal de emergência com risco de vida. Penalidade não aplicável, valor obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 10261,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "Mordi minha bochecha na parte inferior e agora ficou um caroço do tamanho de uma semente de laranja. Esteticamente tá feio pq quando eu vou conversar ele salta p fora pq tá bem perto do lábio. Será q eu procuro o dentista oi otorrino?",
+    "expected": "Otorrino",
+    "predicted": "Dentista",
+    "correct": false,
+    "pontos_obtidos": 14,
+    "pontos_max_positivos": 25,
+    "score": 0.56,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema predisse 'Dentista', mas a especialidade correta é 'Otorrino'. Não houve acerto na especialidade alvo."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 6,
+        "justificativa": "Lesão em mucosa jugal (mordida na bochecha com nódulo próximo ao lábio, provável mucocele ou fibroma traumático) é apresentação dentro do escopo odontológico/estomatológico, então o encaminhamento ao dentista é clinicamente defensável, embora o otorrino também trate lesões da cavidade oral."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "Trata-se de queixa rotineira e estética, sem sinais de urgência. O encaminhamento ambulatorial de rotina (dentista) está coerente com a gravidade baixa do caso."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Dentista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "Queixa rotineira, sem nenhum sinal de emergência com risco de vida descrito. Penalidade obrigatoriamente 0."
+      }
+    ]
+  },
+  {
+    "idx": 12506,
+    "theme": "comum",
+    "theme_label": "Casos comuns / rotineiros",
+    "question": "a gonorreia pode desaparecer, curar sozinha?",
+    "expected": "Urologista",
+    "predicted": "Ginecologista",
+    "correct": false,
+    "pontos_obtidos": 11,
+    "pontos_max_positivos": 25,
+    "score": 0.44,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 0,
+        "justificativa": "O sistema predisse 'Ginecologista', mas a especialidade correta era 'Urologista'. Classificação incorreta."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 3,
+        "justificativa": "Gonorreia é uma IST que ginecologistas de fato tratam em pacientes do sexo feminino, então há certa defensabilidade; porém, sem indicação de paciente do sexo feminino e sendo a urologia a especialidade alvo, o encaminhamento é apenas parcialmente adequado."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "A queixa é uma dúvida rotineira sobre evolução natural da gonorreia, sem sinais de urgência; o sistema encaminhou para especialidade ambulatorial de rotina, adequado quanto à gravidade."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta contém apenas o nome da especialidade ('Ginecologista'), sem texto adicional."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa é rotineira e não descreve nenhum sinal de emergência com risco de vida; penalidade não aplicável."
+      }
+    ]
+  },
+  {
+    "idx": 1798,
+    "theme": "saude_mental",
+    "theme_label": "Saúde mental",
+    "question": "Tenho extremo desprezo pelas pessoas, sou introvertido, tenho poucos amigos e não sinto nenhuma necessidade de os ter ou de socializar. Me sinto superior aos outros, prefiro me dedicar ao trabalho do que as relações íntimas e tenho baixa empatia. Esse comportamento pode indicar algum transtorno?",
+    "expected": "Psiquiatra",
+    "predicted": "Psicólogo",
+    "correct": false,
+    "pontos_obtidos": 15,
+    "pontos_max_positivos": 25,
+    "score": 0.6,
+    "grader_parse_ok": true,
+    "avaliacoes": [
+      {
+        "criterio": "Acurácia — especialidade correta",
+        "pontos": 2,
+        "justificativa": "O sistema prediu 'Psicólogo' em vez de 'Psiquiatra'. A queixa sugere possível transtorno de personalidade (traços narcisistas/esquizoides) com pergunta explícita sobre 'transtorno', o que favorece o psiquiatra; crédito parcial apenas por estar no campo da saúde mental."
+      },
+      {
+        "criterio": "Relevância clínica — especialidade defensável",
+        "pontos": 5,
+        "justificativa": "Psicólogo é clinicamente defensável para avaliação de padrões de personalidade, empatia e relações interpessoais, mas como o paciente pergunta sobre possível transtorno (diagnóstico), o psiquiatra seria o encaminhamento mais adequado."
+      },
+      {
+        "criterio": "Awareness de contexto — identificação de gravidade",
+        "pontos": 5,
+        "justificativa": "O encaminhamento a um profissional de saúde mental ambulatorial indica que o sistema reconheceu corretamente o caso como rotineiro/de saúde mental, sem urgência ou gravidade aguda implícita na queixa."
+      },
+      {
+        "criterio": "Instruction following — formato correto",
+        "pontos": 3,
+        "justificativa": "A resposta do sistema contém apenas o nome da especialidade ('Psicólogo'), sem texto adicional, cumprindo o formato exigido."
+      },
+      {
+        "criterio": "Penalidade — subtriagem de emergência",
+        "pontos": 0,
+        "justificativa": "A queixa não descreve nenhum sinal de emergência com risco de vida (sem dor no peito, dispneia, convulsão, sangramento, sinais de AVC/infarto etc.); penalidade obrigatoriamente 0."
+      }
+    ]
+  }
+]
