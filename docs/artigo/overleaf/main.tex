@@ -1,0 +1,397 @@
+\documentclass{ieeeaccess}
+% Artigo do TCC preenchido no template LaTeX oficial da IEEE Access
+% (ACCESS_latex_template_20260513). Compilar com pdfLaTeX (padrao do Overleaf).
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage[english,brazil]{babel}
+
+\usepackage{bm}
+\makeatletter
+\AtBeginDocument{\DeclareMathVersion{bold}
+\SetSymbolFont{operators}{bold}{T1}{times}{b}{n}
+\SetSymbolFont{NewLetters}{bold}{T1}{times}{b}{it}
+\SetMathAlphabet{\mathrm}{bold}{T1}{times}{b}{n}
+\SetMathAlphabet{\mathit}{bold}{T1}{times}{b}{it}
+\SetMathAlphabet{\mathbf}{bold}{T1}{times}{b}{n}
+\SetMathAlphabet{\mathtt}{bold}{OT1}{pcr}{b}{n}
+\SetSymbolFont{symbols}{bold}{OMS}{cmsy}{b}{n}
+\renewcommand\boldmath{\@nomath\boldmath\mathversion{bold}}}
+\makeatother
+
+% Rotulos em portugues. Os titulos ja vem em MAIUSCULAS no texto porque o
+% template usa \uppercase, que nao converte letras acentuadas.
+\addto\captionsbrazil{%
+  \def\refname{REFER\^ENCIAS}%
+  \def\tablename{TABELA}%
+  \def\figurename{FIGURA}%
+}
+\def\abstracttitle{{\color{accessblue}\abstractheadfont RESUMO}\space}
+\def\indextitle{{\color{accessblue}\indexheadfont TERMOS DE INDEXA\c{C}\~AO}\space}
+% Marcador azul usado antes de cada bloco do resumo (igual ao do template)
+\newcommand{\blocobullet}{\noindent\llap{\raisebox{-.8pc}{\includegraphics[width=0.5em]{bullet.png}}\hspace*{1.5mm}}}
+
+\def\thevol{XX}
+\def\theyear{2026}
+
+%Your document starts from here ___________________________________________________
+\begin{document}
+\history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
+\doi{10.1109/ACCESS.2024.0429000}
+
+\title{Triagem de Especialidade M\'edica em\\ Portugu\^es Brasileiro com Modelos de\\ Linguagem compactos: ajuste fino\\ QLoRA em GPU de consumo}
+\author{\uppercase{Ciro Guilherme Nass}\authorrefmark{1},
+\uppercase{Matheus Marques Eiras}\authorrefmark{1}, E
+JO\~AO PAULO ORLANDO\authorrefmark{1}}
+
+\address[1]{Instituto Federal do Paran\'a (IFPR), Campus Pinhais, Pinhais, PR, Brasil}
+\tfootnote{Este trabalho n\~ao recebeu financiamento espec\'ifico.}
+
+% Cabecalho das paginas internas deixado em branco, como pedido.
+% Para o cabecalho padrao do template, troque por:
+% \markboth{Nass \headeretal: Triagem de Especialidade M\'edica com LLMs}{Nass \headeretal: Triagem de Especialidade M\'edica com LLMs}
+\markboth{}{}
+
+\corresp{Autores correspondentes: Matheus Marques Eiras e Ciro Guilherme Nass (e-mails: matheusmarqueseiras@gmail.com; ciroguilhermenass@gmail.com).}
+
+
+\begin{abstract}
+Os servi\c{c}os de pronto atendimento no Brasil vivem lotados, e muitos pacientes chegam sem saber qual especialista procurar. Neste trabalho, testamos se modelos de linguagem abertos e compactos, ajustados ao dom\'inio cl\'inico, conseguem indicar a especialidade m\'edica certa a partir da queixa do paciente escrita em texto livre, em portugu\^es brasileiro. Com o corpus MedPT, montamos uma tarefa de classifica\c{c}\~ao fechada com as dez especialidades mais frequentes (181.652 queixas, com nove classes nos modelos finais) e ajustamos modelos Qwen3.5 e Gemma~3, de 0,8 a 4,3 bilh\~oes de par\^ametros, com QLoRA em placas de v\'ideo de consumo de 8 e 12~GB. No teste completo (18.166 queixas), os quatro modelos finais ficaram entre 89,1\% e 91,4\% de acur\'acia, com F1 macro de 0,863 a 0,901. O melhor, o Gemma~3 4B, ficou s\'o 0,2 ponto percentual acima do Qwen3.5-2B, que tem metade dos par\^ametros e treinou em cerca de um ter\c{c}o do tempo. Um piloto com 4.000 exemplos mostrou que a quantidade de dados limitava o desempenho mais do que o tamanho do modelo. Os erros que sobram v\^em sobretudo da separa\c{c}\~ao entre Psiquiatra e Psic\'ologo (F1 de no m\'aximo 0,63). Os modelos tamb\'em rodam inteiros no navegador, sem enviar a queixa a nenhum servidor.
+\end{abstract}
+
+\begin{keywords}
+Ajuste fino de baixo posto, apoio \`a decis\~ao cl\'inica, classifica\c{c}\~ao de texto, grandes modelos de linguagem, l\'ingua portuguesa, processamento de linguagem natural, quantiza\c{c}\~ao, triagem m\'edica
+
+\par\vspace{4mm}
+\blocobullet{\color{accessblue}\abstractheadfont ABSTRACT}\space
+\foreignlanguage{english}{Urgent care services in Brazil are often overcrowded, and many patients arrive without knowing which specialist to see. In this work, we tested whether compact open language models, fine-tuned for the clinical domain, can pick the right medical specialty from a patient complaint written as free text in Brazilian Portuguese. Using the MedPT corpus, we built a closed classification task over the ten most frequent specialties (181,652 complaints, with nine classes in the final models) and fine-tuned Qwen3.5 and Gemma~3 models with 0.8 to 4.3 billion parameters using QLoRA on 8 and 12~GB consumer graphics cards. On the complete test set (18,166 complaints), the four final models reached 89.1\% to 91.4\% accuracy, with macro F1 scores from 0.863 to 0.901. The best one, Gemma~3 4B, was only 0.2 percentage point above Qwen3.5-2B, which has half the parameters and trained in about a third of the time. A pilot with 4,000 examples showed that the amount of data limited performance more than model size did. Most remaining errors come from separating Psychiatrist from Psychologist (F1 of at most 0.63). The models also run entirely in a web browser, without sending the complaint to any server.}
+
+\par\vspace{4mm}
+\blocobullet{\color{accessblue}\indexheadfont INDEX TERMS}\space
+\foreignlanguage{english}{Clinical decision support, large language models, low-rank adaptation, medical triage, natural language processing, Portuguese language, quantization, text classification}
+\end{keywords}
+
+% Valor do template: -21pt. Ficou mais negativo porque o resumo tem duas
+% linguas (RESUMO e ABSTRACT); se a primeira pagina ficar apertada ou
+% folgada no Overleaf, ajuste este numero.
+\titlepgskip=-40pt
+
+\maketitle
+
+\section{INTRODU\c{C}\~AO}
+\label{sec:introducao}
+\PARstart{A}{} superlota\c{c}\~ao dos servi\c{c}os de emerg\^encia e de pronto atendimento atrasa o cuidado e aumenta o risco para os pacientes, e por isso os hospitais procuram h\'a bastante tempo formas mais r\'apidas e consistentes de fazer a triagem \cite{b1,b2}. No Brasil, o problema n\~ao termina na emerg\^encia. A espera por uma consulta com especialista no SUS bateu recorde e chegou, em m\'edia, a 57 dias, segundo dados do Minist\'erio da Sa\'ude obtidos pelo jornal O Globo via Lei de Acesso \`a Informa\c{c}\~ao \cite{b3}. Em um estudo com 1.002.719 encaminhamentos para aten\c{c}\~ao especializada na Regi\~ao Metropolitana do Esp\'irito Santo, Farias \emph{et al.} \cite{b4} encontraram espera m\'edia de 419 dias em 2014 e de 1.077 dias em 2016, e mostraram que o tempo de espera est\'a associado \`as faltas nas consultas. Parte desse problema \'e administrativa, e n\~ao cl\'inica: muitos pacientes n\~ao sabem qual especialista procurar e acabam na fila errada, ocupando uma vaga que outra pessoa esperava. Revis\~oes sobre intelig\^encia artificial na triagem de emerg\^encia apontam o processamento de linguagem natural (PLN) da queixa em texto livre como uma das entradas mais promissoras, porque ele aproveita informa\c{c}\~oes que os formul\'arios estruturados perdem \cite{b1,b5}.
+
+Os grandes modelos de linguagem (LLMs) deixaram esse tipo de compreens\~ao de texto ao alcance de quase qualquer aplica\c{c}\~ao \cite{b6,b7}. Os modelos mais fortes, por\'em, s\~ao caros de rodar e normalmente dependem de servi\c{c}os em nuvem, o que esbarra no or\c{c}amento e na prote\c{c}\~ao de dados da sa\'ude p\'ublica. Modelos gen\'ericos tamb\'em erram com frequ\^encia em temas m\'edicos espec\'ificos, e a maioria dos recursos dispon\'iveis est\'a em ingl\^es. Para o portugu\^es brasileiro, a publica\c{c}\~ao do MedPT \cite{b8}, um corpus grande de perguntas reais de pacientes respondidas por m\'edicos, tornou poss\'ivel adaptar modelos ao idioma e ao vocabul\'ario cl\'inico daqui.
+
+Modelos abertos compactos, como os das fam\'ilias Qwen \cite{b9,b10} e Gemma~3 \cite{b11}, rodam em computadores comuns. Com m\'etodos de ajuste fino eficientes em par\^ametros, em especial a adapta\c{c}\~ao de baixo posto (LoRA) \cite{b12} e sua vers\~ao quantizada, a QLoRA \cite{b13}, d\'a para treinar esses modelos em uma \'unica placa de v\'ideo de consumo. A pergunta deste trabalho \'e se um modelo assim, adaptado ao dom\'inio cl\'inico, acerta o suficiente para encaminhar o paciente \`a especialidade certa a partir de uma queixa em texto livre, em portugu\^es brasileiro, sem precisar de uma infraestrutura grande.
+
+As contribui\c{c}\~oes deste artigo s\~ao quatro. A primeira \'e uma tarefa fechada de roteamento de especialidade constru\'ida a partir do MedPT, com dez classes no piloto e nove nos modelos finais, junto com um pipeline de pr\'e-processamento e avalia\c{c}\~ao que pode ser reproduzido. A segunda \'e o ajuste fino QLoRA de quatro modelos Qwen3.5 e Gemma~3, de 0,8 a 4,3 bilh\~oes de par\^ametros, com o conjunto de treino completo em GPUs de consumo de 8 e 12~GB, avaliados nas 18.166 queixas do teste, al\'em de uma an\'alise de quanto o volume de dados de treino pesa no resultado. A terceira \'e uma avalia\c{c}\~ao que junta m\'etricas autom\'aticas e uma rubrica aplicada por um LLM juiz, incluindo o efeito da calibra\c{c}\~ao e a varia\c{c}\~ao do pr\'oprio juiz. A quarta \'e uma demonstra\c{c}\~ao em que os quatro modelos rodam inteiros no navegador, sem que o texto do paciente passe por um servidor.
+
+\section{TRABALHOS RELACIONADOS}
+\label{sec:relacionados}
+
+\subsection{PROCESSAMENTO DE LINGUAGEM NATURAL NA TRIAGEM}
+Stewart \emph{et al.} \cite{b1} revisaram o uso de PLN no texto livre coletado na triagem de emerg\^encia. Os modelos que usam o texto da queixa costumam prever desfechos melhor do que os que usam s\'o dados estruturados, mas a falta de bases p\'ublicas e de valida\c{c}\~ao prospectiva continuava sendo a principal barreira. Almulihi \emph{et al.} \cite{b5} chegaram a conclus\~oes parecidas em uma revis\~ao sistem\'atica sobre aprendizado de m\'aquina na triagem de emerg\^encia. Mais perto da nossa tarefa, Wang \emph{et al.} \cite{b14} previram o departamento hospitalar a partir de queixas neurol\'ogicas em chin\^es, com aprendizado por transfer\^encia baseado em BERT, e o SmartTriage \cite{b15} juntou a coleta de dados do paciente com apoio \`a decis\~ao. No Brasil, Soster \emph{et al.} \cite{b2} revisaram protocolos de triagem avan\c{c}ada em servi\c{c}os de emerg\^encia e relatam menos tempo de espera e um fluxo melhor quando a triagem \'e aprimorada.
+
+\subsection{MODELOS DE LINGUAGEM M\'EDICOS E A L\'INGUA PORTUGUESA}
+O ChatDoctor \cite{b7} mostrou que ajustar um modelo aberto com di\'alogos entre m\'edicos e pacientes melhora as respostas m\'edicas, e grandes corpora de di\'alogo, como o MedDialog \cite{b16}, deram base a essa linha de trabalho. Em portugu\^es, Paiola \emph{et al.} \cite{b17} adaptaram LLMs ao dom\'inio m\'edico e os avaliaram como agentes m\'edicos, e Elvas \emph{et al.} \cite{b18} ajustaram um modelo em portugu\^es europeu para estruturar laudos de cardiologia. At\'e onde sabemos, o MedPT \cite{b8} \'e o primeiro corpus grande de perguntas e respostas com intera\c{c}\~oes reais entre pacientes e m\'edicos em portugu\^es brasileiro. Cada registro traz a especialidade do m\'edico que respondeu, o que faz dele uma boa base para o roteamento de especialidade.
+
+\subsection{AJUSTE FINO EFICIENTE EM PAR\^AMETROS E AVALIA\c{C}\~AO}
+A LoRA \cite{b12} congela os pesos pr\'e-treinados e aprende uma atualiza\c{c}\~ao de baixo posto para algumas matrizes de proje\c{c}\~ao. A QLoRA \cite{b13} combina a LoRA com a quantiza\c{c}\~ao em 4 bits NormalFloat (NF4) do modelo base congelado, o que reduz a mem\'oria o bastante para treinar modelos de bilh\~oes de par\^ametros em uma \'unica GPU, com pouca perda de qualidade. Avaliar respostas cl\'inicas abertas \'e mais dif\'icil do que conferir r\'otulos. Zheng \emph{et al.} \cite{b19} mostraram que LLMs fortes usados como ju\'izes concordam bem com as prefer\^encias humanas, e o HealthBench \cite{b20} prop\^os rubricas escritas por m\'edicos, com crit\'erios ponderados, para conversas sobre sa\'ude. Adaptamos essa ideia para a triagem na Se\c{c}\~ao~\ref{sec:avaliacao}.
+
+\section{MATERIAIS E M\'ETODOS}
+\label{sec:metodos}
+
+\subsection{CONJUNTO DE DADOS}
+O MedPT \cite{b8} tem 384.095 pares de pergunta e resposta em portugu\^es brasileiro, e cada par vem rotulado com a especialidade do m\'edico que respondeu. Usamos a pergunta do paciente como entrada e a especialidade como alvo. O campo de especialidade \'e um texto com 1.278 valores diferentes, e alguns nomes t\^em v\'irgula ou h\'ifen (``Ortopedista - traumatologista'', ``Psic\'ologo, Psicanalista''), ent\~ao usamos o texto inteiro como r\'otulo, sem separ\'a-lo. A distribui\c{c}\~ao tem uma cauda muito longa, e por isso mantivemos as dez especialidades mais frequentes, que somam 181.652 queixas, ou 47,3\% do corpus. As outras 202.443 queixas (52,7\%) est\~ao em 1.268 especialidades menores, como Neurologista (6.938), Pediatra (6.791) e Cardiologista (5.277), e ficaram de fora. A divis\~ao foi estratificada, com 80\% para treino (145.321), 10\% para valida\c{c}\~ao (18.165) e 10\% para teste (18.166), e semente fixa 42. A Tabela~\ref{tab:especialidades} mostra as classes. A distribui\c{c}\~ao \'e desbalanceada, assim como a procura real: a classe Psic\'ologo tem 7,4 vezes mais exemplos que a classe Otorrino.
+
+\begin{table}[!t]
+\caption{\textbf{Especialidades Selecionadas do MedPT}}
+\label{tab:especialidades}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{120pt}rr}
+\hline
+\textbf{Especialidade} & \textbf{Treino} & \textbf{Total} \\
+\hline
+Psic\'ologo & 45.690 & 57.113 \\
+Ginecologista & 21.294 & 26.618 \\
+Urologista & 12.938 & 16.173 \\
+Dermatologista & 12.041 & 15.051 \\
+Ortopedista - traumatologista & 11.854 & 14.818 \\
+Oftalmologista & 9.688 & 12.110 \\
+Psiquiatra & 8.920 & 11.150 \\
+Dentista & 8.915 & 11.143 \\
+Psic\'ologo, Psicanalista & 7.794 & 9.742 \\
+Otorrino & 6.187 & 7.734 \\
+\hline
+Total & 145.321 & 181.652 \\
+\hline
+\multicolumn{3}{p{230pt}}{Contagens ap\'os a limpeza dos r\'otulos; o total inclui os conjuntos de valida\c{c}\~ao e de teste.}
+\end{tabular}
+\end{table}
+
+Para comparar arquiteturas sem gastar muito tempo de treino, montamos tamb\'em um subconjunto piloto balanceado, com 500 exemplos por classe: 4.000 de treino, 500 de valida\c{c}\~ao e 500 de teste, ou seja, 50 queixas de teste por especialidade.
+
+\subsection{FORMULA\c{C}\~AO DA TAREFA}
+Cada exemplo virou um di\'alogo de tr\^es turnos: uma mensagem de sistema com a instru\c{c}\~ao de triagem, a queixa do paciente como mensagem do usu\'ario e o nome da especialidade como resposta do assistente. A mensagem de sistema \'e igual no treino e na avalia\c{c}\~ao: ``Voc\^e \'e um sistema de triagem m\'edica. Dada a queixa do paciente, classifique a especialidade m\'edica mais apropriada entre: [lista]. Responda APENAS com o nome da especialidade, sem explica\c{c}\~oes adicionais.'', com os r\'otulos em ordem alfab\'etica. Usamos os modelos Qwen3.5 no modo sem racioc\'inio (\emph{non-thinking}), porque no modo com racioc\'inio o menor deles entrava em la\c{c}o infinito. Na infer\^encia, o texto gerado (at\'e 20 tokens, com decodifica\c{c}\~ao gulosa) \'e comparado aos r\'otulos depois de tirar acentos, mai\'usculas e espa\c{c}os extras. Se n\~ao houver correspond\^encia exata, escolhemos o r\'otulo mais longo que aparece na resposta, para que ``Psic\'ologo, Psicanalista'' n\~ao seja confundido com o prefixo ``Psic\'ologo''. Respostas que n\~ao batem com nenhum r\'otulo contam como erro.
+
+\subsection{MODELOS}
+Avaliamos quatro modelos abertos compactos. O Qwen3.5-0.8B e o Qwen3.5-2B \cite{b9,b10} j\'a v\^em ajustados para seguir instru\c{c}\~oes. O Gemma~3 1B e o Gemma~3 4B \cite{b11} foram usados na vers\~ao base pr\'e-treinada (-pt), sem esse ajuste, e por isso acrescentamos a eles o modelo de conversa do Gemma. O Gemma~3 4B \'e multimodal: as camadas de vis\~ao ficaram congeladas e s\'o as camadas de linguagem receberam adaptadores.
+
+\subsection{AJUSTE FINO QLORA}
+Cada modelo base foi carregado com quantiza\c{c}\~ao NF4 em 4 bits e mantido congelado, e os adaptadores LoRA foram acoplados \`as proje\c{c}\~oes de aten\c{c}\~ao (q, k, v, o) e \`as proje\c{c}\~oes da rede \emph{feed-forward} (gate, up, down). Para uma matriz de pesos congelada $W_{0}$, a LoRA aprende duas matrizes pequenas $B$ e $A$ de posto $r$ e usa
+\begin{equation}
+W = W_{0} + \frac{\alpha}{r}\,BA,
+\label{eq:lora}
+\end{equation}
+com $r = 16$ e $\alpha = 32$. Apenas $A$ e $B$ s\~ao treinadas, o que corresponde a 6,4 milh\~oes de par\^ametros trein\'aveis no Qwen3.5-0.8B (cerca de 1,1\% do modelo) e a 29,8 milh\~oes no Gemma~3 4B. A Tabela~\ref{tab:hiper} resume os hiperpar\^ametros. O tamanho de lote efetivo foi mantido em 32 em todos os modelos, trocando o lote por dispositivo por acumula\c{c}\~ao de gradiente, para que a din\^amica de otimiza\c{c}\~ao continue compar\'avel enquanto o uso de mem\'oria cabe na GPU. Exemplos curtos foram empacotados em sequ\^encias de at\'e 1.024 tokens, exceto no Gemma~3 4B multimodal, para o qual a biblioteca de treino n\~ao oferece empacotamento. Sem o empacotamento, os exemplos longos ocupam muita mem\'oria da placa, ent\~ao nesse modelo limitamos cada exemplo a 512 tokens e descartamos os 87 que passavam disso (0,06\% do treino). Os \emph{checkpoints} foram salvos pelo menos doze vezes por execu\c{c}\~ao, para que o treino pudesse ser interrompido e retomado.
+
+\begin{table}[!t]
+\caption{\textbf{Hiperpar\^ametros do Ajuste Fino}}
+\label{tab:hiper}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{110pt}p{125pt}}
+\hline
+\textbf{Par\^ametro} & \textbf{Valor} \\
+\hline
+Quantiza\c{c}\~ao do modelo base & NF4 em 4 bits (congelado) \\
+Posto / alfa / \emph{dropout} da LoRA & 16 / 32 / 0 \\
+M\'odulos-alvo & q, k, v, o, gate, up, down \\
+\'Epocas & 3 \\
+Tamanho de lote efetivo & 32 \\
+Taxa de aprendizado & $2\times10^{-4}$ ($1\times10^{-4}$ no Gemma~3 4B) \\
+Agendador / aquecimento & Cosseno / 3\% dos passos \\
+Otimizador / precis\~ao & AdamW 8 bits / bfloat16 \\
+Comprimento m\'aximo da sequ\^encia & 1.024 tokens \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{AVALIA\c{C}\~AO}
+\label{sec:avaliacao}
+A classifica\c{c}\~ao foi medida pela acur\'acia e pelo F1 macro sobre as $C$ classes,
+\begin{equation}
+\mathrm{F1}_{\mathrm{macro}} = \frac{1}{C}\sum_{c=1}^{C}\frac{2P_{c}R_{c}}{P_{c}+R_{c}},
+\label{eq:f1}
+\end{equation}
+em que $P_{c}$ e $R_{c}$ s\~ao a precis\~ao e a revoca\c{c}\~ao da classe $c$. O F1 macro d\'a o mesmo peso a especialidades raras e frequentes, o que importa diante do desbalanceamento da Tabela~\ref{tab:especialidades}. Cada modelo ajustado foi comparado com o mesmo modelo base sem ajuste fino (\emph{zero-shot}) e, no primeiro experimento, com \emph{prompts} de tr\^es e de cinco exemplos (\emph{few-shot}).
+
+Para avaliar se a resposta faz sentido clinicamente, e n\~ao s\'o se bate com o r\'otulo, adaptamos a abordagem do HealthBench \cite{b20} e usamos um LLM como juiz \cite{b19}. Para cada queixa, o juiz recebe a especialidade esperada e a prevista e d\'a pontos em cinco crit\'erios: especialidade correta (at\'e 10 pontos), relev\^ancia cl\'inica da especialidade escolhida (7), percep\c{c}\~ao de gravidade (5), cumprimento da instru\c{c}\~ao, ou seja, responder s\'o com o nome da especialidade (3), e uma penalidade de at\'e $-8$ pontos por subtriagem de emerg\^encia. A nota de cada exemplo \'e a soma dos pontos dividida pelos 25 pontos positivos, limitada ao intervalo $[0, 1]$. A amostra tem 100 queixas de teste, estratificadas por especialidade e agrupadas em temas: casos rotineiros, sa\'ude mental e casos urgentes com sinais de alerta expl\'icitos. Usamos dois ju\'izes. O LLaMA~3.1 8B, rodando localmente, avaliou o primeiro modelo treinado com o conjunto completo (dez classes). O GLM-5.3 (glm-5.3-flash), acessado pelo Ollama, avaliou a compara\c{c}\~ao de arquiteturas e os quatro modelos finais, todos na mesma amostra de 100 queixas do teste completo. Quando o juiz devolvia uma resposta fora do formato JSON esperado, repet\'iamos a consulta at\'e tr\^es vezes antes de contar o exemplo como zero.
+
+\subsection{EQUIPAMENTO E SOFTWARE}
+Quase todo o treino rodou em uma \'unica NVIDIA GeForce RTX 4070 de 12~GB, no Windows 11. A exce\c{c}\~ao foi o Gemma~3 1B final, treinado em uma RTX 4060 Laptop de 8~GB, com lote 1 e acumula\c{c}\~ao de gradiente 32. Usamos Unsloth \cite{b21}, TRL \cite{b22} e PEFT da Hugging Face, Transformers e PyTorch com CUDA 12.8. O c\'odigo, os adaptadores treinados e a demonstra\c{c}\~ao est\~ao dispon\'iveis publicamente (ver a se\c{c}\~ao de disponibilidade de dados).
+
+\section{RESULTADOS}
+\label{sec:resultados}
+
+\subsection{EFEITO DO VOLUME DE DADOS DE TREINO}
+O primeiro experimento treinou o Qwen3.5-0.8B no piloto balanceado (4.000 exemplos), principalmente para testar o pipeline. O modelo ajustado chegou a 66,8\% de acur\'acia e F1 macro de 0,630 nas 500 queixas de teste, contra 22,4\% de acur\'acia (F1 de 0,190) do modelo base em \emph{zero-shot}. Colocar exemplos no \emph{prompt} n\~ao ajudou o modelo pequeno: com tr\^es e cinco exemplos, a acur\'acia caiu para 15,0\% e 14,8\%, abaixo do \emph{zero-shot}. O piloto tamb\'em j\'a mostrava o principal ponto fraco. A classe Psic\'ologo nunca era prevista (F1 igual a zero), e Psiquiatra ficou com F1 de 0,148.
+
+No segundo experimento, treinamos o mesmo modelo com o conjunto de treino completo (145.321 exemplos) por tr\^es \'epocas, ou 13.626 passos, em cerca de sete horas. A perda de valida\c{c}\~ao caiu de 0,601 depois da primeira \'epoca para 0,513 depois da segunda, sem sinal de sobreajuste. Em uma amostra estratificada de 200 queixas do teste completo, o modelo chegou a 85,0\% de acur\'acia, F1 macro de 0,791, precis\~ao macro de 0,801 e revoca\c{c}\~ao macro de 0,792. A Tabela~\ref{tab:volume} compara as duas execu\c{c}\~oes. Com a mesma arquitetura e a mesma quantiza\c{c}\~ao, mais dados de treino subiram a acur\'acia em 18,2 pontos percentuais e fizeram as classes de sa\'ude mental passarem de inutiliz\'aveis a funcionais. Isso indica que o gargalo do piloto eram os dados, e n\~ao a capacidade do modelo nem a quantiza\c{c}\~ao em 4 bits.
+
+\begin{table}[!t]
+\caption{\textbf{Qwen3.5-0.8B Treinado com o Piloto e com o Conjunto Completo}}
+\label{tab:volume}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{80pt}p{70pt}p{80pt}}
+\hline
+\textbf{M\'etrica} & \textbf{Piloto (4.000)} & \textbf{Completo (145.321)} \\
+\hline
+Acur\'acia & 66,8\% & 85,0\% \\
+F1 macro & 0,630 & 0,791 \\
+F1, Psic\'ologo & 0,000 & 0,851 \\
+F1, Psiquiatra & 0,148 & 0,609 \\
+\hline
+\multicolumn{3}{p{238pt}}{O piloto foi testado com 500 queixas balanceadas e o modelo completo com uma amostra estratificada de 200 queixas do conjunto de teste completo.}
+\end{tabular}
+\end{table}
+
+\subsection{DESEMPENHO POR ESPECIALIDADE}
+A Fig.~\ref{fig:f1especialidade} mostra o F1 desse modelo em cada especialidade. As especialidades com sintomas bem definidos tiveram notas altas, como Oftalmologista (1,00), Dentista (0,97), Dermatologista (0,94) e Ginecologista (0,94). A sa\'ude mental continuou sendo o grupo mais dif\'icil: Psiquiatra chegou a 0,61, e Psic\'ologo, Psicanalista ficou com F1 igual a zero. O erro dessa classe mudou de dire\c{c}\~ao em rela\c{c}\~ao ao piloto. Agora o modelo manda essas queixas para Psic\'ologo, a classe majorit\'aria, que usa praticamente o mesmo vocabul\'ario. Como essa distin\c{c}\~ao quase nunca muda a decis\~ao de triagem, juntamos as duas classes nos modelos finais (Se\c{c}\~ao~\ref{sec:finais}).
+
+\Figure[t!](topskip=0pt, botskip=0pt, midskip=0pt)[width=0.95\columnwidth]{fig1.png}
+{\textbf{F1 por especialidade do Qwen3.5-0.8B ajustado com o conjunto completo (amostra estratificada de 200 queixas de teste). A classe Psic\'ologo, Psicanalista \'e absorvida pela classe Psic\'ologo.}\label{fig:f1especialidade}}
+
+\subsection{COMPARA\c{C}\~AO ENTRE ARQUITETURAS COMPACTAS}
+Para decidir quais arquiteturas valiam um treino com o conjunto completo, ajustamos os quatro modelos no piloto com o mesmo pipeline e os avaliamos nas mesmas 500 queixas de teste. A Tabela~\ref{tab:piloto} e a Fig.~\ref{fig:piloto} mostram que, em todos os casos, o ajuste fino \'e o que define o resultado. Os \emph{checkpoints} base do Gemma~3, sem ajuste por instru\c{c}\~oes, quase nunca respondiam com o nome de uma especialidade em \emph{zero-shot} (menos de 1\% de acur\'acia), mas chegaram a 67\% e 76\% depois do ajuste com s\'o 4.000 exemplos. O Qwen3.5-2B, que j\'a acertava 49,8\% sem adapta\c{c}\~ao, chegou a 76,2\%, praticamente empatado com o Gemma~3 4B (75,8\%), com metade dos par\^ametros e um treino quase sete vezes mais r\'apido. Os modelos menores ficaram entre 67\% e 72\%. Nesta tarefa, ent\~ao, aumentar o modelo al\'em de 2 bilh\~oes de par\^ametros rende pouco.
+
+\begin{table}[!t]
+\caption{\textbf{Modelos Compactos Ajustados no Piloto Balanceado}}
+\label{tab:piloto}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{64pt}p{38pt}p{38pt}p{34pt}p{34pt}}
+\hline
+\textbf{Modelo} & \textbf{Acur\'acia zero-shot} & \textbf{Acur\'acia ajustado} & \textbf{F1 macro} & \textbf{Tempo de treino} \\
+\hline
+Qwen3.5-0.8B & 20,4\% & 72,0\% & 0,710 & 13 min \\
+Gemma~3 1B (base) & 0,2\% & 67,2\% & 0,670 & 31 min \\
+Qwen3.5-2B & 49,8\% & 76,2\% & 0,754 & 28 min \\
+Gemma~3 4B (base) & 0,6\% & 75,8\% & 0,758 & 3 h 8 min \\
+\hline
+\multicolumn{5}{p{232pt}}{500 queixas de teste balanceadas (50 por especialidade); 4.000 exemplos de treino; uma execu\c{c}\~ao por modelo.}
+\end{tabular}
+\end{table}
+
+\Figure[t!](topskip=0pt, botskip=0pt, midskip=0pt)[width=0.95\columnwidth]{fig2.png}
+{\textbf{Acur\'acia dos quatro modelos compactos sem ajuste fino e depois do ajuste QLoRA com o piloto de 4.000 exemplos (500 queixas de teste balanceadas).}\label{fig:piloto}}
+
+\subsection{AVALIA\c{C}\~AO QUALITATIVA}
+Na primeira rodada da avalia\c{c}\~ao com LLM como juiz, o modelo do conjunto completo recebeu nota de apenas 0,344. Lendo as respostas do juiz, vimos que ele aplicava a penalidade de subtriagem de emerg\^encia at\'e em queixas claramente rotineiras. Depois de limitar a penalidade \`as queixas que descrevem de forma expl\'icita um sinal de alerta com risco de vida, como dor no peito, falta de ar ou convuls\~ao, a nota com o LLaMA~3.1 8B em 100 queixas subiu para 0,951 (0,966 nos 72 casos rotineiros e 0,911 nos 27 de sa\'ude mental). Uma mudan\c{c}a desse tamanho mostra o quanto os resultados com LLM como juiz dependem da reda\c{c}\~ao da rubrica, e por isso a calibra\c{c}\~ao precisa ser relatada junto com a nota.
+
+A Tabela~\ref{tab:juizpiloto} mostra as notas dos quatro modelos do piloto com o GLM-5.3 como juiz. A ordem \'e a mesma das m\'etricas autom\'aticas: o Qwen3.5-2B teve a maior nota (0,919), seguido do Gemma~3 4B (0,909). Sa\'ude mental foi de novo o tema mais dif\'icil para todos os modelos (de 0,73 a 0,84). O tema de casos urgentes n\~ao deve ser interpretado, porque o teste do piloto tem s\'o quatro queixas com sinais de alerta expl\'icitos e n\~ao foi poss\'ivel atingir a cota de quinze casos urgentes.
+
+\begin{table}[!t]
+\caption{\textbf{Nota Qualitativa com o GLM-5.3 como Juiz (Modelos do Piloto)}}
+\label{tab:juizpiloto}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{56pt}p{36pt}p{42pt}p{42pt}p{40pt}}
+\hline
+\textbf{Modelo} & \textbf{Geral} & \textbf{Sa\'ude mental (25)} & \textbf{Rotineiros (71)} & \textbf{Urgentes (4)} \\
+\hline
+Qwen3.5-0.8B & 0,874 & 0,810 & 0,903 & 0,750 \\
+Gemma~3 1B & 0,865 & 0,726 & 0,910 & 0,930 \\
+Qwen3.5-2B & 0,919 & 0,808 & 0,954 & 1,000 \\
+Gemma~3 4B & 0,909 & 0,842 & 0,930 & 0,960 \\
+\hline
+\multicolumn{5}{p{232pt}}{Notas em $[0, 1]$ sobre 100 queixas de teste estratificadas; n\'umero de queixas por tema entre par\^enteses.}
+\end{tabular}
+\end{table}
+
+\subsection{MODELOS FINAIS NO CONJUNTO COMPLETO}
+\label{sec:finais}
+Com base no piloto, treinamos de novo os quatro modelos com o conjunto de treino completo, desta vez com as classes Psic\'ologo e Psic\'ologo, Psicanalista fundidas, o que deixa nove classes e 66.855 queixas na classe fundida. Todos foram avaliados nas 18.166 queixas do teste completo e, pelo GLM-5.3, na mesma amostra de 100 queixas. A Tabela~\ref{tab:finais} resume os resultados. O Gemma~3 4B teve a maior acur\'acia (91,35\%) e o maior F1 macro (0,901), mas ficou s\'o 0,2 ponto percentual e 0,003 acima do Qwen3.5-2B, que treinou em cerca de um ter\c{c}o do tempo (13 h contra cerca de 40 h). Entre os modelos de cerca de 1 bilh\~ao de par\^ametros, o Qwen3.5-0.8B superou o Gemma~3 1B no F1 macro (0,881 contra 0,863), apesar de as acur\'acias serem quase iguais. O Gemma~3 1B, ali\'as, foi treinado em um notebook com GPU de 8~GB, em 26,6 h, e mesmo assim chegou a 89,1\% de acur\'acia. Em todos os modelos, a perda de valida\c{c}\~ao caiu a cada \'epoca, sem sinal de sobreajuste.
+
+\begin{table}[!t]
+\caption{\textbf{Modelos Finais no Conjunto de Teste Completo (Nove Classes)}}
+\label{tab:finais}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{64pt}p{40pt}p{34pt}p{42pt}p{36pt}}
+\hline
+\textbf{Modelo} & \textbf{Acur\'acia} & \textbf{F1 macro} & \textbf{F1, Psiquiatra} & \textbf{Nota do juiz} \\
+\hline
+Qwen3.5-0.8B & 89,24\% & 0,881 & 0,57 & 0,946 \\
+Gemma~3 1B (base) & 89,13\% & 0,863 & 0,44 & 0,944 \\
+Qwen3.5-2B & 91,14\% & 0,898 & 0,63 & 0,967 \\
+Gemma~3 4B (base) & 91,35\% & 0,901 & 0,63 & 0,961 \\
+\hline
+\multicolumn{5}{p{232pt}}{18.166 queixas de teste; nota do GLM-5.3 em $[0, 1]$ sobre 100 queixas estratificadas; uma execu\c{c}\~ao por modelo.}
+\end{tabular}
+\end{table}
+
+A Tabela~\ref{tab:f1finais} mostra o F1 de cada especialidade. A distin\c{c}\~ao entre Psiquiatra e Psic\'ologo continua sendo a maior fonte de erro: ela responde por 47\% a 49\% dos erros de cada modelo, e nenhum modelo passou de F1 0,63 em Psiquiatra. O Gemma~3 1B quase n\~ao prev\^e essa classe e manda 63\% das queixas de Psiquiatra para Psic\'ologo, a classe majorit\'aria. Por isso a acur\'acia dele fica perto da do Qwen3.5-0.8B, mas o F1 macro cai. A segunda confus\~ao mais comum, entre Urologista e Ginecologista, atinge de 12\% a 13\% das queixas de Urologista em todos os modelos. As outras especialidades ficaram com F1 entre 0,85 e 0,98, e Ortopedista - traumatologista e Oftalmologista passaram de 0,96 em todos os modelos.
+
+\begin{table}[!t]
+\caption{\textbf{F1 por Especialidade nos Modelos Finais}}
+\label{tab:f1finais}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{82pt}p{32pt}p{32pt}p{32pt}p{32pt}}
+\hline
+\textbf{Especialidade} & \textbf{Qwen 0.8B} & \textbf{Gemma 1B} & \textbf{Qwen 2B} & \textbf{Gemma 4B} \\
+\hline
+Ortopedista - traumatologista & 0,968 & 0,968 & 0,974 & 0,979 \\
+Oftalmologista & 0,967 & 0,968 & 0,973 & 0,975 \\
+Dentista & 0,932 & 0,930 & 0,944 & 0,942 \\
+Psic\'ologo & 0,914 & 0,915 & 0,933 & 0,934 \\
+Dermatologista & 0,912 & 0,900 & 0,926 & 0,933 \\
+Otorrino & 0,901 & 0,899 & 0,918 & 0,924 \\
+Ginecologista & 0,901 & 0,896 & 0,911 & 0,913 \\
+Urologista & 0,856 & 0,855 & 0,872 & 0,877 \\
+Psiquiatra & 0,573 & 0,435 & 0,631 & 0,634 \\
+\hline
+\multicolumn{5}{p{232pt}}{18.166 queixas de teste; especialidades em ordem decrescente de F1 no Gemma~3 4B.}
+\end{tabular}
+\end{table}
+
+Com o GLM-5.3 como juiz, as notas dos modelos finais ficaram entre 0,944 e 0,967, e a nota de sa\'ude mental foi de 0,872 (Gemma~3 1B) a 0,964 (Qwen3.5-2B). Nas 15 queixas da amostra com sinais de alerta expl\'icitos, os modelos acertaram entre 13 e 15. S\'o que o pr\'oprio juiz varia tanto quanto os modelos entre si. As mesmas duas queixas, com a mesma predi\c{c}\~ao correta, receberam notas 1,00 e 0,92 na avalia\c{c}\~ao do Qwen3.5-2B e 0,36 e 0,44 na do Gemma~3 4B. Por isso usamos as notas do juiz para entender os padr\~oes de erro, e n\~ao para ordenar modelos t\~ao pr\'oximos.
+
+\subsection{IMPLANTA\c{C}\~AO NO NAVEGADOR}
+Para mostrar que os modelos funcionam sem infraestrutura dedicada, somamos o adaptador LoRA de cada modelo final aos pesos do modelo base, convertemos o resultado para o formato GGUF e o servimos em uma p\'agina web est\'atica que roda a infer\^encia no navegador, com o llama.cpp \cite{b23} compilado para WebAssembly. A queixa do paciente n\~ao sai do computador do usu\'ario. Nessa etapa apareceu um detalhe que n\~ao esper\'avamos: somar o adaptador aos pesos do modelo base em precis\~ao cheia muda o modelo, porque o treino QLoRA ajustou o adaptador sobre o modelo base quantizado em 4 bits. No Gemma~3 1B, as respostas geradas desse jeito bateram com as da avalia\c{c}\~ao em s\'o 185 das 200 primeiras queixas de teste. Quando somamos o adaptador ao modelo base NF4 desquantizado, como no treino, a concord\^ancia subiu para 200 de 200 no Gemma~3 1B, 198 no Qwen3.5-2B, 196 no Gemma~3 4B e 195 no Qwen3.5-0.8B. O Gemma~3 4B foi quantizado em 4 bits (Q4\_K\_M, cerca de 2,4~GB) para caber no limite de mem\'oria do navegador, e os outros usam 8 bits (de 0,8 a 2,0~GB). Com acelera\c{c}\~ao WebGPU em um computador de mesa, cada classifica\c{c}\~ao levou de 0,5 a 1,1~s depois do primeiro download do modelo, que fica guardado no cache do navegador. S\'o no processador, os modelos maiores ficam bem mais lentos.
+
+\section{DISCUSS\~AO}
+\label{sec:discussao}
+Os resultados confirmam a hip\'otese de que um modelo compacto adaptado com QLoRA em uma GPU de consumo consegue encaminhar queixas escritas em portugu\^es brasileiro para a especialidade certa, sem infraestrutura de grande porte: no teste completo, todos os modelos finais passaram de 89\% de acur\'acia. Tr\^es resultados chamam aten\c{c}\~ao. O primeiro \'e que o volume de dados pesou mais que o tamanho do modelo. O mesmo modelo de 0,8 bilh\~ao de par\^ametros ganhou 18 pontos percentuais de acur\'acia ao ser treinado com o conjunto completo, enquanto passar de 2 para 4,3 bilh\~oes de par\^ametros rendeu s\'o 0,2 ponto nos modelos finais. O segundo \'e que o ajuste por instru\c{c}\~oes do modelo base s\'o faz diferen\c{c}a antes da adapta\c{c}\~ao: os \emph{checkpoints} base do Gemma~3 n\~ao serviam em \emph{zero-shot}, mas alcan\c{c}aram os outros depois do ajuste fino. O terceiro \'e que a maior fonte de erro que sobra est\'a nos r\'otulos, e n\~ao no modelo. Mesmo depois de fundir Psic\'ologo e Psic\'ologo, Psicanalista, as classes Psiquiatra e Psic\'ologo continuam com queixas muito parecidas, e nenhum modelo passou de F1 0,63 em Psiquiatra.
+
+Na pr\'atica, o Qwen3.5-2B nos parece a melhor escolha. Ele fica a 0,2 ponto do Gemma~3 4B, treina em cerca de um ter\c{c}o do tempo e usa menos mem\'oria na infer\^encia. Entre os modelos menores, preferimos o Qwen3.5-0.8B ao Gemma~3 1B, porque ele reconhece melhor os casos de Psiquiatra. Voltando \`a motiva\c{c}\~ao, um modelo desse tamanho poderia sugerir a especialidade j\'a no agendamento, quando um encaminhamento errado ainda pode ser corrigido antes de o paciente entrar em uma fila que, como mostram \cite{b3} e \cite{b4}, pode durar meses.
+
+\subsection{LIMITA\c{C}\~OES}
+Este estudo tem limita\c{c}\~oes. O r\'otulo \'e a especialidade do m\'edico que respondeu \`a pergunta, o que \'e uma aproxima\c{c}\~ao, e n\~ao uma decis\~ao cl\'inica de triagem. Al\'em disso, o modelo escolhe sempre entre nove especialidades, que cobrem cerca de 47\% das perguntas do MedPT. Uma queixa de neurologia, pediatria ou cardiologia, por exemplo, vai ser encaminhada a uma das nove mesmo assim. Um uso real precisaria cobrir mais especialidades ou ter uma classe para ``outras''. Cada configura\c{c}\~ao foi treinada uma \'unica vez, com uma \'unica semente, e n\~ao fizemos teste estat\'istico entre os modelos finais. Diferen\c{c}as pequenas, como os 0,2 ponto entre o Gemma~3 4B e o Qwen3.5-2B, n\~ao s\~ao conclusivas. As receitas de treino tamb\'em n\~ao s\~ao id\^enticas (taxa de aprendizado menor e 87 exemplos descartados no Gemma~3 4B, GPU de 8~GB no Gemma~3 1B), ent\~ao o efeito da arquitetura se mistura com o da receita. A linha de base sem ajuste fino s\'o foi medida no piloto, e os resultados do piloto e do conjunto completo v\^em de testes diferentes, que n\~ao devem ser comparados diretamente. A avalia\c{c}\~ao com LLM como juiz usa 100 queixas, um \'unico juiz e nenhuma revis\~ao m\'edica, e o juiz variou entre execu\c{c}\~oes. Casos urgentes s\~ao raros no MedPT, ent\~ao ainda n\~ao d\'a para medir com confian\c{c}a a seguran\c{c}a do sistema em emerg\^encias. Por fim, o sistema sugere uma especialidade. Ele n\~ao faz diagn\'ostico, n\~ao avalia gravidade e n\~ao \'e um dispositivo m\'edico.
+
+\section{CONCLUS\~AO}
+\label{sec:conclusao}
+Este trabalho mostrou que modelos de linguagem abertos e compactos, ajustados com QLoRA em GPUs de consumo, conseguem indicar a especialidade m\'edica adequada a partir de queixas em texto livre em portugu\^es brasileiro, com 89\% a 91\% de acur\'acia em 18.166 queixas de teste, e que os quatro modelos rodam inteiros no navegador. A compara\c{c}\~ao entre um piloto pequeno e o conjunto completo apontou o volume de dados como o principal gargalo. J\'a a compara\c{c}\~ao entre os quatro modelos finais mostrou que um modelo de 2 bilh\~oes de par\^ametros tem o melhor equil\'ibrio entre acur\'acia e custo, praticamente empatado com um de 4,3 bilh\~oes. Como trabalhos futuros, pretendemos medir a linha de base sem ajuste fino no teste completo, repetir os treinos com outras sementes e testar a signific\^ancia das diferen\c{c}as, ampliar o n\'umero de especialidades, reunir mais queixas urgentes para medir a subtriagem e acrescentar um n\'ivel de gravidade, passando do roteamento de especialidade para a classifica\c{c}\~ao de risco cl\'inico.
+
+\section*{AGRADECIMENTOS}
+Os autores agradecem ao Instituto Federal do Paran\'a, Campus Pinhais, pelo apoio a esta pesquisa.
+
+\section*{DISPONIBILIDADE DE DADOS}
+O c\'odigo est\'a dispon\'ivel em \url{https://github.com/MatheusMarquesEiras/TCC-Matheus-e-Ciro}. Os adaptadores treinados, as vers\~oes GGUF e a demonstra\c{c}\~ao no navegador est\~ao em \url{https://huggingface.co/matheus-ciro-tcc}. O MedPT est\'a dispon\'ivel publicamente em \url{https://huggingface.co/datasets/AKCIT/MedPT}.
+
+\begin{thebibliography}{00}
+
+\bibitem{b1} J. Stewart \emph{et al.}, ``Applications of natural language processing at emergency department triage: A narrative review,'' \emph{PLoS ONE}, vol. 18, no. 12, Art. no. e0279953, 2023.
+
+\bibitem{b2} C. B. Soster, F. Anschau, N. H. Rodrigues, L. G. A. da Silva, and A. Klafke, ``Protocolos de triagem avan\c{c}ada no servi\c{c}o de emerg\^encia: revis\~ao sistem\'atica e metan\'alise,'' \emph{Rev. Latino-Am. Enfermagem}, vol. 30, Art. no. e3511, 2022, doi: 10.1590/1518-8345.5479.3511.
+
+\bibitem{b3} S. Te\'ofilo, D. Dantas, and K. Bandeira, ``Entre a fila do SUS e a vida: espera para consultas bate recorde e dura em m\'edia 57 dias,'' \emph{O Globo}, Mar. 16, 2025. [Online]. Available: \url{https://oglobo.globo.com/saude/especial/entre-a-fila-do-sus-e-a-vida-espera-para-consultas-bate-recorde.ghtml}
+
+\bibitem{b4} C. M. L. Farias, L. Giovanella, A. E. Oliveira, and E. T. Santos Neto, ``Tempo de espera e absente\'ismo na aten\c{c}\~ao especializada: um desafio para os sistemas universais de sa\'ude,'' \emph{Sa\'ude Debate}, vol. 43, no. spe5, pp. 190--204, 2019, doi: 10.1590/0103-11042019s516.
+
+\bibitem{b5} Q. A. Almulihi \emph{et al.}, ``Applications of artificial intelligence and machine learning in emergency medicine triage---A systematic review,'' \emph{Med. Arch.}, vol. 78, no. 3, pp. 198--206, 2024.
+
+\bibitem{b6} R. Yang, T. F. Tan, W. Lu, A. J. Thirunavukarasu, D. S. W. Ting, and N. Liu, ``Large language models in health care: Development, applications, and challenges,'' \emph{Health Care Sci.}, vol. 2, 2023, doi: 10.1002/hcs2.61.
+
+\bibitem{b7} Y. Li, Z. Li, K. Zhang, R. Dan, S. Jiang, and Y. Zhang, ``ChatDoctor: A medical chat model fine-tuned on a large language model Meta-AI (LLaMA) using medical domain knowledge,'' \emph{Cureus}, vol. 15, no. 6, Art. no. e40895, 2023.
+
+\bibitem{b8} F. B. F\"arber \emph{et al.}, ``MedPT: A massive medical question answering dataset for Brazilian-Portuguese speakers,'' 2025, \emph{arXiv:2511.11878}.
+
+\bibitem{b9} Qwen Team, ``Qwen3 technical report,'' 2025, \emph{arXiv:2505.09388}.
+
+\bibitem{b10} Qwen Team. (2026). \emph{Qwen3.5-0.8B}. Hugging Face. [Online]. Available: \url{https://huggingface.co/Qwen/Qwen3.5-0.8B}
+
+\bibitem{b11} Gemma Team, Google DeepMind, ``Gemma 3 technical report,'' 2025, \emph{arXiv:2503.19786}.
+
+\bibitem{b12} E. J. Hu \emph{et al.}, ``LoRA: Low-rank adaptation of large language models,'' in \emph{Proc. Int. Conf. Learn. Represent. (ICLR)}, 2022.
+
+\bibitem{b13} T. Dettmers, A. Pagnoni, A. Holtzman, and L. Zettlemoyer, ``QLoRA: Efficient finetuning of quantized LLMs,'' in \emph{Proc. Adv. Neural Inf. Process. Syst. (NeurIPS)}, vol. 36, 2023.
+
+\bibitem{b14} B. Wang, Z. Gao, Z. Lin, and R. Wang, ``A disease-prediction protocol integrating triage priority and BERT-based transfer learning for intelligent triage,'' \emph{Bioengineering}, vol. 10, no. 4, Art. no. 420, 2023.
+
+\bibitem{b15} I. Valmianski \emph{et al.}, ``SmartTriage: A system for personalized patient data capture, documentation generation, and decision support,'' in \emph{Proc. Mach. Learn. Health (ML4H)}, 2021, pp. 1--21.
+
+\bibitem{b16} X. He \emph{et al.}, ``MedDialog: Two large-scale medical dialogue datasets,'' 2020, \emph{arXiv:2004.03329}.
+
+\bibitem{b17} P. H. Paiola, G. L. Garcia, J. R. R. Manesco, M. Roder, D. Rodrigues, and J. P. Papa, ``Adapting LLMs for the medical domain in Portuguese: A study on fine-tuning and model evaluation,'' 2024, \emph{arXiv:2410.00163}.
+
+\bibitem{b18} L. B. Elvas, R. Santos, and J. C. Ferreira, ``Fine-tuning of language models for automated structuring of medical exam reports to improve patient screening and analysis,'' \emph{Sci. Rep.}, vol. 15, Art. no. 23949, 2025.
+
+\bibitem{b19} L. Zheng \emph{et al.}, ``Judging LLM-as-a-judge with MT-Bench and Chatbot Arena,'' in \emph{Proc. Adv. Neural Inf. Process. Syst. (NeurIPS)}, vol. 36, 2023.
+
+\bibitem{b20} R. K. Arora \emph{et al.}, ``HealthBench: Evaluating large language models towards improved human health,'' 2025, \emph{arXiv:2505.08775}.
+
+\bibitem{b21} D. Han, M. Han, and Unsloth Team. (2023). \emph{Unsloth}. [Online]. Available: \url{https://github.com/unslothai/unsloth}
+
+\bibitem{b22} L. von Werra \emph{et al.} (2020). \emph{TRL: Transformer Reinforcement Learning}. [Online]. Available: \url{https://github.com/huggingface/trl}
+
+\bibitem{b23} G. Gerganov \emph{et al.} (2023). \emph{llama.cpp}. [Online]. Available: \url{https://github.com/ggml-org/llama.cpp}
+
+\end{thebibliography}
+
+% Biografias: o template aceita foto (IEEEbiography, 1 x 1,25 pol). Para colocar
+% foto, troque IEEEbiographynophoto por
+% \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{foto.png}}]{Nome}
+\begin{IEEEbiographynophoto}{Ciro Guilherme Nass} \'e estudante do curso de Bacharelado em Ci\^encia da Computa\c{c}\~ao do Instituto Federal do Paran\'a (IFPR), Campus Pinhais, Pinhais, PR, Brasil. Este artigo apresenta o Trabalho de Conclus\~ao de Curso que desenvolveu com Matheus Marques Eiras, sobre o ajuste fino de modelos de linguagem compactos para a triagem de especialidade m\'edica.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{Matheus Marques Eiras} \'e estudante do curso de Bacharelado em Ci\^encia da Computa\c{c}\~ao do Instituto Federal do Paran\'a (IFPR), Campus Pinhais, Pinhais, PR, Brasil. Este artigo apresenta o Trabalho de Conclus\~ao de Curso que desenvolveu com Ciro Guilherme Nass, sobre o ajuste fino de modelos de linguagem compactos para a triagem de especialidade m\'edica.
+\end{IEEEbiographynophoto}
+
+\begin{IEEEbiographynophoto}{JO\~AO PAULO ORLANDO} \'e docente do Instituto Federal do Paran\'a (IFPR), Campus Pinhais, Pinhais, PR, Brasil, e orientou este trabalho no curso de Bacharelado em Ci\^encia da Computa\c{c}\~ao.
+\end{IEEEbiographynophoto}
+
+\EOD
+
+\end{document}
